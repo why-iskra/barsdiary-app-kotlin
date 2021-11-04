@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Barsdiary.Common" parent="Theme.Barsdiary">
+        <item name="android:fadingEdgeLength">24dp</item>
+
+        <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+
+        <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
+        <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
+        <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
+        <item name="android:progressBarStyleHorizontal">@style/Widget.Barsdiary.ProgressBar.Horizontal</item>
+        <item name="android:scrollViewStyle">@style/Container.Barsdiary.ScrollView.Vertical</item>
+        <item name="android:horizontalScrollViewStyle">@style/Container.Barsdiary.ScrollView.Horizontal</item>
+        <item name="android:spinnerStyle">@style/Widget.Barsdiary.Spinner</item>
+        <item name="recyclerViewStyle">@style/Container.Barsdiary.RecyclerView.Vertical</item>
+
+        <item name="bottomSheetDialogTheme">@style/Theme.Barsdiary.BottomSheetDialog.Common</item>
+    </style>
+
+    <style name="Theme.Barsdiary.Dialog.Common" parent="Theme.Barsdiary.Dialog">
+        <item name="android:windowBackground">@drawable/background_dialog_fragment</item>
+        <item name="android:windowAnimationStyle">@style/Theme.Barsdiary.Dialog.WindowAnimation</item>
+
+        <item name="android:fadingEdgeLength">24dp</item>
+
+        <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+
+        <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
+        <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
+        <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
+        <item name="android:progressBarStyleHorizontal">@style/Widget.Barsdiary.ProgressBar.Horizontal</item>
+        <item name="android:scrollViewStyle">@style/Container.Barsdiary.ScrollView.Vertical</item>
+        <item name="android:horizontalScrollViewStyle">@style/Container.Barsdiary.ScrollView.Horizontal</item>
+        <item name="android:spinnerStyle">@style/Widget.Barsdiary.Spinner</item>
+        <item name="recyclerViewStyle">@style/Container.Barsdiary.RecyclerView.Vertical</item>
+    </style>
+
+    <style name="Theme.Barsdiary.BottomSheetDialog.Common" parent="Theme.Barsdiary.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Theme.Barsdiary.BottomSheetDialog.Style</item>
+
+        <item name="android:fadingEdgeLength">24dp</item>
+
+        <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+
+        <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
+        <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
+        <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
+        <item name="android:progressBarStyleHorizontal">@style/Widget.Barsdiary.ProgressBar.Horizontal</item>
+        <item name="android:scrollViewStyle">@style/Container.Barsdiary.ScrollView.Vertical</item>
+        <item name="android:horizontalScrollViewStyle">@style/Container.Barsdiary.ScrollView.Horizontal</item>
+        <item name="android:spinnerStyle">@style/Widget.Barsdiary.Spinner</item>
+        <item name="recyclerViewStyle">@style/Container.Barsdiary.RecyclerView.Vertical</item>
+    </style>
+
+    <style name="Theme.Barsdiary.BottomSheetDialog.Style">
+        <item name="android:background">@drawable/background_bottom_sheet_dialog_fragment</item>
+    </style>
+
+    <style name="Theme.Barsdiary.Dialog.WindowAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in_short</item>
+        <item name="android:windowExitAnimation">@anim/fade_out_short</item>
+    </style>
+
+    <style name="Widget.Barsdiary.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">24dp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Widget.Barsdiary.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Barsdiary.Medium</item>
+    </style>
+
+    <style name="Widget.Barsdiary.DropDownItem">
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Widget.Barsdiary.Spinner" parent="Widget.AppCompat.Spinner.DropDown">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:popupBackground">@drawable/background_spinner</item>
+        <item name="android:popupEnterTransition">@transition/popup_window_enter</item>
+        <item name="android:popupExitTransition">@transition/popup_window_exit</item>
+        <item name="android:dropDownVerticalOffset">0dp</item>
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <item name="android:overlapAnchor">true</item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="Widget.Barsdiary.EditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="Widget.Barsdiary.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+    </style>
+
+    <style name="Container.Barsdiary.RecyclerView" parent="Container.Barsdiary">
+        <item name="android:layoutAnimation">@anim/adapter_anim</item>
+    </style>
+
+    <style name="Container.Barsdiary.RecyclerView.Vertical" parent="Container.Barsdiary.RecyclerView">
+        <item name="android:requiresFadingEdge">vertical</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="Container.Barsdiary.RecyclerView.Horizontal" parent="Container.Barsdiary.RecyclerView">
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:scrollbars">horizontal</item>
+    </style>
+
+    <style name="Container.Barsdiary.ScrollView" parent="Container.Barsdiary" />
+
+    <style name="Container.Barsdiary.ScrollView.Vertical" parent="Container.Barsdiary.ScrollView">
+        <item name="android:requiresFadingEdge">vertical</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="Container.Barsdiary.ScrollView.Horizontal" parent="Container.Barsdiary.ScrollView">
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:scrollbars">horizontal</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Title" parent="TextAppearance.Barsdiary.Large">
+        <item name="android:fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Medium" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Large" parent="TextAppearance.AppCompat.Large">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Small" parent="TextAppearance.AppCompat.Small">
+        <item name="android:fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Calendar.Day" parent="TextAppearance.Barsdiary">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textColor">@color/text_color_activated</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Calendar.DayOfWeek" parent="TextAppearance.Barsdiary">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+
+    <style name="Widget" />
+
+    <style name="Widget.Barsdiary" />
+
+    <style name="TextAppearance" />
+
+    <style name="TextAppearance.Barsdiary" />
+
+    <style name="Container" />
+
+    <style name="Container.Barsdiary" parent="Container" />
+</resources>

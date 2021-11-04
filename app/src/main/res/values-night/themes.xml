@@ -1,0 +1,59 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Barsdiary" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/matt_white</item>
+        <item name="colorPrimaryVariant">@color/silver</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/arsenic</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <!-- Background -->
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <!-- Chart -->
+        <item name="dataLineColor">@color/matt_white</item>
+        <item name="levelLineColor">@color/gray</item>
+        <item name="textColor">@color/silver</item>
+        <!-- Scrollbar thumb -->
+        <item name="scrollbarThumbColor">@color/arsenic</item>
+        <!-- BottomNavBar -->
+        <item name="itemIconTint">?attr/colorSecondary</item>
+    </style>
+
+    <style name="Theme.Barsdiary.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/matt_white</item>
+        <item name="colorPrimaryVariant">@color/silver</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/arsenic</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Background -->
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        <!-- Scrollbar thumb -->
+        <item name="scrollbarThumbColor">@color/arsenic</item>
+    </style>
+
+
+    <style name="Theme.Barsdiary.BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/matt_white</item>
+        <item name="colorPrimaryVariant">@color/silver</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/gray</item>
+        <item name="colorSecondaryVariant">@color/arsenic</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Background -->
+        <!--        <item name="android:windowBackground">@color/black</item>-->
+        <!--        <item name="android:colorBackground">@color/black</item>-->
+        <!-- Scrollbar thumb -->
+        <item name="scrollbarThumbColor">@color/arsenic</item>
+    </style>
+</resources>

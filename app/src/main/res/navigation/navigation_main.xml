@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_diary"
+    app:startDestination="@id/navigationFragment">
+
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.NavigationFragment"
+        android:label="fragment_navigation"
+        tools:layout="@layout/fragment_navigation">
+        <action
+            android:id="@+id/action_navigationFragment_to_marksFragment"
+            app:destination="@id/marksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_developerFragment"
+            app:destination="@id/developerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_childChoiceFragment"
+            app:destination="@id/childChoiceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_finalMarksFragment"
+            app:destination="@id/finalMarksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_birthdaysFragment"
+            app:destination="@id/birthdaysFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_mailFragment"
+            app:destination="@id/mailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+    </fragment>
+    <fragment
+        android:id="@+id/marksFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.MarksFragment"
+        android:label="MarksFragment" />
+    <fragment
+        android:id="@+id/developerFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.DeveloperFragment"
+        android:label="DeveloperFragment" />
+    <fragment
+        android:id="@+id/childChoiceFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.ChildChoiceFragment"
+        android:label="ChildChoiceFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/finalMarksFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.FinalMarksFragment"
+        android:label="FinalMarksFragment" />
+    <fragment
+        android:id="@+id/birthdaysFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.BirthdaysFragment"
+        android:label="BirthdaysFragment" />
+    <fragment
+        android:id="@+id/mailFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.MailFragment"
+        android:label="MailFragment">
+        <action
+            android:id="@+id/action_mailFragment_to_letterFragment"
+            app:destination="@id/letterFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+    </fragment>
+    <fragment
+        android:id="@+id/letterFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.LetterFragment"
+        android:label="LetterFragment" />
+</navigation>

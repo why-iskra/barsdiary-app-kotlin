@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Chart">
+        <attr name="dataLineColor" format="color" />
+        <attr name="dataShadowLineColor" format="color" />
+        <attr name="levelLineColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="textMargin" format="dimension" />
+        <attr name="android:textSize" format="dimension" />
+        <attr name="padding" format="dimension" />
+        <attr name="levelLineSize" format="dimension" />
+        <attr name="dataLineSize" format="dimension" />
+        <attr name="shadowDataLineIndent" format="dimension" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="animationDelayHideAndShow" format="integer" />
+        <attr name="removeUnusedLevels" format="boolean" />
+        <attr name="zipElements" format="boolean" />
+        <attr name="maxElements" format="integer" />
+        <attr name="countViewElementsNames" format="integer" />
+        <attr name="dataLineSmoothing" format="float" />
+        <attr name="backgroundColor" />
+        <attr name="android:fontFamily" />
+        <attr name="background" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomNavBar">
+        <attr name="menu" format="reference" />
+        <attr name="background" format="reference" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="indicatorRadius" format="dimension" />
+        <attr name="sideMargins" format="dimension" />
+        <attr name="itemPadding" format="dimension" />
+        <attr name="itemFontFamily" format="reference" />
+        <attr name="itemIconTint" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="iconSize" format="dimension" />
+        <attr name="activeItem" format="integer" />
+        <attr name="itemAnimDuration" format="integer" />
+
+        <attr name="itemNotificationColor" format="color" />
+        <attr name="activeItemNotificationColor" format="color" />
+        <attr name="itemNotificationRadius" format="dimension" />
+
+        <attr name="itemIndicatorHighlighter" format="float" />
+        <attr name="itemIndicatorAlpha" format="integer" />
+        <attr name="indicatorVisible" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrollbarThumb">
+        <attr name="scrollbarThumbColor" format="color" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".mvvm.fragment.AccountFragment">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/account"
+            android:textAppearance="@style/TextAppearance.Barsdiary.Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ru.unit.barsdiary.components.RefreshButtonView
+            android:id="@+id/refreshButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextSwitcher
+            android:id="@+id/textSwitcherPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            android:inAnimation="@anim/fade_in_short"
+            android:outAnimation="@anim/fade_out_short"
+            android:text="@{model.personNameLiveData}" />
+
+        <TextSwitcher
+            android:id="@+id/textSwitcherPersonParentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inAnimation="@anim/fade_in_short"
+            android:outAnimation="@anim/fade_out_short"
+            android:text="@{model.personParentNameLiveData}"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textSwitcherPersonName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/profile"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_person_24" />
+
+                <TextView
+                    android:id="@+id/textViewChildChoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/child_s_choice"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_face_24" />
+
+                <TextView
+                    android:id="@+id/textViewFinalMarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/final_marks"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_check_circle_outline_24" />
+
+                <TextView
+                    android:id="@+id/textViewSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/settings"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_settings_24" />
+
+                <TextView
+                    android:id="@+id/textViewDeveloper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/developer"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_developer_board_24" />
+
+                <TextView
+                    android:id="@+id/textViewLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/logout"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_logout_24" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
