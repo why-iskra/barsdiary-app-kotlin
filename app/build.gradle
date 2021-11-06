@@ -13,18 +13,36 @@ android {
         checkReleaseBuilds false
     }
 
-    defaultConfig {
-        applicationId "ru.unit.barsdiary"
-        minSdk 26
-        targetSdk 31
-        versionCode 5
-        versionName "2.3-beta1"
+    def versionPropsFile = file('version.properties')
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def code = versionProps['VERSION_CODE'].toInteger() + (gradle.startParameter.taskNames.contains("assembleRelease") ? 1 : 0)
+
+        versionProps['VERSION_CODE'] = code.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "ru.unit.barsdiary"
+            minSdk 26
+            targetSdk 31
+            versionCode code
+            versionName "2.4-beta ($code)"
+        }
+    } else {
+        throw new GradleException("Could not read version.properties")
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".debug"
         }
     }
     buildFeatures {
@@ -45,8 +63,6 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
 
-    implementation "io.ktor:ktor-client-okhttp:$ktor_version"
-
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
@@ -64,6 +80,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_version"
     implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_version"
     implementation "androidx.paging:paging-runtime-ktx:$androidx_paging_version"
+    implementation "androidx.datastore:datastore-preferences:$androidx_datastore_version"
 
     implementation "com.google.android.material:material:$material_version"
 }

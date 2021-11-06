@@ -3,8 +3,8 @@ package ru.unit.barsdiary.mvvm.fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import nl.dionsegijn.konfetti.models.Shape
@@ -16,7 +16,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class BirthdaysFragment : Fragment(R.layout.fragment_birthdays) {
+class BirthdaysFragment : BaseFragment(R.layout.fragment_birthdays) {
 
     private val model: GlobalViewModel by activityViewModels()
 
@@ -65,6 +65,8 @@ class BirthdaysFragment : Fragment(R.layout.fragment_birthdays) {
                 }
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.refreshBirthdays()
     }

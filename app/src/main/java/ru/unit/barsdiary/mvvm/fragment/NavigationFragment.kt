@@ -2,8 +2,8 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -13,7 +13,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
 import ru.unit.barsdiary.other.function.configure
 
 @AndroidEntryPoint
-class NavigationFragment : Fragment(R.layout.fragment_navigation) {
+class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
 
     private val globalModel: GlobalViewModel by activityViewModels()
 
@@ -47,5 +47,7 @@ class NavigationFragment : Fragment(R.layout.fragment_navigation) {
         }
 
         globalModel.refreshNotifications()
+
+        globalModel.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
     }
 }

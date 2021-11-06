@@ -2,8 +2,8 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +16,7 @@ import ru.unit.barsdiary.other.function.configure
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class MailFragment : Fragment(R.layout.fragment_mail) {
+class MailFragment : BaseFragment(R.layout.fragment_mail) {
 
     val model: GlobalViewModel by activityViewModels()
 
@@ -45,6 +45,8 @@ class MailFragment : Fragment(R.layout.fragment_mail) {
                 EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
     }
 
     fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {

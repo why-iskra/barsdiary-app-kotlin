@@ -169,6 +169,22 @@
                     app:drawableStartCompat="@drawable/ic_round_developer_board_24" />
 
                 <TextView
+                    android:id="@+id/textViewAboutApp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="@string/about_application"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_info_24" />
+
+                <TextView
                     android:id="@+id/textViewLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

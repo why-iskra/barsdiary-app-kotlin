@@ -8,12 +8,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ru.unit.barsdiary.components.ChartView
+import ru.unit.barsdiary.data.di.annotation.ChartDateFormatter
+import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.mark.pojo.DisciplineMarksPojo
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import ru.unit.barsdiary.sdk.di.annotation.ChartDateFormatter
-import ru.unit.barsdiary.sdk.di.annotation.WebDateFormatter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*

@@ -1,11 +1,11 @@
 package ru.unit.barsdiary.data.transformer
 
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
-import ru.unit.barsdiary.sdk.BarsEngine
+import ru.unit.barsdiary.sdk.BarsDiaryEngine
 import javax.inject.Inject
 
-class AuthDataTransformer @Inject constructor() : RevertTransformer<BarsEngine.AuthData, AuthDataPojo> {
-    override fun transform(value: BarsEngine.AuthData): AuthDataPojo {
+class AuthDataTransformer @Inject constructor() : RevertTransformer<BarsDiaryEngine.AuthData, AuthDataPojo> {
+    override fun transform(value: BarsDiaryEngine.AuthData): AuthDataPojo {
         return AuthDataPojo(
             value.serverUrl,
             value.login,
@@ -13,8 +13,8 @@ class AuthDataTransformer @Inject constructor() : RevertTransformer<BarsEngine.A
         )
     }
 
-    override fun revert(value: AuthDataPojo): BarsEngine.AuthData {
-        return BarsEngine.AuthData(
+    override fun revert(value: AuthDataPojo): BarsDiaryEngine.AuthData {
+        return BarsDiaryEngine.AuthData(
             value.serverUrl,
             value.login,
             value.password

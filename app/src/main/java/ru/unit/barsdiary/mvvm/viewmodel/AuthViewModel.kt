@@ -7,6 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.unit.barsdiary.data.datastore.SettingsDataStore
+import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
 import ru.unit.barsdiary.other.SpamGuard
@@ -17,6 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
+    private val authRepository: AuthRepository,
+    private val settingsDataStore: SettingsDataStore,
 ) : ViewModel() {
 
     private val spamGuard = SpamGuard()
@@ -33,6 +37,10 @@ class AuthViewModel @Inject constructor(
     val passwordVisibilityLiveData = MutableLiveData<Boolean>(false)
 
     val eventLiveData = EventLiveData()
+
+    fun fastAuth(): Boolean {
+        return settingsDataStore.fastAuth && authUseCase.prepareFastAuth()
+    }
 
     fun refresh() {
         viewModelScope.launch(Dispatchers.IO) {

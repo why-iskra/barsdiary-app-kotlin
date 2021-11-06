@@ -2,16 +2,14 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentChildBinding
 
-class ChildFragment : Fragment(R.layout.fragment_child) {
+class ChildFragment : BaseFragment(R.layout.fragment_child) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentChildBinding.bind(view)
-
 
         arguments?.let {
 //            binding.textViewId.text = it.getInt("id").toString()

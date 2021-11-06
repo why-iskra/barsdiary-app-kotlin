@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Bars Diary</string>
-    <string name="written_by_unit">written by ũŋit</string>
+    <string name="written_by_unit" translatable="false">written by ũŋit</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="custom_url">Custom URL</string>
-    <string name="ellipsis">…</string>
+    <string name="ellipsis" translatable="false">…</string>
     <string name="statistics">Statistics</string>
     <string name="diary">Diary</string>
     <string name="global">Global</string>
@@ -21,7 +21,7 @@
     <string name="child_s_choice">Child\'s choice</string>
     <string name="final_marks">Final marks</string>
     <string name="developer">Developer</string>
-    <string name="https">https://</string>
+    <string name="https" translatable="false">https://</string>
     <string name="overview_marks">Overview Marks</string>
     <string name="open_marks">Open Marks</string>
     <string name="experimental">experimental</string>
@@ -54,4 +54,12 @@
     <string name="logout_text">Are you sure you want to logout?</string>
     <string name="retry">retry</string>
     <string name="letter">Letter</string>
+    <string name="about_application">About application</string>
+    <string name="theme">Theme</string>
+    <string name="sync_with_system_theme">Sync with the system theme</string>
+    <string name="night_theme">Night theme</string>
+    <string name="rate_app">Rate the application</string>
+    <string name="client">Client</string>
+    <string name="fast_auth">Fast authorization</string>
+    <string name="fast_auth_description">Saving auth cookies between sessions</string>
 </resources>

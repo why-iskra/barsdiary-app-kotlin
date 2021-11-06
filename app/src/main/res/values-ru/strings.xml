@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Барс Дневник</string>
-    <string name="written_by_unit">written by ũŋit</string>
     <string name="ok">ОК</string>
     <string name="cancel">Отменить</string>
     <string name="custom_url">Свой URL</string>
-    <string name="ellipsis">…</string>
     <string name="statistics">Статистика</string>
     <string name="diary">Дневник</string>
     <string name="global">Сервисы</string>
@@ -21,7 +19,6 @@
     <string name="child_s_choice">Выбрать ребенка</string>
     <string name="final_marks">Финальные оценки</string>
     <string name="developer">Для разработчиков</string>
-    <string name="https">https://</string>
     <string name="overview_marks">Обзор оценок</string>
     <string name="open_marks">Открыть оценки</string>
     <string name="experimental">experimental</string>
@@ -54,4 +51,12 @@
     <string name="logout_text">Вы уверены, что хотите выйти?</string>
     <string name="retry">Повторить</string>
     <string name="letter">Письмо</string>
+    <string name="about_application">О приложении</string>
+    <string name="theme">Тема</string>
+    <string name="sync_with_system_theme">Синхронизировать с системной темой</string>
+    <string name="night_theme">Ночной режим</string>
+    <string name="rate_app">Оценить приложение</string>
+    <string name="client">Клиент</string>
+    <string name="fast_auth">Быстрая авторизация</string>
+    <string name="fast_auth_description">Сохранение авторизационных файлов cookie между сеансами</string>
 </resources>

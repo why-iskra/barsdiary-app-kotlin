@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observeFreshly
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -19,7 +19,7 @@ import ru.unit.barsdiary.other.function.switchActivity
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class ChildChoiceFragment : Fragment(R.layout.fragment_child_choice) {
+class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
 
     private val model: ChangePupilViewModel by viewModels()
 
@@ -51,6 +51,8 @@ class ChildChoiceFragment : Fragment(R.layout.fragment_child_choice) {
                 }
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
     }
 
     private fun uiShowButton() {

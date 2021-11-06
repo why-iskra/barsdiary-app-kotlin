@@ -8,14 +8,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
+import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
+import ru.unit.barsdiary.data.utils.aTagDocument
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
 import ru.unit.barsdiary.other.livedata.EmptyLiveData
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import ru.unit.barsdiary.sdk.BarsEngine
-import ru.unit.barsdiary.sdk.di.annotation.WebDateFormatter
+import ru.unit.barsdiary.sdk.BarsDiaryEngine
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GlobalViewModel @Inject constructor(
-    private val barsEngine: BarsEngine,
+    private val barsDiaryEngine: BarsDiaryEngine,
     private val globalUseCase: GlobalUseCase,
     @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
 ) : ViewModel() {
@@ -144,6 +144,24 @@ class GlobalViewModel @Inject constructor(
         return ""
     }
 
+    fun deleteInBox(list: List<Int>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.removeInBoxMessages(list)
+                refreshBoxes()
+            }
+        }
+    }
+
+    fun deleteOutBox(list: List<Int>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.removeOutBoxMessages(list)
+                refreshBoxes()
+            }
+        }
+    }
+
     private fun hasBirthsToday(value: BirthdaysPojo): Boolean {
         val date = LocalDate.now()
         return value.birthdays.find {
@@ -151,15 +169,5 @@ class GlobalViewModel @Inject constructor(
         } != null
     }
 
-    fun document(name: String, url: String) = barsEngine.document(name, url)
-
-    fun materialsToString(list: List<MaterialPojo>) = buildString {
-        val size = list.size
-        for ((i, material) in list.withIndex()) {
-            append(document(material.name, material.url))
-            if (i != size - 1) {
-                append("<br/>")
-            }
-        }
-    }
+    fun document(name: String, url: String) = aTagDocument(name, barsDiaryEngine.getServerUrl() + url)
 }

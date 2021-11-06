@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.sdk.di.annotation
+package ru.unit.barsdiary.data.di.annotation
 
 import javax.inject.Qualifier
 

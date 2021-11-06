@@ -7,6 +7,7 @@
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
 
+        <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
         <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
         <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
@@ -28,6 +29,7 @@
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
 
+        <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
         <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
         <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
@@ -46,6 +48,7 @@
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
 
+        <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
         <item name="materialButtonStyle">@style/Widget.Barsdiary.Button</item>
         <item name="editTextStyle">@style/Widget.Barsdiary.EditText</item>
@@ -67,7 +70,14 @@
 
     <style name="Widget.Barsdiary.Button" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">24dp</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Widget.Barsdiary.Switch" parent="android:Widget.Material.CompoundButton.Switch">
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textAppearance">@style/TextAppearance.Barsdiary.Medium</item>
+        <!--        <item name="android:switchTextAppearance">@style/TextAppearance.Barsdiary.Medium</item>-->
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="Widget.Barsdiary.TextView" parent="Widget.MaterialComponents.TextView">
@@ -152,6 +162,11 @@
     <style name="TextAppearance.Barsdiary.Calendar.DayOfWeek" parent="TextAppearance.Barsdiary">
         <item name="android:fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.Barsdiary.Author" parent="TextAppearance.Barsdiary.Small">
+        <item name="android:fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 
 

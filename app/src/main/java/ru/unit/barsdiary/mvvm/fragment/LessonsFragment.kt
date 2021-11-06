@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.DiaryViewModel
 import java.time.LocalDate
 
 @AndroidEntryPoint
-class LessonsFragment : Fragment(R.layout.fragment_lessons) {
+class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
 
     companion object {
         private const val LESSON_BOTTOM_SHEET_DIALOG_FRAGMENT_TAG = "lessonBottomSheetDialogFragment"
@@ -106,11 +105,13 @@ class LessonsFragment : Fragment(R.layout.fragment_lessons) {
             }
         }
 
-        model.updateExceptionLiveData.observeFreshly(viewLifecycleOwner, { t ->
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner, { t ->
             t?.printStackTrace()
             if (model.updateFailIdLiveData.value == epochDays) {
                 uiRefreshStop(view)
             }
+
+            mainModel.handleException(t)
         })
 
         uiRefreshStart(view)

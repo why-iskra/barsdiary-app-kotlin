@@ -3,8 +3,8 @@ package ru.unit.barsdiary.mvvm.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -14,7 +14,7 @@ import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.questionAttribute
 
 @AndroidEntryPoint
-class GlobalFragment : Fragment(R.layout.fragment_global) {
+class GlobalFragment : BaseFragment(R.layout.fragment_global) {
 
     private val model: GlobalViewModel by activityViewModels()
 
@@ -54,6 +54,8 @@ class GlobalFragment : Fragment(R.layout.fragment_global) {
         model.hasInBoxLiveData.observe(viewLifecycleOwner) {
             binding.textViewMail.setTextColor(if (it) attentionColor else normalColor)
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
     }
 
     override fun onResume() {

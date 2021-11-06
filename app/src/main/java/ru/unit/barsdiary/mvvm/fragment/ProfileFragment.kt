@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.*
@@ -15,7 +15,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val model: PersonViewModel by activityViewModels()
 
@@ -80,6 +80,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 binding.linearLayoutClassmates.addView(item.root)
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.refreshProfile()
     }

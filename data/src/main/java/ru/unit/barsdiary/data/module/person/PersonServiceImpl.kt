@@ -9,18 +9,18 @@ import ru.unit.barsdiary.domain.person.pojo.ClassInfoPojo
 import ru.unit.barsdiary.domain.person.pojo.PersonPojo
 import ru.unit.barsdiary.domain.person.pojo.SchoolInfoPojo
 import ru.unit.barsdiary.domain.person.pojo.TotalMarksPojo
-import ru.unit.barsdiary.sdk.BarsWrapper
+import ru.unit.barsdiary.sdk.BarsDiaryEngine
 import javax.inject.Inject
 
 class PersonServiceImpl @Inject constructor(
-    private val barsWrapper: BarsWrapper,
+    private val engine: BarsDiaryEngine,
     private val personTransformer: PersonTransformer,
     private val schoolInfoTransformer: SchoolInfoTransformer,
     private val classInfoTransformer: ClassInfoTransformer,
     private val totalMarksTransformer: TotalMarksTransformer,
 ) : PersonService {
-    override suspend fun getPerson(): PersonPojo = personTransformer.transform(barsWrapper.getPersonData())
-    override suspend fun getSchoolInfo(): SchoolInfoPojo = schoolInfoTransformer.transform(barsWrapper.getSchoolInfo())
-    override suspend fun getClassInfo(): ClassInfoPojo = classInfoTransformer.transform(barsWrapper.getClassYearInfo())
-    override suspend fun getTotalMarks(): TotalMarksPojo = totalMarksTransformer.transform(barsWrapper.getTotalMarks())
+    override suspend fun getPerson(): PersonPojo = personTransformer.transform(engine.api { getPersonData() })
+    override suspend fun getSchoolInfo(): SchoolInfoPojo = schoolInfoTransformer.transform(engine.api { getSchoolInfo() })
+    override suspend fun getClassInfo(): ClassInfoPojo = classInfoTransformer.transform(engine.api { getClassYearInfo() })
+    override suspend fun getTotalMarks(): TotalMarksPojo = totalMarksTransformer.transform(engine.api { getTotalMarks() })
 }

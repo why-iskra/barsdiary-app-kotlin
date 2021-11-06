@@ -2,8 +2,8 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -17,7 +17,7 @@ import ru.unit.barsdiary.other.livedata.EventLiveData
 import java.time.LocalDate
 
 @AndroidEntryPoint
-class DiaryFragment : Fragment(R.layout.fragment_diary) {
+class DiaryFragment : BaseFragment(R.layout.fragment_diary) {
 
     companion object {
         private const val PICK_DATE_DIALOG_TAG = "pickDateDialog"
@@ -82,6 +82,8 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
             onPageChangeListener = OnPageChangeListener()
             registerOnPageChangeCallback(onPageChangeListener)
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         setupViewPager(model.dateLiveData.value)
     }

@@ -8,5 +8,7 @@ interface GlobalService {
     suspend fun getInBox(page: Int): BoxPojo
     suspend fun getOutBox(page: Int): BoxPojo
     suspend fun getInBoxCount(): Int
+    suspend fun removeInBoxMessages(list: List<Int>): Boolean
+    suspend fun removeOutBoxMessages(list: List<Int>): Boolean
     suspend fun markRead(id: Int)
 }

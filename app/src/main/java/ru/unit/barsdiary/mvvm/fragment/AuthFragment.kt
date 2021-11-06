@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
-import io.ktor.client.features.*
-import io.ktor.http.*
 import ru.unit.barsdiary.ApplicationStatus
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAuthBinding
@@ -24,6 +22,7 @@ import ru.unit.barsdiary.mvvm.fragment.dialog.ServerListDialogFragment
 import ru.unit.barsdiary.mvvm.viewmodel.AuthViewModel
 import ru.unit.barsdiary.other.function.switchActivity
 import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.sdk.exception.UnauthorizedException
 import javax.inject.Inject
 
 
@@ -46,6 +45,10 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
     private lateinit var binding: FragmentAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (model.fastAuth()) {
+            activity?.switchActivity(context, MainActivity::class.java)
+        }
+
         infoDialog = parentFragmentManager
             .findFragmentByTag(INFO_DIALOG_TAG) as? InfoDialogFragment ?: InfoDialogFragment()
         serverListDialog = parentFragmentManager
@@ -61,6 +64,8 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
             lifecycleOwner = this@AuthFragment
             model = this@AuthFragment.model
         }
+
+        binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
 
         if (infoDialog.isAdded) {
             infoDialog.dismiss()
@@ -147,7 +152,7 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
         model.authExceptionLiveData.observeFreshly(viewLifecycleOwner, {
             if (it is ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException) {
                 infoDialog.send(getString(R.string.finish_registration_error), getString(R.string.finish_registration_error_text).format(it.site))
-            } else if (it is ClientRequestException && it.response.status == HttpStatusCode.Unauthorized) {
+            } else if (it is UnauthorizedException) {
                 infoDialog.send(getString(R.string.unauthorized), getString(R.string.unauthorized_error_text))
             } else if (applicationStatus.isOnline()) {
                 infoDialog.send(getString(R.string.internal_error), it.message ?: getString(R.string.internal_error_text))

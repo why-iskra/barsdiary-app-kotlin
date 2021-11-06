@@ -5,12 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.mvvm.viewmodel.InBoxViewModel
 
-@AndroidEntryPoint
 class MailInBoxFragment : MailBoxFragment() {
 
     private val model: InBoxViewModel by viewModels()

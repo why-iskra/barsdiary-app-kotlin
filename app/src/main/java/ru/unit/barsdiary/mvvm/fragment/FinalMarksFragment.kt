@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -15,7 +15,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class FinalMarksFragment : Fragment(R.layout.fragment_final_marks) {
+class FinalMarksFragment : BaseFragment(R.layout.fragment_final_marks) {
 
     private val model: PersonViewModel by activityViewModels()
 
@@ -65,6 +65,8 @@ class FinalMarksFragment : Fragment(R.layout.fragment_final_marks) {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.refreshTotalMarks()
     }

@@ -2,8 +2,8 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -14,7 +14,7 @@ import ru.unit.barsdiary.mvvm.viewmodel.StatisticsViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class MarksFragment : Fragment(R.layout.fragment_marks) {
+class MarksFragment : BaseFragment(R.layout.fragment_marks) {
 
     companion object {
         private const val DISCIPLINE_MARKS_BOTTOM_SHEET_DIALOG_FRAGMENT_TAG = "disciplineMarksBottomSheetDialogFragment"
@@ -65,6 +65,8 @@ class MarksFragment : Fragment(R.layout.fragment_marks) {
                 EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.getMarks()
     }

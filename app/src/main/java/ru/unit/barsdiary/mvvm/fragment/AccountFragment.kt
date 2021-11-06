@@ -3,8 +3,8 @@ package ru.unit.barsdiary.mvvm.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.BuildConfig
@@ -17,7 +17,7 @@ import ru.unit.barsdiary.other.inflateFactory
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class AccountFragment : Fragment(R.layout.fragment_account) {
+class AccountFragment : BaseFragment(R.layout.fragment_account) {
 
     companion object {
         private const val ACTION_DIALOG_TAG = "actionDialog"
@@ -63,10 +63,10 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
         if (BuildConfig.DEBUG) {
             binding.textViewDeveloper.visibility = View.VISIBLE
-            binding.textViewSettings.visibility = View.VISIBLE
+            binding.textViewAboutApp.visibility = View.VISIBLE
         } else {
             binding.textViewDeveloper.visibility = View.GONE
-            binding.textViewSettings.visibility = View.GONE
+            binding.textViewAboutApp.visibility = View.GONE
         }
 
         binding.textViewDeveloper.setOnClickListener {
@@ -83,6 +83,14 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
         binding.textViewFinalMarks.setOnClickListener {
             findNavController().navigate(R.id.action_navigationFragment_to_finalMarksFragment)
+        }
+
+        binding.textViewAboutApp.setOnClickListener {
+            findNavController().navigate(R.id.action_navigationFragment_to_aboutApplicationFragment)
+        }
+
+        binding.textViewSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_navigationFragment_to_settingsFragment)
         }
 
         actionDialog.setActionListener {
@@ -104,6 +112,8 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.refresh()
     }

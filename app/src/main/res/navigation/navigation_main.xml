@@ -59,6 +59,20 @@
             app:exitAnim="@anim/fade_out_short"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_aboutApplicationFragment"
+            app:destination="@id/aboutApplicationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_navigationFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
     </fragment>
     <fragment
         android:id="@+id/marksFragment"
@@ -100,4 +114,12 @@
         android:id="@+id/letterFragment"
         android:name="ru.unit.barsdiary.mvvm.fragment.LetterFragment"
         android:label="LetterFragment" />
+    <fragment
+        android:id="@+id/aboutApplicationFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.AboutApplicationFragment"
+        android:label="AboutApplicationFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

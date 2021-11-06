@@ -2,8 +2,8 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -13,7 +13,7 @@ import ru.unit.barsdiary.other.inflateFactory
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
+class StatisticsFragment : BaseFragment(R.layout.fragment_statistics) {
 
     private val model: StatisticsViewModel by activityViewModels()
     private lateinit var binding: FragmentStatisticsBinding
@@ -60,7 +60,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             }
         }
 
-        model.exceptionLiveData.observe(viewLifecycleOwner) { }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
 
         model.refresh()
     }

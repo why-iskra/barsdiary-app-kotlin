@@ -1,9 +1,9 @@
 package ru.unit.barsdiary.mvvm.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +13,11 @@ import ru.unit.barsdiary.databinding.FragmentMailBoxBinding
 import ru.unit.barsdiary.mvvm.adapter.BoxAdapter
 import ru.unit.barsdiary.mvvm.adapter.LoadStateAdapter
 import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class MailBoxFragment : Fragment(R.layout.fragment_mail_box) {
+open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
 
     private val globalModel: GlobalViewModel by activityViewModels()
     private lateinit var binding: FragmentMailBoxBinding
@@ -26,6 +27,9 @@ open class MailBoxFragment : Fragment(R.layout.fragment_mail_box) {
     @Inject
     lateinit var adapter: BoxAdapter
 
+    var selected: List<Int> = emptyList()
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMailBoxBinding.bind(view)
@@ -42,6 +46,37 @@ open class MailBoxFragment : Fragment(R.layout.fragment_mail_box) {
             (parentFragment as? MailFragment)?.openLetterFragment(it, inBox)
         }
 
+        binding.imageButtonViewDelete.setOnClickListener {
+            if (inBox) {
+                globalModel.deleteInBox(selected)
+            } else {
+                globalModel.deleteOutBox(selected)
+            }
+        }
+
+        binding.imageButtonViewSelectAll.setOnClickListener {
+            adapter.selectAll()
+        }
+
+        binding.imageButtonViewClear.setOnClickListener {
+            adapter.resetSelected()
+        }
+
+        binding.imageButtonViewDelete.setOnClickListener {
+            if (inBox) {
+                globalModel.deleteInBox(selected)
+            } else {
+                globalModel.deleteOutBox(selected)
+            }
+        }
+
+        toolbarVisibility(adapter.hasSelected())
+
+        adapter.setOnSelect {
+            toolbarVisibility(it.isNotEmpty())
+            selected = it
+        }
+
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             LoadStateAdapter {
                 adapter.retry()
@@ -52,7 +87,17 @@ open class MailBoxFragment : Fragment(R.layout.fragment_mail_box) {
         )
 
         globalModel.resetBoxAdapterLiveData.observe(viewLifecycleOwner) {
+            Timber.d("resetBoxAdapter")
+            adapter.resetSelected()
             adapter.refresh()
+        }
+    }
+
+    private fun toolbarVisibility(hasSelected: Boolean) {
+        (if (hasSelected) View.VISIBLE else View.GONE).let {
+            binding.imageButtonViewDelete.visibility = it
+            binding.imageButtonViewSelectAll.visibility = it
+            binding.imageButtonViewClear.visibility = it
         }
     }
 

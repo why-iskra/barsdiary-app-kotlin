@@ -1,7 +1,7 @@
 package ru.unit.barsdiary.domain.auth
 
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
-import ru.unit.barsdiary.domain.auth.pojo.PupilPojo
+import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
 import javax.inject.Inject
 
@@ -10,8 +10,10 @@ interface AuthUseCase {
     suspend fun logout()
     suspend fun getServerList(): List<ServerInfoPojo>
 
+    fun prepareFastAuth(): Boolean
+
     fun isParent(): Boolean
-    fun getPupils(): List<PupilPojo>
+    fun getPupils(): List<ChildPojo>
     fun getSelectedPupil(): Int
     suspend fun changePupil(index: Int)
 
@@ -24,7 +26,6 @@ class AuthUseCaseImpl @Inject constructor(
 ) : AuthUseCase {
     override suspend fun auth(serverUrl: String?, login: String?, password: String?) {
         val repositoryAuthData = authRepository.getAuthData()
-        val repositorySelectedPupil = authRepository.getSelectedPupil()
 
         val authData = if (serverUrl.isNullOrEmpty() || login.isNullOrEmpty() || password.isNullOrEmpty()) {
             repositoryAuthData
@@ -34,9 +35,6 @@ class AuthUseCaseImpl @Inject constructor(
 
         if (authData != null) {
             authService.auth(authData)
-            if (authService.isParent()) {
-                authService.selectPupil(repositorySelectedPupil)
-            }
             authRepository.setAuthData(authData)
         } else {
             throw Exception("Fields are empty")
@@ -50,15 +48,21 @@ class AuthUseCaseImpl @Inject constructor(
 
     override suspend fun getServerList(): List<ServerInfoPojo> = authService.getServerList()
 
+    override fun prepareFastAuth(): Boolean {
+        val authData = authRepository.getAuthData() ?: return false
+
+        authService.prepare(authData)
+        return true
+    }
+
     override fun isParent(): Boolean = authService.isParent()
 
-    override fun getPupils(): List<PupilPojo> = authService.getPupils()
+    override fun getPupils(): List<ChildPojo> = authService.getChildren()
 
-    override fun getSelectedPupil(): Int = authService.getSelectedPupil()
+    override fun getSelectedPupil(): Int = authService.getSelectedChild()
 
     override suspend fun changePupil(index: Int) {
-        authService.selectPupil(index)
-        authRepository.setSelectedPupil(index)
+        authService.selectChild(index)
     }
 
     override fun isAuthorized(): Boolean {

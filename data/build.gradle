@@ -34,9 +34,17 @@ dependencies {
     implementation project(":sdk")
     implementation project(":domain")
 
-    implementation "io.ktor:ktor-client:$ktor_version"
-
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+    debugImplementation "com.github.chuckerteam.chucker:library:$chucker_version"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker_version"
+
+    implementation "androidx.datastore:datastore-preferences-core:$androidx_datastore_version"
+    implementation "androidx.datastore:datastore-preferences:$androidx_datastore_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    implementation "com.google.code.gson:gson:$gson_version"
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"

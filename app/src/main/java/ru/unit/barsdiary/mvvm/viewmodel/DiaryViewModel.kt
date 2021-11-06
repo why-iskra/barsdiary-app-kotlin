@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
+import ru.unit.barsdiary.data.utils.aTagDocument
 import ru.unit.barsdiary.domain.diary.DiaryUseCase
 import ru.unit.barsdiary.domain.diary.pojo.DiaryDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkDayPojo
@@ -13,8 +15,7 @@ import ru.unit.barsdiary.domain.diary.pojo.HomeworkIndividualPojo
 import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import ru.unit.barsdiary.sdk.BarsEngine
-import ru.unit.barsdiary.sdk.di.annotation.WebDateFormatter
+import ru.unit.barsdiary.sdk.BarsDiaryEngine
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -22,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DiaryViewModel @Inject constructor(
-    private val barsEngine: BarsEngine,
+    private val barsDiaryEngine: BarsDiaryEngine,
     private val diaryUseCase: DiaryUseCase,
     @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
 ) : ViewModel() {
@@ -35,7 +36,6 @@ class DiaryViewModel @Inject constructor(
     }
 
     val exceptionLiveData = ExceptionLiveData()
-    val updateExceptionLiveData = ExceptionLiveData()
     val updateFailIdLiveData = MutableLiveData<Long>()
 
     val dateLiveData = MutableLiveData(LocalDate.now())
@@ -49,7 +49,7 @@ class DiaryViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
 
-            updateExceptionLiveData.safety({
+            exceptionLiveData.safety({
                 val result = diaryUseCase.getDiary(getFirstDayOfWeek(date))
                 val diary = result.first
                 val homework = result.second
@@ -80,7 +80,7 @@ class DiaryViewModel @Inject constructor(
         }
     }
 
-    fun document(name: String, url: String) = barsEngine.document(name, url)
+    fun document(name: String, url: String) = aTagDocument(name, barsDiaryEngine.getServerUrl() + url)
 
     fun materialsToString(list: List<MaterialPojo>) = buildString {
         val size = list.size

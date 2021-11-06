@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentLetterBinding
@@ -13,7 +13,7 @@ import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.mvvm.viewmodel.LetterViewModel
 
 @AndroidEntryPoint
-class LetterFragment : Fragment(R.layout.fragment_letter) {
+class LetterFragment : BaseFragment(R.layout.fragment_letter) {
 
     companion object {
         private const val TITLE_KEY = "title"
@@ -62,5 +62,7 @@ class LetterFragment : Fragment(R.layout.fragment_letter) {
                 model.markRead(it)
             }
         }
+
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
     }
 }

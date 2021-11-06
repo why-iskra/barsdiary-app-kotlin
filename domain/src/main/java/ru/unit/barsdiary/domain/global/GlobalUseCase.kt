@@ -9,6 +9,7 @@ interface GlobalUseCase {
     suspend fun getInBox(page: Int): BoxPojo
     suspend fun getOutBox(page: Int): BoxPojo
     suspend fun getInBoxCount(): Int
+
     suspend fun clearBirthdays()
     suspend fun clearInBox()
     suspend fun clearOutBox()
@@ -16,6 +17,8 @@ interface GlobalUseCase {
     suspend fun clear()
 
     suspend fun markRead(id: Int)
+    suspend fun removeInBoxMessages(list: List<Int>): Boolean
+    suspend fun removeOutBoxMessages(list: List<Int>): Boolean
 }
 
 class GlobalUseCaseImpl @Inject constructor(
@@ -60,6 +63,20 @@ class GlobalUseCaseImpl @Inject constructor(
 
     override suspend fun markRead(id: Int) {
         globalService.markRead(id)
+    }
+
+    override suspend fun removeInBoxMessages(list: List<Int>): Boolean {
+        val result = globalService.removeInBoxMessages(list)
+        clearInBox()
+
+        return result
+    }
+
+    override suspend fun removeOutBoxMessages(list: List<Int>): Boolean {
+        val result = globalService.removeOutBoxMessages(list)
+        clearOutBox()
+
+        return result
     }
 
 }
