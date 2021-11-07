@@ -1,12 +1,14 @@
 package ru.unit.barsdiary.data.module.auth
 
 import ru.unit.barsdiary.data.datastore.AuthDataStore
+import ru.unit.barsdiary.data.utils.RamCacheCleaner
 import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val authDataStore: AuthDataStore,
+    private val ramCacheCleaner: RamCacheCleaner,
 ) : AuthRepository {
     override fun setAuthData(authData: AuthDataPojo) {
         authDataStore.serverUrl = authData.serverUrl
@@ -31,5 +33,9 @@ class AuthRepositoryImpl @Inject constructor(
         authDataStore.login = null
         authDataStore.password = null
         authDataStore.sessionId = null
+    }
+
+    override suspend fun cleanRamCache() {
+        ramCacheCleaner.clean()
     }
 }

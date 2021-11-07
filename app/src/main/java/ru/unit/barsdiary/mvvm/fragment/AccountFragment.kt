@@ -12,7 +12,7 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAccountBinding
 import ru.unit.barsdiary.mvvm.activity.StartActivity
 import ru.unit.barsdiary.mvvm.fragment.dialog.ActionDialogFragment
-import ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel
+import ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel
 import ru.unit.barsdiary.other.inflateFactory
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
@@ -23,7 +23,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
         private const val ACTION_DIALOG_TAG = "actionDialog"
     }
 
-    private val model: PersonViewModel by activityViewModels()
+    private val model: AccountViewModel by activityViewModels()
     private lateinit var binding: FragmentAccountBinding
 
     private lateinit var actionDialog: ActionDialogFragment
@@ -113,7 +113,13 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
 
         model.refresh()
     }

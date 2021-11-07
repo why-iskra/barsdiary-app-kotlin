@@ -55,7 +55,13 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
             binding.textViewMail.setTextColor(if (it) attentionColor else normalColor)
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
     }
 
     override fun onResume() {

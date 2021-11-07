@@ -83,7 +83,13 @@ class DiaryFragment : BaseFragment(R.layout.fragment_diary) {
             registerOnPageChangeCallback(onPageChangeListener)
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
 
         setupViewPager(model.dateLiveData.value)
     }

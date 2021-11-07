@@ -66,7 +66,13 @@ class MarksFragment : BaseFragment(R.layout.fragment_marks) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
 
         model.getMarks()
     }

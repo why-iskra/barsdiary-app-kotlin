@@ -15,8 +15,7 @@ class AuthServiceImpl @Inject constructor(
     private val engine: BarsDiaryEngine,
     private val serverInfoTransformer: ServerInfoTransformer,
     private val authDataTransformer: AuthDataTransformer,
-    private val childTransformer: ChildTransformer,
-    private val authDataStore: AuthDataStore,
+    private val childTransformer: ChildTransformer
 ) : AuthService {
     override suspend fun getServerList(): List<ServerInfoPojo> = BarsDiaryEngine.getServerList().map { serverInfoTransformer.transform(it) }
 
@@ -27,7 +26,6 @@ class AuthServiceImpl @Inject constructor(
 
     override fun prepare(authData: AuthDataPojo) {
         engine.setAuthData(authDataTransformer.revert(authData))
-        authDataStore.sessionId = null
     }
 
     override fun isParent(): Boolean = engine.isParent()

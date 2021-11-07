@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBoxBinding
 import ru.unit.barsdiary.mvvm.adapter.BoxAdapter
 import ru.unit.barsdiary.mvvm.adapter.LoadStateAdapter
 import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -87,9 +89,23 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
         )
 
         globalModel.resetBoxAdapterLiveData.observe(viewLifecycleOwner) {
-            Timber.d("resetBoxAdapter")
             adapter.resetSelected()
             adapter.refresh()
+        }
+
+        lifecycleScope.launchWhenResumed {
+            adapter.loadStateFlow.collectLatest {
+                val error = when {
+                    it.append is LoadState.Error -> it.append
+                    it.prepend is LoadState.Error -> it.prepend
+                    it.refresh is LoadState.Error -> it.refresh
+                    else -> return@collectLatest
+                }
+
+                if (error is LoadState.Error) {
+                    mainModel.handleException(error.error)
+                }
+            }
         }
     }
 

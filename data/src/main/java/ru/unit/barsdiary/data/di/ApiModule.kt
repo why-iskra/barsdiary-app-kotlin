@@ -108,19 +108,19 @@ object ApiModule {
                 addInterceptor { chain ->
                     return@addInterceptor chain.run {
                         val request = request()
-                        Timber.i("--> ${request.method()} ${request.url()}")
+                        Timber.i("==^ ${request.method()} ${request.url()}")
 
                         val response: Response
                         val tookMs = measureTimeMillis {
                             try {
                                 response = proceed(request)
                             } catch (e: Exception) {
-                                Timber.i("<-- HTTP FAILED: $e")
+                                Timber.i("v== HTTP FAILED: $e")
                                 throw e
                             }
                         }
 
-                        Timber.i("<-- ${response.code()}${if (response.message().isEmpty()) "" else ' ' + response.message()} ${
+                        Timber.i("v== ${response.code()}${if (response.message().isEmpty()) "" else ' ' + response.message()} ${
                             response.request().url()
                         } (${tookMs}ms)")
 

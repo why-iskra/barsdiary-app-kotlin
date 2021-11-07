@@ -1,5 +1,7 @@
 package ru.unit.barsdiary.components
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
@@ -14,6 +16,7 @@ import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.other.endAnimatorListener
+import ru.unit.barsdiary.other.questionAttribute
 
 class RefreshButtonView : FrameLayout {
 
@@ -95,8 +98,33 @@ class RefreshButtonView : FrameLayout {
             imageView.startAnimation(fadeIn)
             imageView.visibility = VISIBLE
         })
+
         progressBar.startAnimation(fadeOut)
     }
+
+    fun state(error: Boolean = false) {
+        val currentIsError = (imageView.tag as? Boolean) ?: false
+        if(currentIsError == error) return
+
+        colorAnim?.run { cancel() }
+
+        val mainColor = ContextCompat.getColor(context, context.questionAttribute(R.attr.colorSecondary).resourceId)
+        val errorColor = ContextCompat.getColor(context, R.color.amaranth)
+
+        val colorFrom = if(currentIsError) errorColor else mainColor
+        val colorTo = if(error) errorColor else mainColor
+
+        colorAnim = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
+        colorAnim?.duration = 500
+        colorAnim?.addUpdateListener {
+            imageView.setColorFilter(it.animatedValue as Int)
+        }
+        colorAnim?.start()
+
+        imageView.tag = error
+    }
+
+    private var colorAnim: ValueAnimator? = null
 
     private val fadeIn = AlphaAnimation(0f, 1f).apply {
         interpolator = DecelerateInterpolator()

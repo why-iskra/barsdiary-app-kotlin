@@ -150,6 +150,8 @@ class AuthFragment : Fragment(R.layout.fragment_auth) {
 
         // if got error, then show infoDialog and stop refreshing
         model.authExceptionLiveData.observeFreshly(viewLifecycleOwner, {
+            it ?: return@observeFreshly
+
             if (it is ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException) {
                 infoDialog.send(getString(R.string.finish_registration_error), getString(R.string.finish_registration_error_text).format(it.site))
             } else if (it is UnauthorizedException) {

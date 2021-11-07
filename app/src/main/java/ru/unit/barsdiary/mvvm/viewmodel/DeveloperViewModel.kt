@@ -9,8 +9,10 @@ import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
 import ru.unit.barsdiary.domain.diary.DiaryUseCase
+import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.person.PersonUseCase
+import ru.unit.barsdiary.other.InAppLog
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import javax.inject.Inject
@@ -22,12 +24,16 @@ class DeveloperViewModel @Inject constructor(
     private val diaryUseCase: DiaryUseCase,
     private val markUseCase: MarkUseCase,
     private val personUseCase: PersonUseCase,
-
+    private val globalUseCase: GlobalUseCase,
     private val authRepository: AuthRepository,
+    private val inAppLog: InAppLog,
 ) : ViewModel() {
 
+    val updateLogFlow = inAppLog.publicUpdateFlow
+
     val exceptionLiveData = ExceptionLiveData()
-    val eventLiveData = EventLiveData()
+
+    fun getLog() = inAppLog.publicLogList
 
     fun clearAll() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,6 +41,7 @@ class DeveloperViewModel @Inject constructor(
                 diaryUseCase.clear()
                 markUseCase.clear()
                 personUseCase.clear()
+                globalUseCase.clear()
             }
         }
     }

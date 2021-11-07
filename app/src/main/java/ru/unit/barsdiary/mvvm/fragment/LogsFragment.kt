@@ -1,0 +1,33 @@
+package ru.unit.barsdiary.mvvm.fragment
+
+import android.os.Bundle
+import android.text.Html
+import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import ru.unit.barsdiary.R
+import ru.unit.barsdiary.databinding.FragmentLogsBinding
+import ru.unit.barsdiary.mvvm.viewmodel.DeveloperViewModel
+
+@AndroidEntryPoint
+class LogsFragment : BaseFragment(R.layout.fragment_logs) {
+
+    private val model: DeveloperViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentLogsBinding.bind(view)
+
+        binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
+        binding.horizontalScrollView.overScrollMode = View.OVER_SCROLL_NEVER
+
+        binding.debugView.text = Html.fromHtml(model.getLog().joinToString("<br/>"), Html.FROM_HTML_MODE_LEGACY)
+        lifecycleScope.launchWhenResumed {
+            model.updateLogFlow.collectLatest {
+                binding.debugView.text = Html.fromHtml(model.getLog().joinToString("<br/>"), Html.FROM_HTML_MODE_LEGACY)
+            }
+        }
+    }
+}

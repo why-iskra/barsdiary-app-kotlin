@@ -7,12 +7,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
-import ru.unit.barsdiary.data.utils.aTagDocument
 import ru.unit.barsdiary.domain.diary.DiaryUseCase
 import ru.unit.barsdiary.domain.diary.pojo.DiaryDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkIndividualPojo
 import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
+import ru.unit.barsdiary.other.aTagDocument
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import ru.unit.barsdiary.sdk.BarsDiaryEngine
@@ -36,7 +36,7 @@ class DiaryViewModel @Inject constructor(
     }
 
     val exceptionLiveData = ExceptionLiveData()
-    val updateFailIdLiveData = MutableLiveData<Long>()
+    val updateFailIdLiveData = MutableLiveData<MutableList<Long>>()
 
     val dateLiveData = MutableLiveData(LocalDate.now())
     val dateStringLiveData = MutableLiveData(LocalDate.now().format(dateFormat))
@@ -63,8 +63,18 @@ class DiaryViewModel @Inject constructor(
                     )
                 }
                 lessonsLiveData.postValue(map)
+
+                val ids = updateFailIdLiveData.value ?: mutableListOf()
+                if(ids.contains(id)) {
+                    ids.remove(id)
+                }
+                updateFailIdLiveData.postValue(ids)
             }, {
-                updateFailIdLiveData.postValue(id)
+                val ids = updateFailIdLiveData.value ?: mutableListOf()
+                if(!ids.contains(id)) {
+                    ids.add(id)
+                }
+                updateFailIdLiveData.postValue(ids)
             })
 
             eventLiveData.postEventLoaded()

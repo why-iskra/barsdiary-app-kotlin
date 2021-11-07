@@ -9,9 +9,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
-import ru.unit.barsdiary.data.utils.aTagDocument
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
+import ru.unit.barsdiary.other.aTagDocument
 import ru.unit.barsdiary.other.livedata.EmptyLiveData
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData

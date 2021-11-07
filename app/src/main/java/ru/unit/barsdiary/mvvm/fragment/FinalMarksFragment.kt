@@ -11,13 +11,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentFinalMarksBinding
 import ru.unit.barsdiary.mvvm.adapter.FinalMarksAdapter
-import ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel
+import ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
 class FinalMarksFragment : BaseFragment(R.layout.fragment_final_marks) {
 
-    private val model: PersonViewModel by activityViewModels()
+    private val model: AccountViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +66,13 @@ class FinalMarksFragment : BaseFragment(R.layout.fragment_final_marks) {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
 
         model.refreshTotalMarks()
     }

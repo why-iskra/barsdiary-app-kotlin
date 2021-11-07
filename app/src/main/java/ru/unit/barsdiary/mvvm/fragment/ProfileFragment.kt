@@ -11,13 +11,13 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.*
 import ru.unit.barsdiary.domain.person.pojo.ClassmatePojo
 import ru.unit.barsdiary.domain.person.pojo.EmployeePojo
-import ru.unit.barsdiary.mvvm.viewmodel.PersonViewModel
+import ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
-    private val model: PersonViewModel by activityViewModels()
+    private val model: AccountViewModel by activityViewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +81,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
 
         model.refreshProfile()
     }

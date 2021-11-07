@@ -46,7 +46,13 @@ class MailFragment : BaseFragment(R.layout.fragment_mail) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            binding.refreshButton.state(it != null)
+
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
     }
 
     fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {

@@ -62,4 +62,8 @@
     <string name="client">Client</string>
     <string name="fast_auth">Fast authorization</string>
     <string name="fast_auth_description">Saving auth cookies between sessions</string>
+    <string name="crash" translatable="false">Crash</string>
+    <string name="clear_all" translatable="false">Clear all</string>
+    <string name="fake_auth" translatable="false">Fake auth</string>
+    <string name="error">Error</string>
 </resources>

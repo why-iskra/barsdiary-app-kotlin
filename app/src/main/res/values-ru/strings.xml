@@ -59,4 +59,5 @@
     <string name="client">Клиент</string>
     <string name="fast_auth">Быстрая авторизация</string>
     <string name="fast_auth_description">Сохранение авторизационных файлов cookie между сеансами</string>
+    <string name="error">Ошибка</string>
 </resources>

@@ -1,16 +1,19 @@
 package ru.unit.barsdiary.other.livedata
 
 import androidx.lifecycle.MutableLiveData
+import timber.log.Timber
 
-class ExceptionLiveData : MutableLiveData<Throwable>() {
+class ExceptionLiveData : MutableLiveData<Throwable?>() {
 
     inline fun safety(tryBlock: () -> Unit, catchBlock: () -> Unit) {
         runCatching {
             tryBlock()
         }.onFailure {
-            it.printStackTrace()
+            Timber.e(it)
             postValue(it)
             catchBlock()
+        }.onSuccess {
+            postValue(null)
         }
     }
 

@@ -36,6 +36,7 @@ class AuthUseCaseImpl @Inject constructor(
         if (authData != null) {
             authService.auth(authData)
             authRepository.setAuthData(authData)
+            authRepository.cleanRamCache()
         } else {
             throw Exception("Fields are empty")
         }

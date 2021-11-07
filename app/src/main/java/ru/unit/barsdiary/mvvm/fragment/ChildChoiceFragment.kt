@@ -52,7 +52,11 @@ class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) { mainModel.handleException(it) }
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            if(it != null) {
+                mainModel.handleException(it)
+            }
+        }
     }
 
     private fun uiShowButton() {

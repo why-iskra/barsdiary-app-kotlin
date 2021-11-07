@@ -44,6 +44,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
         val epochDays = arguments?.getLong("epoch_days") ?: LocalDate.now().toEpochDay()
         val date: LocalDate = LocalDate.ofEpochDay(epochDays)
 
+        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val infoTextView = view.findViewById<TextView>(R.id.infoTextView)
 
@@ -105,14 +106,21 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
             }
         }
 
-        model.exceptionLiveData.observeFreshly(viewLifecycleOwner, { t ->
-            t?.printStackTrace()
-            if (model.updateFailIdLiveData.value == epochDays) {
-                uiRefreshStop(view)
+        model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
+            if(it != null) {
+                mainModel.handleException(it)
             }
+        }
 
-            mainModel.handleException(t)
-        })
+        model.updateFailIdLiveData.observe(viewLifecycleOwner) {
+            if (model.updateFailIdLiveData.value?.contains(epochDays) == true) {
+                uiRefreshStop(view)
+
+                recyclerView.visibility = View.GONE
+                infoTextView.visibility = View.VISIBLE
+                infoTextView.text = resources.getString(R.string.error)
+            }
+        }
 
         uiRefreshStart(view)
         model.getLessons(epochDays, date)

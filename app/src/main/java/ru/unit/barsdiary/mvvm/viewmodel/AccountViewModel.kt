@@ -18,7 +18,7 @@ import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import javax.inject.Inject
 
 @HiltViewModel
-class PersonViewModel @Inject constructor(
+class AccountViewModel @Inject constructor(
     private val personUseCase: PersonUseCase,
     private val authUseCase: AuthUseCase,
 ) : ViewModel() {
