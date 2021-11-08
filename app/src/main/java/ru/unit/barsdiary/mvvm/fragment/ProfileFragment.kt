@@ -84,7 +84,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
             binding.refreshButton.state(it != null)
 
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

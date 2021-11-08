@@ -86,7 +86,7 @@ class DiaryFragment : BaseFragment(R.layout.fragment_diary) {
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
             binding.refreshButton.state(it != null)
 
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

@@ -9,16 +9,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.*
+import okhttp3.Cookie
+import okhttp3.CookieJar
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
 import ru.unit.barsdiary.data.BuildConfig
 import ru.unit.barsdiary.data.datastore.AuthDataStore
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.data.di.annotation.*
+import ru.unit.barsdiary.data.utils.LoggingInterceptor
+import ru.unit.barsdiary.sdk.BarsDiaryCommon
 import ru.unit.barsdiary.sdk.BarsDiaryEngine
-import timber.log.Timber
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import kotlin.system.measureTimeMillis
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -95,46 +99,56 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(
+    @EngineHttpClient
+    fun provideEngineHttpClient(
         chuckerInterceptor: ChuckerInterceptor,
+        loggingInterceptor: LoggingInterceptor,
         settingsDataStore: SettingsDataStore,
         @SessionCookieSaver sessionCookieSaver: CookieJar,
         @DataStoreCookieSaver dataStoreCookieSaver: CookieJar,
     ): OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .callTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .readTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .writeTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .cookieJar(if (settingsDataStore.fastAuth) dataStoreCookieSaver else sessionCookieSaver)
         .apply {
             if (BuildConfig.DEBUG) {
                 addInterceptor(chuckerInterceptor)
-                addInterceptor { chain ->
-                    return@addInterceptor chain.run {
-                        val request = request()
-                        Timber.i("==^ ${request.method()} ${request.url()}")
-
-                        val response: Response
-                        val tookMs = measureTimeMillis {
-                            try {
-                                response = proceed(request)
-                            } catch (e: Exception) {
-                                Timber.i("v== HTTP FAILED: $e")
-                                throw e
-                            }
-                        }
-
-                        Timber.i("v== ${response.code()}${if (response.message().isEmpty()) "" else ' ' + response.message()} ${
-                            response.request().url()
-                        } (${tookMs}ms)")
-
-                        response
-                    }
-                }
             }
+
+            addInterceptor(loggingInterceptor)
+        }.build()
+
+    @Provides
+    @CommonHttpClient
+    fun provideCommonHttpClient(
+        chuckerInterceptor: ChuckerInterceptor,
+        loggingInterceptor: LoggingInterceptor,
+        settingsDataStore: SettingsDataStore,
+    ): OkHttpClient = OkHttpClient.Builder()
+        .connectTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .callTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .readTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .writeTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
+        .apply {
+            if (BuildConfig.DEBUG) {
+                addInterceptor(chuckerInterceptor)
+            }
+
+            addInterceptor(loggingInterceptor)
         }.build()
 
     @Provides
     @Singleton
     fun provideSdkEngine(
-        client: OkHttpClient,
+        @EngineHttpClient client: OkHttpClient,
     ): BarsDiaryEngine = BarsDiaryEngine(client)
+
+    @Provides
+    fun provideSdkCommon(
+        @CommonHttpClient client: OkHttpClient,
+    ): BarsDiaryCommon = BarsDiaryCommon(client)
 
     @Provides
     @WebDateFormatter

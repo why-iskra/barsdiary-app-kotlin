@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.BuildConfig
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAccountBinding
@@ -61,13 +63,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
             }
         }
 
-        if (BuildConfig.DEBUG) {
-            binding.textViewDeveloper.visibility = View.VISIBLE
-            binding.textViewAboutApp.visibility = View.VISIBLE
-        } else {
-            binding.textViewDeveloper.visibility = View.GONE
-            binding.textViewAboutApp.visibility = View.GONE
-        }
+        binding.textViewAboutApp.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
 
         binding.textViewDeveloper.setOnClickListener {
             findNavController().navigate(R.id.action_navigationFragment_to_developerFragment)
@@ -116,11 +112,17 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
             binding.refreshButton.state(it != null)
 
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }
 
         model.refresh()
+
+        lifecycleScope.launchWhenCreated {
+            model.settingsDataStore.flow.collectLatest {
+                binding.textViewDeveloper.visibility = if (it.developerMode == true) View.VISIBLE else View.GONE
+            }
+        }
     }
 }

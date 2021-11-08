@@ -38,7 +38,7 @@ class AuthUseCaseImpl @Inject constructor(
             authRepository.setAuthData(authData)
             authRepository.cleanRamCache()
         } else {
-            throw Exception("Fields are empty")
+            throw Exception("No auth data")
         }
     }
 
@@ -50,6 +50,8 @@ class AuthUseCaseImpl @Inject constructor(
     override suspend fun getServerList(): List<ServerInfoPojo> = authService.getServerList()
 
     override fun prepareFastAuth(): Boolean {
+
+
         val authData = authRepository.getAuthData() ?: return false
 
         authService.prepare(authData)

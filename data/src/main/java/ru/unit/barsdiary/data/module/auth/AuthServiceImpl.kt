@@ -1,23 +1,25 @@
 package ru.unit.barsdiary.data.module.auth
 
-import ru.unit.barsdiary.data.datastore.AuthDataStore
 import ru.unit.barsdiary.data.transformer.AuthDataTransformer
 import ru.unit.barsdiary.data.transformer.ChildTransformer
-import ru.unit.barsdiary.data.transformer.ServerInfoTransformer
+import ru.unit.barsdiary.data.transformer.ServerTransformer
 import ru.unit.barsdiary.domain.auth.AuthService
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
 import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
+import ru.unit.barsdiary.sdk.BarsDiaryCommon
 import ru.unit.barsdiary.sdk.BarsDiaryEngine
 import javax.inject.Inject
 
 class AuthServiceImpl @Inject constructor(
     private val engine: BarsDiaryEngine,
-    private val serverInfoTransformer: ServerInfoTransformer,
+    private val common: BarsDiaryCommon,
+    private val serverTransformer: ServerTransformer,
     private val authDataTransformer: AuthDataTransformer,
-    private val childTransformer: ChildTransformer
+    private val childTransformer: ChildTransformer,
 ) : AuthService {
-    override suspend fun getServerList(): List<ServerInfoPojo> = BarsDiaryEngine.getServerList().map { serverInfoTransformer.transform(it) }
+
+    override suspend fun getServerList(): List<ServerInfoPojo> = serverTransformer.transform(common.getServers())
 
     override suspend fun auth(authData: AuthDataPojo) {
         engine.setAuthData(authDataTransformer.revert(authData))

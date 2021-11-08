@@ -38,8 +38,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <Switch
+                android:id="@+id/devModeThemeSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp"
+                android:switchPadding="10dp"
+                android:text="@string/developer_mode"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
             <TextView
-                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
@@ -76,7 +87,30 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp"
+                android:text="@string/application"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Large"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/error_dialogs_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp"
+                android:switchPadding="10dp"
+                android:text="@string/error_dialog"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
@@ -101,7 +135,6 @@
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <TextView
-                android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
@@ -110,6 +143,43 @@
                 android:text="@string/fast_auth_description"
                 android:textAppearance="@style/TextAppearance.Barsdiary.Small"
                 android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/request_timeout"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium" />
+
+                <EditText
+                    android:id="@+id/timeoutEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:ems="10"
+                    android:hint="@string/seconds"
+                    android:inputType="numberDecimal"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="12dp"
+                android:text="@string/request_timeout_description"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Small"
+                android:textSize="14sp" />
+
         </LinearLayout>
     </ScrollView>
 

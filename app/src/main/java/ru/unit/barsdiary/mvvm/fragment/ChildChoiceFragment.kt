@@ -53,7 +53,7 @@ class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
         }
 
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

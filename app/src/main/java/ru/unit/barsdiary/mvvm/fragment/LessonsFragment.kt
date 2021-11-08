@@ -107,7 +107,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
         }
 
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

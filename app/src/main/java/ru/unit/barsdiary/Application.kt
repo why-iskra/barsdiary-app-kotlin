@@ -15,9 +15,10 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
-            Timber.plant(inAppTree)
         }
+
+        Timber.plant(inAppTree)
     }
 }

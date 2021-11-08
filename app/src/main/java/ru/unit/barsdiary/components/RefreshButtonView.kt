@@ -104,15 +104,15 @@ class RefreshButtonView : FrameLayout {
 
     fun state(error: Boolean = false) {
         val currentIsError = (imageView.tag as? Boolean) ?: false
-        if(currentIsError == error) return
+        if (currentIsError == error) return
 
         colorAnim?.run { cancel() }
 
         val mainColor = ContextCompat.getColor(context, context.questionAttribute(R.attr.colorSecondary).resourceId)
         val errorColor = ContextCompat.getColor(context, R.color.amaranth)
 
-        val colorFrom = if(currentIsError) errorColor else mainColor
-        val colorTo = if(error) errorColor else mainColor
+        val colorFrom = if (currentIsError) errorColor else mainColor
+        val colorTo = if (error) errorColor else mainColor
 
         colorAnim = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
         colorAnim?.duration = 500

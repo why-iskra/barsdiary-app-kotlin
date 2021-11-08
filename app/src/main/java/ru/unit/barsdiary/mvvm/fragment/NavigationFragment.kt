@@ -49,7 +49,7 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
         globalModel.refreshNotifications()
 
         globalModel.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

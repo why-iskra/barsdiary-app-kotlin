@@ -8,9 +8,8 @@ import android.widget.HorizontalScrollView
 import android.widget.ScrollView
 import androidx.annotation.AttrRes
 import ru.unit.barsdiary.R
-import timber.log.Timber
 
-class FixScrollView: ScrollView {
+class TwoWayScrollView : ScrollView {
 
     constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)

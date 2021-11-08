@@ -1,11 +1,12 @@
 package ru.unit.barsdiary.other
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -14,21 +15,31 @@ import javax.inject.Singleton
 @Singleton
 class InAppLog @Inject constructor() {
 
+    private val replaceMap = mapOf(
+        "<" to "&lt;",
+        ">" to "&gt;"
+    )
+
     private val logList = mutableListOf<String>()
     private val updateFlow = MutableSharedFlow<Unit>()
+    private val mutex = Mutex()
 
     val publicLogList: List<String> get() = logList
     val publicUpdateFlow: SharedFlow<Unit> get() = updateFlow
 
-    fun println(priorityInt: Int, tag: String?, text: String) {
-        val priority = priorityToString(priorityInt)
+    fun println(priorityInt: Int, tag: String?, raw: String) {
+        val text = parseReplaces(raw)
+
+        val prefix = priorityToString(priorityInt)
+        val prefixText = prefix.first + " " + getCurrentTime()
+        val prefixColor = prefix.second
 
         val list = text.split("\n")
 
         if (list.size < 2) {
-            addLine("<span white-space=\"pre\"><font color='${priority.second}'>${priority.first} $tag > ${list[0]}</font></span>")
+            addLine("<span white-space=\"pre\"><font color='${prefixColor}'>${prefixText} $tag > ${list[0]}</font></span>")
         } else {
-            val size = priority.first.length
+            val size = prefixText.length
             val spacePrefix = buildString {
                 for (i in 0 until size) {
                     append("&nbsp;")
@@ -38,13 +49,13 @@ class InAppLog @Inject constructor() {
             for (i in list.indices) {
                 when (i) {
                     0 -> {
-                        addLine("<font color='${priority.second}'>${priority.first} + ${list[i]}</font>")
+                        addLine("<font color='${prefixColor}'>${prefixText} + ${list[i]}</font>")
                     }
                     list.size - 1 -> {
-                        addLine("<font color='${priority.second}'>${spacePrefix} + ${list[i]}</font>")
+                        addLine("<font color='${prefixColor}'>${spacePrefix} + ${list[i]}</font>")
                     }
                     else -> {
-                        addLine("<font color='${priority.second}'>${spacePrefix} | ${list[i]}</font>")
+                        addLine("<font color='${prefixColor}'>${spacePrefix} | ${list[i]}</font>")
                     }
                 }
             }
@@ -56,10 +67,25 @@ class InAppLog @Inject constructor() {
     }
 
     private fun addLine(text: String) {
-        logList.add(text)
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
+            mutex.withLock {
+                while (logList.size > MAX_BUFFER_LINES) {
+                    logList.removeAt(0)
+                }
+
+                logList.add(text)
+            }
             updateFlow.emit(Unit)
         }
+    }
+
+    private fun parseReplaces(text: String): String {
+        var result = text
+        replaceMap.forEach { (old, new) ->
+            result = result.replace(old, new)
+        }
+
+        return result
     }
 
     private fun priorityToString(priority: Int) = when (priority) {
@@ -77,15 +103,19 @@ class InAppLog @Inject constructor() {
 
     companion object {
         // Decompile from android
-        val VERBOSE = 2
-        val DEBUG = 3
-        val INFO = 4
-        val WARN = 5
-        val ERROR = 6
-        val ASSERT = 7
-        val WTF = 8
+        private const val VERBOSE = 2
+        private const val DEBUG = 3
+        private const val INFO = 4
+        private const val WARN = 5
+        private const val ERROR = 6
+        private const val ASSERT = 7
+
+        private const val WTF = 8
+
 
         private val PREFIX_DATE = DateTimeFormatter.ofPattern("HH:mm:ss.SSS")
+
+        private const val MAX_BUFFER_LINES = 2000
     }
 
 }

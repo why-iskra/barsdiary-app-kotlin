@@ -66,4 +66,10 @@
     <string name="clear_all" translatable="false">Clear all</string>
     <string name="fake_auth" translatable="false">Fake auth</string>
     <string name="error">Error</string>
+    <string name="developer_mode">Developer mode</string>
+    <string name="request_timeout">Request timeout</string>
+    <string name="seconds">seconds</string>
+    <string name="request_timeout_description">Maximum request execution time to the server (changes will take effect after the application is restarted)</string>
+    <string name="application">Application</string>
+    <string name="error_dialog">Pop-up windows with errors</string>
 </resources>

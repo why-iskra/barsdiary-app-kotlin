@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observeFreshly
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -29,7 +28,7 @@ class DeveloperFragment : BaseFragment(R.layout.fragment_developer) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()
 
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

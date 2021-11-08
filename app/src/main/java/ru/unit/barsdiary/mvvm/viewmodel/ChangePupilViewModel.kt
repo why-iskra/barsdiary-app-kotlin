@@ -11,7 +11,6 @@ import ru.unit.barsdiary.domain.diary.DiaryUseCase
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.person.PersonUseCase
-import ru.unit.barsdiary.other.SpamGuard
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import javax.inject.Inject
@@ -24,9 +23,6 @@ class ChangePupilViewModel @Inject constructor(
     private val personUseCase: PersonUseCase,
     private val globalUseCase: GlobalUseCase,
 ) : ViewModel() {
-
-    private val spamGuard = SpamGuard()
-
     val exceptionLiveData = ExceptionLiveData()
     val eventLiveData = EventLiveData()
 
@@ -35,20 +31,16 @@ class ChangePupilViewModel @Inject constructor(
 
     fun changeChild(index: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            spamGuard.guard("changeChild") {
-                eventLiveData.postEventLoading()
+            eventLiveData.postEventLoading()
 
-                exceptionLiveData.safety {
-                    authUseCase.changePupil(index)
-                    clearAll()
-                }
-
-                delay(1000)
-
-                eventLiveData.postEventLoaded()
-
-                it.unlock()
+            exceptionLiveData.safety {
+                authUseCase.changePupil(index)
+                clearAll()
             }
+
+            delay(1000)
+
+            eventLiveData.postEventLoaded()
         }
     }
 

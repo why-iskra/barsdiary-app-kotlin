@@ -34,6 +34,7 @@ class BarsDiaryEngine(
         }
 
     private var authData: AuthData? = null
+    private var inited: Boolean = false
     private var parent: Boolean = false
     private var childrenList: List<Child> = emptyList()
     private var selectedChild: Int = 0
@@ -44,6 +45,9 @@ class BarsDiaryEngine(
     fun setAuthData(data: AuthData) {
         this.authData = data
         _service = null
+
+        runCatching { authMutex.unlock() }
+        runCatching { logicMutex.unlock() }
     }
 
     private suspend fun waitAuth() {
@@ -51,6 +55,10 @@ class BarsDiaryEngine(
     }
 
     suspend fun auth() {
+        auth(false)
+    }
+
+    private suspend fun auth(skipAuth: Boolean) {
         logicMutex.lock()
 
         if (authMutex.isLocked) {
@@ -63,33 +71,46 @@ class BarsDiaryEngine(
         authMutex.lock()
         logicMutex.unlock()
 
-        val data = authData ?: throw AuthDataNotInitException()
+        runCatching {
+            if (!skipAuth) {
+                val data = authData ?: throw AuthDataNotInitException()
 
-        try {
-            val result = service.login(data.login, data.password)
+                try {
+                    val result = service.login(data.login, data.password)
 
-            if (!result.success) throw UnauthorizedException()
-            val redirect = result.redirect.orEmpty()
+                    if (!result.success) throw UnauthorizedException()
+                    val redirect = result.redirect.orEmpty()
 
-            val parsedRedirect = if (redirect.isNotEmpty() && redirect.first() == '/') redirect.drop(1) else redirect
+                    val parsedRedirect = if (redirect.isNotEmpty() && redirect.first() == '/') redirect.drop(1) else redirect
 
-            val redirectUrl = service.redirect(parsedRedirect).raw().request().url().toString()
+                    val redirectUrl = service.redirect(parsedRedirect).raw().request().url().toString()
 
-            if ("${data.serverUrl}/personal-area/" != redirectUrl) {
-                runCatching {
-                    service.noinput(redirectUrl.removePrefix("${data.serverUrl}/"))
-                }.onFailure {
-                    throw FinishRegistrationAccountException(data.serverUrl)
+                    if ("${data.serverUrl}/personal-area/" != redirectUrl) {
+                        runCatching {
+                            service.noinput(redirectUrl.removePrefix("${data.serverUrl}/"))
+                        }.onFailure {
+                            throw FinishRegistrationAccountException(data.serverUrl)
+                        }
+                    }
+                } catch (e: HttpException) {
+                    if (e.code() == 401 || e.code() == 403) {
+                        throw UnauthorizedException()
+                    } else {
+                        throw e
+                    }
                 }
             }
-        } catch (e: HttpException) {
-            if (e.code() == 401 || e.code() == 403) {
-                throw UnauthorizedException()
-            } else {
-                throw e
-            }
+
+            updateParentData()
+        }.onFailure {
+            authMutex.unlock()
+            throw it
         }
 
+        authMutex.unlock()
+    }
+
+    private suspend fun updateParentData() {
         val personData = service.getPersonData()
         if (personData.childrenPersons.isNotEmpty()) {
             parent = true
@@ -108,7 +129,7 @@ class BarsDiaryEngine(
             selectedChild = 0
         }
 
-        authMutex.unlock()
+        inited = true
     }
 
     suspend fun changeChild(index: Int) {
@@ -139,12 +160,18 @@ class BarsDiaryEngine(
     suspend fun <T> api(authProtect: Boolean = true, block: suspend ApiService.() -> T): T {
         waitAuth()
 
+        runCatching {
+            if (!inited) {
+                auth(true)
+            }
+        }
+
         return if (authProtect) {
             return try {
                 block.invoke(service)
             } catch (e: HttpException) {
                 if (e.code() == 403) {
-                    auth()
+                    auth(false)
                     block.invoke(service)
                 } else {
                     throw e
@@ -172,32 +199,9 @@ class BarsDiaryEngine(
         val password: String,
     )
 
-    data class ServerInfo(
-        val url: String,
-        val name: String,
-    )
-
     companion object {
         const val webDateFormatPattern = "yyyy-MM-dd"
         const val chartDateFormatPattern = "dd.MM.yyyy"
         const val mailDateFormatPattern = "dd.MM.yyyy HH:mm"
-
-        fun getServerList(): List<ServerInfo> {
-            return listOf(
-                ServerInfo("https://xn--80atdl2c.xn--33-6kcadhwnl3cfdx.xn--p1ai", "Владимирская область"),
-                ServerInfo("https://school.vip.edu35.ru", "Вологодская область"),
-                ServerInfo("https://school.07.edu.o7.com/", "Кабардино-Балкарская республика"),
-                ServerInfo("https://schools48.ru", "Липецкая область"),
-                ServerInfo("https://s51.edu.o7.com", "Мурманская область"),
-                ServerInfo("https://edu.adm-nao.ru/", "Ненецкий автономный округ"),
-                ServerInfo("https://shkola.nso.ru", "Новосибирская область"),
-                ServerInfo("https://sosh.mon-ra.ru", "Республика Алтай"),
-                ServerInfo("https://school.karelia.ru/", "Республика Карелия"),
-                ServerInfo("https://school.r-19.ru", "Республика Хакасия"),
-                ServerInfo("https://sh-open.ris61edu.ru/", "Ростовская область "),
-                ServerInfo("https://e-school.ryazangov.ru/", "Рязанская область"),
-                ServerInfo("https://es.ciur.ru", "Удмуртская республика")
-            )
-        }
     }
 }

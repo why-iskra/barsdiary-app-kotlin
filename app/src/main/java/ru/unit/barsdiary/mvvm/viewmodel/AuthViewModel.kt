@@ -8,10 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
-import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
-import ru.unit.barsdiary.other.SpamGuard
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import javax.inject.Inject
@@ -19,11 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
-    private val authRepository: AuthRepository,
     private val settingsDataStore: SettingsDataStore,
 ) : ViewModel() {
-
-    private val spamGuard = SpamGuard()
 
     val serverUrlLiveData = MutableLiveData<String>()
     val loginLiveData = MutableLiveData<String>()
@@ -56,17 +51,13 @@ class AuthViewModel @Inject constructor(
 
     fun auth() {
         viewModelScope.launch(Dispatchers.IO) {
-            spamGuard.guard("auth") {
-                authExceptionLiveData.safety {
-                    delay(2000)
-                    authUseCase.auth(serverUrlLiveData.value, loginLiveData.value, passwordLiveData.value)
+            authExceptionLiveData.safety {
+                delay(2000)
+                authUseCase.auth(serverUrlLiveData.value, loginLiveData.value, passwordLiveData.value)
 
-                    progressLiveData.postValue(50)
-                    delay(1500)
-                    progressLiveData.postValue(100)
-                }
-
-                it.unlock()
+                progressLiveData.postValue(50)
+                delay(1500)
+                progressLiveData.postValue(100)
             }
         }
     }

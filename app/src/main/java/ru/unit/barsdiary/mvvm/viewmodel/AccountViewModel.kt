@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.person.PersonUseCase
 import ru.unit.barsdiary.domain.person.pojo.ClassmatePojo
@@ -21,12 +22,13 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val personUseCase: PersonUseCase,
     private val authUseCase: AuthUseCase,
+    val settingsDataStore: SettingsDataStore,
 ) : ViewModel() {
     val exceptionLiveData = ExceptionLiveData()
 
     val personNameLiveData = MutableLiveData<String?>()
     val personParentNameLiveData = MutableLiveData<String?>()
-    val isParentLiveData = MutableLiveData<Boolean>()
+    val isParentLiveData = MutableLiveData(false)
 
     val schoolNameLiveData = MutableLiveData<String?>()
     val schoolAddressLiveData = MutableLiveData<String?>()
@@ -44,6 +46,7 @@ class AccountViewModel @Inject constructor(
     private suspend fun getPersonName() {
         exceptionLiveData.safety {
             val result = personUseCase.getPerson()
+            isParent()
             personNameLiveData.postValue(result.selectedPupilName)
         }
     }
@@ -76,7 +79,6 @@ class AccountViewModel @Inject constructor(
             val asyncPersonName = async { getPersonName() }
             val asyncPersonParentName = async { getPersonParentName() }
 
-            isParent()
 
             asyncPersonName.await()
             asyncPersonParentName.await()

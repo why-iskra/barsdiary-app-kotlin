@@ -64,7 +64,7 @@ class LetterFragment : BaseFragment(R.layout.fragment_letter) {
         }
 
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
-            if(it != null) {
+            if (it != null) {
                 mainModel.handleException(it)
             }
         }

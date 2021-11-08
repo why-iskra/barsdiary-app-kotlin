@@ -60,4 +60,10 @@
     <string name="fast_auth">Быстрая авторизация</string>
     <string name="fast_auth_description">Сохранение авторизационных файлов cookie между сеансами</string>
     <string name="error">Ошибка</string>
+    <string name="developer_mode">Режим разработчика</string>
+    <string name="request_timeout">Таймаут запроса</string>
+    <string name="seconds">секунды</string>
+    <string name="request_timeout_description">Максимальное время выполнения запроса до сервера (изменения вступят в силу после перезагрузки приложения)</string>
+    <string name="application">Приложение</string>
+    <string name="error_dialog">Всплывающие окно с ошибками</string>
 </resources>

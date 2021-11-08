@@ -65,13 +65,13 @@ class DiaryViewModel @Inject constructor(
                 lessonsLiveData.postValue(map)
 
                 val ids = updateFailIdLiveData.value ?: mutableListOf()
-                if(ids.contains(id)) {
+                if (ids.contains(id)) {
                     ids.remove(id)
                 }
                 updateFailIdLiveData.postValue(ids)
             }, {
                 val ids = updateFailIdLiveData.value ?: mutableListOf()
-                if(!ids.contains(id)) {
+                if (!ids.contains(id)) {
                     ids.add(id)
                 }
                 updateFailIdLiveData.postValue(ids)

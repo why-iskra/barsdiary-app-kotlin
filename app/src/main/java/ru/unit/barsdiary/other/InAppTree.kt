@@ -5,8 +5,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class InAppTree @Inject constructor(
-    private val inAppLog: InAppLog
-): Timber.DebugTree() {
+    private val inAppLog: InAppLog,
+) : Timber.DebugTree() {
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.ASSERT) {
