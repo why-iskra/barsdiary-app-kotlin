@@ -79,14 +79,16 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
             selected = it
         }
 
-        binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
-            LoadStateAdapter {
-                adapter.retry()
-            },
-            LoadStateAdapter {
-                adapter.retry()
-            }
-        )
+        if(binding.recyclerView.adapter == null) {
+            binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+                LoadStateAdapter {
+                    adapter.retry()
+                },
+                LoadStateAdapter {
+                    adapter.retry()
+                }
+            )
+        }
 
         globalModel.resetBoxAdapterLiveData.observe(viewLifecycleOwner) {
             adapter.resetSelected()

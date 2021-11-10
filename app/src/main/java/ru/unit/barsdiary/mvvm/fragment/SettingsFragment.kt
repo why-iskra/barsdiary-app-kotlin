@@ -40,6 +40,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
         binding.syncThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
             model.settingsDataStore.syncWithSystemTheme = isChecked
+            binding.nightThemeSwitch.isEnabled = !isChecked
         }
 
         binding.nightThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
