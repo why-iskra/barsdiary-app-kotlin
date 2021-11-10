@@ -81,27 +81,43 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideChuckerCollector(@ApplicationContext context: Context) = ChuckerCollector(
-        context = context,
-        showNotification = BuildConfig.DEBUG,
-        retentionPeriod = RetentionManager.Period.ONE_DAY
-    )
+    fun provideChuckerCollector(
+        @ApplicationContext context: Context,
+        settingsDataStore: SettingsDataStore
+    ): ChuckerCollector? {
+        return if(settingsDataStore.enableChucker) {
+            ChuckerCollector(
+                context = context,
+                showNotification = BuildConfig.DEBUG,
+                retentionPeriod = RetentionManager.Period.ONE_DAY
+            )
+        } else {
+            null
+        }
+    }
 
     @Provides
     @Singleton
-    fun provideChuckerInterceptor(@ApplicationContext context: Context, chuckerCollector: ChuckerCollector): ChuckerInterceptor {
-        return ChuckerInterceptor.Builder(context)
-            .collector(chuckerCollector)
-            .maxContentLength(Long.MAX_VALUE)
-            .alwaysReadResponseBody(true)
-            .build()
+    fun provideChuckerInterceptor(
+        @ApplicationContext context: Context,
+        chuckerCollector: ChuckerCollector?
+    ): ChuckerInterceptor? {
+        return if(chuckerCollector == null) {
+            null
+        } else {
+            ChuckerInterceptor.Builder(context)
+                .collector(chuckerCollector)
+                .maxContentLength(Long.MAX_VALUE)
+                .alwaysReadResponseBody(true)
+                .build()
+        }
     }
 
     @Provides
     @Singleton
     @EngineHttpClient
     fun provideEngineHttpClient(
-        chuckerInterceptor: ChuckerInterceptor,
+        chuckerInterceptor: ChuckerInterceptor?,
         loggingInterceptor: LoggingInterceptor,
         settingsDataStore: SettingsDataStore,
         @SessionCookieSaver sessionCookieSaver: CookieJar,
@@ -113,7 +129,7 @@ object ApiModule {
         .writeTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .cookieJar(if (settingsDataStore.fastAuth) dataStoreCookieSaver else sessionCookieSaver)
         .apply {
-            if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG && chuckerInterceptor != null) {
                 addInterceptor(chuckerInterceptor)
             }
 
@@ -123,7 +139,7 @@ object ApiModule {
     @Provides
     @CommonHttpClient
     fun provideCommonHttpClient(
-        chuckerInterceptor: ChuckerInterceptor,
+        chuckerInterceptor: ChuckerInterceptor?,
         loggingInterceptor: LoggingInterceptor,
         settingsDataStore: SettingsDataStore,
     ): OkHttpClient = OkHttpClient.Builder()
@@ -132,7 +148,7 @@ object ApiModule {
         .readTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .writeTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .apply {
-            if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG && chuckerInterceptor != null) {
                 addInterceptor(chuckerInterceptor)
             }
 

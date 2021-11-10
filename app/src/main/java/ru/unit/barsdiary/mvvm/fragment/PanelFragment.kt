@@ -21,5 +21,9 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
         binding.clearAllButton.setOnClickListener { model.clearAll() }
         binding.crashButton.setOnClickListener { model.crash() }
 
+        binding.chuckerSwitch.isChecked = model.settingsDataStore.enableChucker
+        binding.chuckerSwitch.setOnCheckedChangeListener { _, isChecked ->
+            model.settingsDataStore.enableChucker = isChecked
+        }
     }
 }

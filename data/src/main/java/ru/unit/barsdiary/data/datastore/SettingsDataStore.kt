@@ -35,7 +35,8 @@ class SettingsDataStore @Inject constructor(
             it[FAST_AUTH],
             it[DEVELOPER_MODE],
             it[CLIENT_TIMEOUT],
-            it[ERROR_DIALOGS]
+            it[ERROR_DIALOGS],
+            it[ENABLE_CHUCKER],
         )
     }
 
@@ -45,6 +46,7 @@ class SettingsDataStore @Inject constructor(
     var developerMode by BooleanPreference(context.dataStore, DEVELOPER_MODE, false)
     var clientTimeout by IntPreference(context.dataStore, CLIENT_TIMEOUT, 60)
     var errorDialogs by BooleanPreference(context.dataStore, ERROR_DIALOGS, true)
+    var enableChucker by BooleanPreference(context.dataStore, ENABLE_CHUCKER, false)
 
     data class Data(
         val syncWithSystemTheme: Boolean?,
@@ -53,6 +55,7 @@ class SettingsDataStore @Inject constructor(
         val developerMode: Boolean?,
         val clientTimeout: Int?,
         val errorDialogs: Boolean?,
+        val enableChucker: Boolean?,
     )
 
     companion object {
@@ -62,5 +65,6 @@ class SettingsDataStore @Inject constructor(
         private val DEVELOPER_MODE = booleanPreferencesKey("developerMode")
         private val CLIENT_TIMEOUT = intPreferencesKey("clientTimeout")
         private val ERROR_DIALOGS = booleanPreferencesKey("errorDialogs")
+        private val ENABLE_CHUCKER = booleanPreferencesKey("enableChucker")
     }
 }

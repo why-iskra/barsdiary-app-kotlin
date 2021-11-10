@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
@@ -26,6 +27,7 @@ class DeveloperViewModel @Inject constructor(
     private val globalUseCase: GlobalUseCase,
     private val authRepository: AuthRepository,
     private val inAppLog: InAppLog,
+    val settingsDataStore: SettingsDataStore
 ) : ViewModel() {
 
     val updateLogFlow = inAppLog.publicUpdateFlow
