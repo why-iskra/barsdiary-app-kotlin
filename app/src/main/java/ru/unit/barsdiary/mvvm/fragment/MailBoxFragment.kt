@@ -95,7 +95,7 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
             adapter.refresh()
         }
 
-        lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             adapter.loadStateFlow.collectLatest {
                 val error = when {
                     it.append is LoadState.Error -> it.append

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.DialogFragmentPickDateBinding
+import ru.unit.barsdiary.other.function.argumentDelegate
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
@@ -13,19 +14,31 @@ import java.time.ZoneId
 
 class PickDateDialogFragment : DialogFragment() {
 
+    companion object {
+        private const val YEAR_KEY = "year"
+        private const val MONTH_KEY = "month"
+        private const val DAY_KEY = "day"
+
+        fun config(date: LocalDate): Bundle {
+            val bundle = Bundle()
+            bundle.putInt(YEAR_KEY, date.year)
+            bundle.putInt(MONTH_KEY, date.monthValue)
+            bundle.putInt(DAY_KEY, date.dayOfMonth)
+            return bundle
+        }
+    }
+
+    private val year: Int by argumentDelegate()
+    private val month: Int by argumentDelegate()
+    private val day: Int by argumentDelegate()
+
     private var onSelectListener: ((LocalDate) -> Unit)? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding =
             DialogFragmentPickDateBinding.inflate(layoutInflater, null, false)
 
-        val date = arguments?.let {
-            LocalDate.of(
-                it.getInt("year"),
-                it.getInt("month"),
-                it.getInt("day")
-            )
-        } ?: LocalDate.now()
+        val date = LocalDate.of(year, month, day)
 
         binding.cancelButton.setOnClickListener {
             dismiss()
@@ -40,14 +53,6 @@ class PickDateDialogFragment : DialogFragment() {
         val builder = AlertDialog.Builder(requireContext(), R.style.Theme_Barsdiary_Dialog_Common)
         builder.setView(binding.root)
         return builder.create()
-    }
-
-    fun send(date: LocalDate) {
-        val args = Bundle()
-        args.putInt("day", date.dayOfMonth)
-        args.putInt("month", date.monthValue)
-        args.putInt("year", date.year)
-        arguments = args
     }
 
     fun setOnSelectListener(onSelectListener: ((LocalDate) -> Unit)?) {

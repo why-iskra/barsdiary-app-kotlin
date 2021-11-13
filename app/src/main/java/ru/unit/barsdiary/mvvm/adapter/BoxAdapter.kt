@@ -13,6 +13,7 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.data.di.annotation.MailDateFormatter
 import ru.unit.barsdiary.databinding.RecyclerItemMailBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
+import ru.unit.barsdiary.other.HtmlUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -48,7 +49,7 @@ class BoxAdapter @Inject constructor(
 
         holder.binding.authorTextView.text = if (isInBox) item.senderFullName else item.receivers.joinToString { it.fullname }
 
-        holder.binding.contentTextView.text = item.shortText
+        holder.binding.contentTextView.text = HtmlUtils.convert(item.shortText)
 
         holder.binding.dateTextView.text = dateToString(item.date)
 

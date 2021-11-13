@@ -58,7 +58,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
 
         binding.textViewLogout.setOnClickListener {
             if (!actionDialog.isAdded) {
-                actionDialog.send(getString(R.string.logout), getString(R.string.logout_text))
+                actionDialog.arguments = ActionDialogFragment.config(getString(R.string.logout), getString(R.string.logout_text))
                 actionDialog.show(parentFragmentManager, ACTION_DIALOG_TAG)
             }
         }
@@ -119,7 +119,7 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
 
         model.refresh()
 
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             model.settingsDataStore.flow.collectLatest {
                 binding.textViewDeveloper.visibility = if (it.developerMode == true) View.VISIBLE else View.GONE
             }

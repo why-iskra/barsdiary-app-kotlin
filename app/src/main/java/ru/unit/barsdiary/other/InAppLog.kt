@@ -15,11 +15,6 @@ import javax.inject.Singleton
 @Singleton
 class InAppLog @Inject constructor() {
 
-    private val replaceMap = mapOf(
-        "<" to "&lt;",
-        ">" to "&gt;"
-    )
-
     private val logList = mutableListOf<String>()
     private val updateFlow = MutableSharedFlow<Unit>()
     private val mutex = Mutex()
@@ -28,7 +23,7 @@ class InAppLog @Inject constructor() {
     val publicUpdateFlow: SharedFlow<Unit> get() = updateFlow
 
     fun println(priorityInt: Int, tag: String?, raw: String) {
-        val text = parseReplaces(raw)
+        val text = HtmlUtils.prepareText(raw)
 
         val prefix = priorityToString(priorityInt)
         val prefixText = prefix.first + " " + getCurrentTime()
@@ -42,7 +37,7 @@ class InAppLog @Inject constructor() {
             val size = prefixText.length
             val spacePrefix = buildString {
                 for (i in 0 until size) {
-                    append("&nbsp;")
+                    append(HtmlUtils.nonBreakWhitespaceSign)
                 }
             }
 
@@ -77,15 +72,6 @@ class InAppLog @Inject constructor() {
             }
             updateFlow.emit(Unit)
         }
-    }
-
-    private fun parseReplaces(text: String): String {
-        var result = text
-        replaceMap.forEach { (old, new) ->
-            result = result.replace(old, new)
-        }
-
-        return result
     }
 
     private fun priorityToString(priority: Int) = when (priority) {

@@ -12,7 +12,7 @@ import ru.unit.barsdiary.domain.diary.pojo.DiaryDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkIndividualPojo
 import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
-import ru.unit.barsdiary.other.aTagDocument
+import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
 import ru.unit.barsdiary.sdk.BarsDiaryEngine
@@ -90,14 +90,14 @@ class DiaryViewModel @Inject constructor(
         }
     }
 
-    fun document(name: String, url: String) = aTagDocument(name, barsDiaryEngine.getServerUrl() + url)
+    private fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), barsDiaryEngine.getServerUrl() + url)
 
     fun materialsToString(list: List<MaterialPojo>) = buildString {
         val size = list.size
         for ((i, material) in list.withIndex()) {
             append(document(material.name, material.url))
             if (i != size - 1) {
-                append("<br/>")
+                append(HtmlUtils.tagNewLine)
             }
         }
     }
@@ -106,10 +106,11 @@ class DiaryViewModel @Inject constructor(
         append(homework)
 
         if (list.isNotEmpty()) {
-            append("<br/><br/>")
+            append(HtmlUtils.tagNewLine)
+            append(HtmlUtils.tagNewLine)
             val size = list.size
             for ((i, individual) in list.withIndex()) {
-                append(individual.description)
+                append(HtmlUtils.prepareText(individual.description ?: ""))
                 append(" (")
                 if (individual.document != null) {
                     val document = individual.document
@@ -122,7 +123,7 @@ class DiaryViewModel @Inject constructor(
                 }
                 append(")")
                 if (i != size - 1) {
-                    append("<br/>")
+                    append(HtmlUtils.tagNewLine)
                 }
             }
         }

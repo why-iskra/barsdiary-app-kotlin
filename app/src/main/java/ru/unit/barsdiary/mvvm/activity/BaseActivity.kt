@@ -93,7 +93,7 @@ open class BaseActivity(@LayoutRes val res: Int) : AppCompatActivity(res) {
                                 return@withLock
                             }
 
-                            dialog.send(title, text)
+                            dialog.arguments = InfoDialogFragment.config(title, text)
                             dialog.show(supportFragmentManager, infoDialogTag)
                         }
                     }

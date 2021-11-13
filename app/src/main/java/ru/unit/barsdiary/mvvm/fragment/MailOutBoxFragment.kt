@@ -23,7 +23,7 @@ class MailOutBoxFragment : MailBoxFragment() {
 
         setTitle(R.string.out_box)
 
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             model.outBoxFlow.collectLatest {
                 adapter.submitData(it)
             }

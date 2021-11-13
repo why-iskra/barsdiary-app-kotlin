@@ -12,6 +12,7 @@ import ru.unit.barsdiary.databinding.FragmentMailBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.mvvm.adapter.MailAdapter
 import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
+import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.function.configure
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
@@ -63,8 +64,8 @@ class MailFragment : BaseFragment(R.layout.fragment_mail) {
                 data.attachments.map {
                     model.document(it.originalName, it.downloadLink)
                 }.forEach {
-                    append("<br/>")
-                    append("<br/>")
+                    append(HtmlUtils.tagNewLine)
+                    append(HtmlUtils.tagNewLine)
                     append(it)
                 }
             }

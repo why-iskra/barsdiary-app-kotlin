@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
-import ru.unit.barsdiary.other.aTagDocument
+import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.livedata.EmptyLiveData
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
@@ -25,7 +25,7 @@ import javax.inject.Inject
 class GlobalViewModel @Inject constructor(
     private val barsDiaryEngine: BarsDiaryEngine,
     private val globalUseCase: GlobalUseCase,
-    @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
+    @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter
 ) : ViewModel() {
 
     companion object {
@@ -169,5 +169,5 @@ class GlobalViewModel @Inject constructor(
         } != null
     }
 
-    fun document(name: String, url: String) = aTagDocument(name, barsDiaryEngine.getServerUrl() + url)
+    fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), barsDiaryEngine.getServerUrl() + url)
 }

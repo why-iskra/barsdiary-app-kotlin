@@ -1,6 +1,7 @@
 package ru.unit.barsdiary.data.di
 
 import android.content.Context
+import androidx.annotation.Nullable
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
@@ -81,11 +82,12 @@ object ApiModule {
 
     @Provides
     @Singleton
+    @Nullable
     fun provideChuckerCollector(
         @ApplicationContext context: Context,
-        settingsDataStore: SettingsDataStore
+        settingsDataStore: SettingsDataStore,
     ): ChuckerCollector? {
-        return if(settingsDataStore.enableChucker) {
+        return if (settingsDataStore.enableChucker) {
             ChuckerCollector(
                 context = context,
                 showNotification = BuildConfig.DEBUG,
@@ -98,11 +100,12 @@ object ApiModule {
 
     @Provides
     @Singleton
+    @Nullable
     fun provideChuckerInterceptor(
         @ApplicationContext context: Context,
-        chuckerCollector: ChuckerCollector?
+        chuckerCollector: ChuckerCollector?,
     ): ChuckerInterceptor? {
-        return if(chuckerCollector == null) {
+        return if (chuckerCollector == null) {
             null
         } else {
             ChuckerInterceptor.Builder(context)

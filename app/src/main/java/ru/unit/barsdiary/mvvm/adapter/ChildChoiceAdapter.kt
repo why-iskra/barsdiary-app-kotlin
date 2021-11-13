@@ -16,7 +16,7 @@ class ChildChoiceAdapter(
         val pupil = children[position]
         val fragment = ChildFragment()
 
-        fragment.config(pupil.id, pupil.name, pupil.school)
+        fragment.arguments = ChildFragment.config(pupil.id, pupil.name, pupil.school)
 
         return fragment
     }

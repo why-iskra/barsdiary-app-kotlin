@@ -16,7 +16,7 @@ class DiaryAdapter(fragment: Fragment, private val date: LocalDate) : FragmentSt
         }
 
         val fragment = LessonsFragment()
-        fragment.config(date.plusDays(position - 500L).toEpochDay())
+        fragment.arguments = LessonsFragment.config(date.plusDays(position - 500L).toEpochDay())
         return fragment
     }
 }

@@ -1,7 +1,6 @@
 package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentLogsBinding
 import ru.unit.barsdiary.mvvm.viewmodel.DeveloperViewModel
+import ru.unit.barsdiary.other.HtmlUtils
 
 @AndroidEntryPoint
 class LogsFragment : BaseFragment(R.layout.fragment_logs) {
@@ -23,11 +23,11 @@ class LogsFragment : BaseFragment(R.layout.fragment_logs) {
         binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
         binding.horizontalScrollView.overScrollMode = View.OVER_SCROLL_NEVER
 
-        binding.debugView.text = Html.fromHtml(model.getLog().joinToString("<br/>"), Html.FROM_HTML_MODE_COMPACT)
+        binding.debugView.text = HtmlUtils.convert(model.getLog().joinToString(HtmlUtils.tagNewLine))
 
-        lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             model.updateLogFlow.collectLatest {
-                binding.debugView.text = Html.fromHtml(model.getLog().joinToString("<br/>"), Html.FROM_HTML_MODE_COMPACT)
+                binding.debugView.text = HtmlUtils.convert(model.getLog().joinToString(HtmlUtils.tagNewLine))
             }
         }
     }

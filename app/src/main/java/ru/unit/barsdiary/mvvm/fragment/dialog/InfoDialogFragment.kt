@@ -8,9 +8,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.DialogFragmentInfoBinding
+import ru.unit.barsdiary.other.function.argumentDelegate
 
 
 class InfoDialogFragment : DialogFragment() {
+
+    companion object {
+        private const val LABEL_KEY = "label"
+        private const val DESCRIPTION_KEY = "description"
+
+        fun config(label: String?, description: String?): Bundle {
+            val bundle = Bundle()
+            bundle.putString(LABEL_KEY, label)
+            bundle.putString(DESCRIPTION_KEY, description)
+            return bundle
+        }
+    }
+
+    private val label: String? by argumentDelegate()
+    private val description: String? by argumentDelegate()
 
     private var dismissListener: (() -> Unit) = {}
 
@@ -21,11 +37,9 @@ class InfoDialogFragment : DialogFragment() {
             dismiss()
         }
 
-        val args = arguments
-
         binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
-        binding.textViewLabel.text = args?.getString("label")
-        binding.textViewDescription.text = args?.getString("description")
+        binding.textViewLabel.text = label
+        binding.textViewDescription.text = description
 
         val builder = AlertDialog.Builder(requireContext(), R.style.Theme_Barsdiary_Dialog_Common)
         builder.setView(binding.root)
@@ -40,14 +54,6 @@ class InfoDialogFragment : DialogFragment() {
     override fun onCancel(dialog: DialogInterface) {
         dismissListener()
         super.onCancel(dialog)
-    }
-
-    fun send(label: String, description: String) {
-        val args = Bundle()
-        args.putString("label", label)
-        args.putString("description", description)
-
-        arguments = args
     }
 
     fun setDismissListener(dismissListener: () -> Unit) {

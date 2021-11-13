@@ -54,7 +54,7 @@ class DiaryFragment : BaseFragment(R.layout.fragment_diary) {
 
         binding.calendarButtonView.setOnClickListener {
             if (!pickDateDialog.isAdded) {
-                pickDateDialog.send(model.dateLiveData.value ?: LocalDate.now())
+                pickDateDialog.arguments = PickDateDialogFragment.config(model.dateLiveData.value ?: LocalDate.now())
                 pickDateDialog.show(parentFragmentManager, PICK_DATE_DIALOG_TAG)
             }
         }

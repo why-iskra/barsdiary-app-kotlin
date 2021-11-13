@@ -43,7 +43,7 @@ class MarksFragment : BaseFragment(R.layout.fragment_marks) {
 
         model.marksLiveData.observe(viewLifecycleOwner) {
             recyclerView.adapter = MarksAdapter(it) { position ->
-                disciplineMarksBottomSheetDialogFragment.config(position)
+                disciplineMarksBottomSheetDialogFragment.arguments = DisciplineMarksBottomSheetDialogFragment.config(position)
                 if (!disciplineMarksBottomSheetDialogFragment.isAdded) {
                     disciplineMarksBottomSheetDialogFragment.show(
                         parentFragmentManager, DISCIPLINE_MARKS_BOTTOM_SHEET_DIALOG_FRAGMENT_TAG

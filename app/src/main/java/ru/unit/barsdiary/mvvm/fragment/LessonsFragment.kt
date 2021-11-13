@@ -13,6 +13,7 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.mvvm.adapter.LessonsAdapter
 import ru.unit.barsdiary.mvvm.fragment.bottomsheet.LessonBottomSheetDialogFragment
 import ru.unit.barsdiary.mvvm.viewmodel.DiaryViewModel
+import ru.unit.barsdiary.other.function.argumentDelegate
 import java.time.LocalDate
 
 @AndroidEntryPoint
@@ -20,9 +21,19 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
 
     companion object {
         private const val LESSON_BOTTOM_SHEET_DIALOG_FRAGMENT_TAG = "lessonBottomSheetDialogFragment"
+
+        private const val EPOCH_DAYS_KEY = "epochDays"
+
+        fun config(epochDays: Long): Bundle {
+            val bundle = Bundle()
+            bundle.putLong(EPOCH_DAYS_KEY, epochDays)
+            return bundle
+        }
     }
 
     private val model: DiaryViewModel by activityViewModels()
+
+    private val epochDays: Long by argumentDelegate()
 
     private lateinit var lessonBottomSheetDialogFragment: LessonBottomSheetDialogFragment
 
@@ -41,10 +52,9 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
             lessonBottomSheetDialogFragment.dismiss()
         }
 
-        val epochDays = arguments?.getLong("epoch_days") ?: LocalDate.now().toEpochDay()
         val date: LocalDate = LocalDate.ofEpochDay(epochDays)
 
-        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
+//        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val infoTextView = view.findViewById<TextView>(R.id.infoTextView)
 
@@ -67,7 +77,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
                             homeworkWithInd = model.homeworkToString(homework.homework ?: "", homework.individualHomeworks)
                         }
 
-                        lessonBottomSheetDialogFragment.config(
+                        lessonBottomSheetDialogFragment.arguments = LessonBottomSheetDialogFragment.config(
                             lesson.discipline,
                             lesson.teacher,
                             lesson.office,
@@ -150,11 +160,5 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
         val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
 
         progressBarCircle.visibility = View.GONE
-    }
-
-    fun config(epochDays: Long) {
-        val args = Bundle()
-        args.putLong("epoch_days", epochDays)
-        arguments = args
     }
 }
