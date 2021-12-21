@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.mvvm.adapter.LessonsAdapter
@@ -57,6 +58,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
 //        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val infoTextView = view.findViewById<TextView>(R.id.infoTextView)
+        val shimmerLayout = view.findViewById<ShimmerFrameLayout>(R.id.shimmerLayout)
 
         with(recyclerView) {
             layoutManager = LinearLayoutManager(requireContext())
@@ -98,6 +100,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
             recyclerView.adapter = adapter
 
             if (adapter == null) {
+                shimmerLayout.visibility = View.GONE
                 recyclerView.visibility = View.GONE
                 infoTextView.visibility = View.VISIBLE
 
@@ -111,6 +114,7 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
                     infoTextView.text = resources.getString(R.string.empty)
                 }
             } else {
+                shimmerLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
                 infoTextView.visibility = View.GONE
             }
@@ -126,9 +130,10 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
             if (model.updateFailIdLiveData.value?.contains(epochDays) == true) {
                 uiRefreshStop(view)
 
+                shimmerLayout.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE
-                infoTextView.visibility = View.VISIBLE
-                infoTextView.text = resources.getString(R.string.error)
+                infoTextView.visibility = View.GONE
+//                infoTextView.text = resources.getString(R.string.error)
             }
         }
 
@@ -147,18 +152,16 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
 
     // todo: add animations for update recyclerview
     private fun uiRefreshStart(view: View) {
-        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val infoTextView = view.findViewById<TextView>(R.id.infoTextView)
 
         infoTextView.visibility = View.GONE
         recyclerView.visibility = View.GONE
-        progressBarCircle.visibility = View.VISIBLE
+//        shimmerLayout.visibility = View.VISIBLE
     }
 
     private fun uiRefreshStop(view: View) {
-        val progressBarCircle = view.findViewById<ProgressBar>(R.id.progressBar)
-
-        progressBarCircle.visibility = View.GONE
+        val shimmerLayout = view.findViewById<ShimmerFrameLayout>(R.id.shimmerLayout)
+        shimmerLayout.visibility = View.GONE
     }
 }

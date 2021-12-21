@@ -56,7 +56,16 @@ class StatisticsFragment : BaseFragment(R.layout.fragment_statistics) {
 
             when (it) {
                 EventLiveData.Event.LOADING -> binding.refreshButton.refreshStart()
-                EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
+                EventLiveData.Event.LOADED -> {
+                    binding.refreshButton.refreshStop()
+
+                    if(model.exceptionLiveData.value == null) {
+                        binding.shimmerTextLayout.visibility = View.GONE
+                        binding.shimmerChartLayout.visibility = View.GONE
+                        binding.textContentLayout.visibility = View.VISIBLE
+                        binding.chart.visibility = View.VISIBLE
+                    }
+                }
             }
         }
 

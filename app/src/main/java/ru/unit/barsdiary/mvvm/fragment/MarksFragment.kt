@@ -50,6 +50,9 @@ class MarksFragment : BaseFragment(R.layout.fragment_marks) {
                     )
                 }
             }
+
+            binding.shimmerLayout.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
         }
 
         binding.refreshButton.setOnClickListener {

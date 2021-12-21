@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="model"
             type="ru.unit.barsdiary.mvvm.viewmodel.StatisticsViewModel" />
@@ -53,35 +52,52 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <TextSwitcher
-                    android:id="@+id/textSwitcherAttendance"
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerTextLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/fade_in_short"
-                    android:outAnimation="@anim/fade_out_short"
-                    android:padding="16dp"
-                    android:text="@{model.attendanceLiveData}" />
+                    android:layout_height="wrap_content">
 
-                <TextSwitcher
-                    android:id="@+id/textSwitcherDaysUntilVacation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inAnimation="@anim/fade_in_short"
-                    android:outAnimation="@anim/fade_out_short"
-                    android:padding="16dp"
-                    android:text="@{model.daysUntilVacationLiveData}" />
+                    <include layout="@layout/shimmer_fragment_statistics_text_placeholder" />
 
-                <TextSwitcher
-                    android:id="@+id/textSwitcherAverageGrade"
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/textContentLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inAnimation="@anim/fade_in_short"
-                    android:outAnimation="@anim/fade_out_short"
-                    android:padding="16dp"
-                    android:text="@{model.averageGradeLiveData}" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextSwitcher
+                        android:id="@+id/textSwitcherAttendance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inAnimation="@anim/fade_in_short"
+                        android:outAnimation="@anim/fade_out_short"
+                        android:padding="16dp"
+                        android:text="@{model.attendanceLiveData}" />
+
+                    <TextSwitcher
+                        android:id="@+id/textSwitcherDaysUntilVacation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inAnimation="@anim/fade_in_short"
+                        android:outAnimation="@anim/fade_out_short"
+                        android:padding="16dp"
+                        android:text="@{model.daysUntilVacationLiveData}" />
+
+                    <TextSwitcher
+                        android:id="@+id/textSwitcherAverageGrade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inAnimation="@anim/fade_in_short"
+                        android:outAnimation="@anim/fade_out_short"
+                        android:padding="16dp"
+                        android:text="@{model.averageGradeLiveData}" />
+
+                </LinearLayout>
 
                 <View
                     android:id="@+id/view2"
@@ -98,10 +114,21 @@
                     android:text="@string/overview_marks"
                     android:textAppearance="@style/TextAppearance.Barsdiary.Large" />
 
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerChartLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+
+                    <include layout="@layout/shimmer_fragment_statistics_chart_placeholder" />
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <ru.unit.barsdiary.components.ChartView
                     android:id="@+id/chart"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
+                    android:visibility="gone"
                     app:countViewElementsNames="5"
                     app:dataLineSize="4dp"
                     app:fontFamily="@font/nunito"
@@ -109,6 +136,7 @@
                     app:zipElements="true" />
 
             </LinearLayout>
+
         </ScrollView>
 
         <Button

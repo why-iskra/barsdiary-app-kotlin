@@ -38,7 +38,16 @@ class Safety @Inject constructor() {
         val keyStore = KeyStore.getInstance("AndroidKeyStore")
         keyStore.load(null)
 
-        return keyStore.isKeyEntry(alias)
+        val aliases = keyStore.aliases()
+        var result = false
+        while (aliases.hasMoreElements()) {
+            if(aliases.nextElement() == alias) {
+                result = true
+                break
+            }
+        }
+
+        return result
     }
 
     private fun getKey(alias: String): SecretKey {

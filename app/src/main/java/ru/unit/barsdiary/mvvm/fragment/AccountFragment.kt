@@ -105,7 +105,11 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
 
             when (it) {
                 EventLiveData.Event.LOADING -> binding.refreshButton.refreshStart()
-                EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
+                EventLiveData.Event.LOADED -> {
+                    binding.refreshButton.refreshStop()
+                    binding.shimmerLayout.visibility = View.GONE
+                    binding.nameLayout.visibility = View.VISIBLE
+                }
             }
         }
 

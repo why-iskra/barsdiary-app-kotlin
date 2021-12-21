@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "577779756007",
+    "project_id": "barsdiary",
+    "storage_bucket": "barsdiary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577779756007:android:fc6da3d9d73186c2af6b42",
+        "android_client_info": {
+          "package_name": "ru.unit.barsdiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577779756007-b4u4n94nonj7rah5gtdp1lp8d0pfrnmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV127KMZyaMRhsi958J4e_loZ6yF09CMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577779756007-b4u4n94nonj7rah5gtdp1lp8d0pfrnmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

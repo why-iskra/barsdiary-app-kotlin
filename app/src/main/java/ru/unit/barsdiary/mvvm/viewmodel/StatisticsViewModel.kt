@@ -4,6 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -14,10 +18,6 @@ import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.mark.pojo.DisciplineMarksPojo
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
-import javax.inject.Inject
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
@@ -27,6 +27,7 @@ class StatisticsViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
+
         private val chartDateFormatter = DateTimeFormatter.ofPattern("MMM")
     }
 
@@ -65,7 +66,8 @@ class StatisticsViewModel @Inject constructor(
             for ((i, value) in response.series[0].data.map { it.toFloat() }.withIndex()) {
                 elements.add(
                     ChartView.Element(
-                        LocalDate.parse(response.dates[i], mobileDateTimeFormatter).format(chartDateFormatter),
+                        LocalDate.parse(response.dates[i], mobileDateTimeFormatter)
+                            .format(chartDateFormatter),
                         value
                     )
                 )
@@ -119,7 +121,12 @@ class StatisticsViewModel @Inject constructor(
                 }
             }
 
-            averageGradeLiveData.postValue(averageGradeText + ": %.2f".format(Locale.US, sum / count))
+            averageGradeLiveData.postValue(
+                averageGradeText + ": %.2f".format(
+                    Locale.US,
+                    sum / count
+                )
+            )
         }
     }
 
@@ -177,5 +184,4 @@ class StatisticsViewModel @Inject constructor(
             }
         }
     }
-
 }

@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -41,9 +43,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            applicationIdSuffix ".debug"
-        }
+        debug { }
     }
     buildFeatures {
         dataBinding true
@@ -63,10 +63,17 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
 
+    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     implementation "nl.dionsegijn:konfetti:$konfetti_version"
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 
     implementation "com.jakewharton.timber:timber:$timber_version"
 

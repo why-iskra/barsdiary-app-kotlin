@@ -27,7 +27,11 @@ class AuthUseCaseImpl @Inject constructor(
     override suspend fun auth(serverUrl: String?, login: String?, password: String?) {
         val repositoryAuthData = authRepository.getAuthData()
 
-        val authData = if (serverUrl.isNullOrEmpty() || login.isNullOrEmpty() || password.isNullOrEmpty()) {
+        val authData = if (
+            serverUrl.isNullOrEmpty()
+            || login.isNullOrEmpty()
+            || password.isNullOrEmpty()
+        ) {
             repositoryAuthData
         } else {
             AuthDataPojo(serverUrl.trimEnd('/'), login, password)

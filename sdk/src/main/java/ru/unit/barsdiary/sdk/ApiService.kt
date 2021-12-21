@@ -106,4 +106,14 @@ interface ApiService {
         @Field("messages") messages: String,
     ): Boolean
 
+    // api/MailBoxService/getPupilUserProfiles
+    // api/MailBoxService/getEmployeeUserProfiles
+    // api/MailBoxService/getParentUserProfiles
+    // api/MailBoxService/getAdminUserProfiles
+
+//    fullname:
+//    study_level:
+//    letter:
+
+
 }

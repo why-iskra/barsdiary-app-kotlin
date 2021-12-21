@@ -2,8 +2,10 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ru.unit.barsdiary.BuildConfig
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentPanelBinding
 import ru.unit.barsdiary.mvvm.viewmodel.DeveloperViewModel
@@ -25,5 +27,7 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
         binding.chuckerSwitch.setOnCheckedChangeListener { _, isChecked ->
             model.settingsDataStore.enableChucker = isChecked
         }
+
+        binding.crashButton.isVisible = BuildConfig.DEBUG
     }
 }

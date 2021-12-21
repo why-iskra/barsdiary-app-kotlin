@@ -38,7 +38,11 @@ class FinalMarksFragment : BaseFragment(R.layout.fragment_final_marks) {
 
             when (it) {
                 EventLiveData.Event.LOADING -> binding.refreshButton.refreshStart()
-                EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
+                EventLiveData.Event.LOADED -> {
+                    binding.shimmerLayout.visibility = View.GONE
+                    binding.contentLayout.visibility = View.VISIBLE
+                    binding.refreshButton.refreshStop()
+                }
             }
         }
 
