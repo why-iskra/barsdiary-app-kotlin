@@ -1,14 +1,15 @@
 package ru.unit.barsdiary.mvvm.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
 import ru.unit.barsdiary.mvvm.fragment.ChildFragment
 
 class ChildChoiceAdapter(
-    fragment: Fragment,
+    fragmentActivity: FragmentActivity,
     private val children: List<ChildPojo>,
-) : FragmentStateAdapter(fragment) {
+) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = children.size
 

@@ -3,6 +3,7 @@
     android:id="@+id/textViewPersonParentName"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:fontFamily="@font/nunito"
     android:textAlignment="center"
     android:textAppearance="@style/TextAppearance.Barsdiary.Small" />

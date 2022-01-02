@@ -10,6 +10,7 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 import javax.inject.Inject
 
+@Deprecated("Make crashes")
 class Safety @Inject constructor() {
 
     companion object {

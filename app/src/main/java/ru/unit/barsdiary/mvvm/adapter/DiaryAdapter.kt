@@ -1,12 +1,14 @@
 package ru.unit.barsdiary.mvvm.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.unit.barsdiary.mvvm.fragment.LessonsFragment
 import ru.unit.barsdiary.mvvm.fragment.PlugFragment
 import java.time.LocalDate
 
-class DiaryAdapter(fragment: Fragment, private val date: LocalDate) : FragmentStateAdapter(fragment) {
+class DiaryAdapter(fragmentActivity: FragmentActivity, private val date: LocalDate) :
+    FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = 1000
 

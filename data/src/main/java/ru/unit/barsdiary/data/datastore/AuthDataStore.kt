@@ -10,15 +10,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import ru.unit.barsdiary.data.datastore.preferences.SafetyStringPreference
-import ru.unit.barsdiary.data.utils.Safety
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AuthDataStore @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val safety: Safety,
+    @ApplicationContext private val context: Context
 ) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
 
@@ -35,17 +33,17 @@ class AuthDataStore @Inject constructor(
         val sessionId = it[SESSION_ID]
 
         Data(
-            if (url == null) null else safety.decrypt(url),
-            if (login == null) null else safety.decrypt(login),
-            if (password == null) null else safety.decrypt(password),
-            if (sessionId == null) null else safety.decrypt(sessionId),
+            url,
+            login,
+            password,
+            sessionId,
         )
     }
 
-    var serverUrl by SafetyStringPreference(context.dataStore, SERVER_URL, null, safety)
-    var login by SafetyStringPreference(context.dataStore, LOGIN, null, safety)
-    var password by SafetyStringPreference(context.dataStore, PASSWORD, null, safety)
-    var sessionId by SafetyStringPreference(context.dataStore, SESSION_ID, null, safety)
+    var serverUrl by SafetyStringPreference(context.dataStore, SERVER_URL, null)
+    var login by SafetyStringPreference(context.dataStore, LOGIN, null)
+    var password by SafetyStringPreference(context.dataStore, PASSWORD, null)
+    var sessionId by SafetyStringPreference(context.dataStore, SESSION_ID, null)
 
     data class Data(
         val serverUrl: String?,
@@ -55,9 +53,9 @@ class AuthDataStore @Inject constructor(
     )
 
     companion object {
-        private val SERVER_URL = stringPreferencesKey("serverUrl")
-        private val LOGIN = stringPreferencesKey("login")
-        private val PASSWORD = stringPreferencesKey("password")
-        private val SESSION_ID = stringPreferencesKey("sessionId")
+        private val SERVER_URL = stringPreferencesKey("unsafe_serverUrl")
+        private val LOGIN = stringPreferencesKey("unsafe_login")
+        private val PASSWORD = stringPreferencesKey("unsafe_password")
+        private val SESSION_ID = stringPreferencesKey("unsafe_sessionId")
     }
 }

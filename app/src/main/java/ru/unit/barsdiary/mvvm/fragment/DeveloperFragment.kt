@@ -21,9 +21,11 @@ class DeveloperFragment : BaseFragment(R.layout.fragment_developer) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDeveloperBinding.bind(view)
 
+        val developerAdapter = activity?.let { DeveloperAdapter(it) }
+
         with(binding.viewPager) {
             configure()
-            adapter = DeveloperAdapter(this@DeveloperFragment)
+            adapter = developerAdapter
         }
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()
 

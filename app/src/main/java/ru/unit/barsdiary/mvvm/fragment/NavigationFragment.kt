@@ -21,9 +21,11 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentNavigationBinding.bind(view)
 
+        val navigationAdapter = activity?.let { NavigationAdapter(it) }
+
         with(binding.viewPager) {
             configure()
-            adapter = NavigationAdapter(this@NavigationFragment)
+            adapter = navigationAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     if (position != binding.bottomNavBar.activeItemIndex && position < 4) {

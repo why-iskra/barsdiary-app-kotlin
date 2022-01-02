@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBinding
-import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.mvvm.adapter.MailAdapter
 import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
-import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.function.configure
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
@@ -27,9 +24,11 @@ class MailFragment : BaseFragment(R.layout.fragment_mail) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMailBinding.bind(view)
 
+        val mailAdapter = activity?.let { MailAdapter(it) }
+
         with(binding.viewPager) {
             configure()
-            adapter = MailAdapter(this@MailFragment)
+            adapter = mailAdapter
         }
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()
 
@@ -56,21 +55,4 @@ class MailFragment : BaseFragment(R.layout.fragment_mail) {
         }
     }
 
-    fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {
-        var text: String? = data.text
-        runCatching {
-            text = buildString {
-                append(data.text)
-                data.attachments.map {
-                    model.document(it.originalName, it.downloadLink)
-                }.forEach {
-                    append(HtmlUtils.tagNewLine)
-                    append(HtmlUtils.tagNewLine)
-                    append(it)
-                }
-            }
-        }
-
-        findNavController().navigate(R.id.action_mailFragment_to_letterFragment, LetterFragment.config(data, isInBox, text))
-    }
 }

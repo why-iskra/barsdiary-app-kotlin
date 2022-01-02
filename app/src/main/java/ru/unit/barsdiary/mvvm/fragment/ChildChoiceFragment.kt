@@ -29,9 +29,11 @@ class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChildChoiceBinding.bind(view)
 
+        val childChoiceAdapter = activity?.let { ChildChoiceAdapter(it, model.getPupils()) }
+
         with(binding.viewPager) {
             configure()
-            adapter = ChildChoiceAdapter(this@ChildChoiceFragment, model.getPupils())
+            adapter = childChoiceAdapter
             currentItem = model.getSelectedPupil()
         }
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()

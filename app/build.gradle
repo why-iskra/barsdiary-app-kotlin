@@ -18,11 +18,24 @@ android {
     def versionPropsFile = file('version.properties')
 
     if (versionPropsFile.canRead()) {
-        def Properties versionProps = new Properties()
+        Properties versionProps = new Properties()
 
-        versionProps.load(new FileInputStream(versionPropsFile))
+        if (versionPropsFile.canRead()) {
+            versionProps.load(new FileInputStream(versionPropsFile))
+        } else {
+            versionProps['VERSION_CODE']='0'
+        }
 
-        def code = versionProps['VERSION_CODE'].toInteger() + (gradle.startParameter.taskNames.contains("assembleRelease") ? 1 : 0)
+        def isRelease = gradle.startParameter.taskRequests.any {
+            it.args.any {it.endsWith("Release") }
+        }
+
+        def code = 0
+        if(isRelease) {
+            code = versionProps['VERSION_CODE'].toInteger() + 1
+        } else {
+            code = versionProps['VERSION_CODE'].toInteger()
+        }
 
         versionProps['VERSION_CODE'] = code.toString()
         versionProps.store(versionPropsFile.newWriter(), null)
@@ -32,7 +45,7 @@ android {
             minSdk 26
             targetSdk 31
             versionCode code
-            versionName "2.5-beta ($code)"
+            versionName "2.6-beta ($code)"
         }
     } else {
         throw new GradleException("Could not read version.properties")

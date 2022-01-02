@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +14,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBoxBinding
+import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.mvvm.adapter.BoxAdapter
 import ru.unit.barsdiary.mvvm.adapter.LoadStateAdapter
 import ru.unit.barsdiary.mvvm.viewmodel.GlobalViewModel
+import ru.unit.barsdiary.other.HtmlUtils
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,7 +48,8 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         adapter.setMailOnClick {
-            (parentFragment as? MailFragment)?.openLetterFragment(it, inBox)
+//            (parentFragment as? MailFragment)?.openLetterFragment(it, inBox)
+            openLetterFragment(it, inBox)
         }
 
         binding.imageButtonViewDelete.setOnClickListener {
@@ -125,5 +129,26 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
 
     fun setTitle(@StringRes res: Int) {
         binding.textViewTitle.setText(res)
+    }
+
+    fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {
+        var text: String? = data.text
+        runCatching {
+            text = buildString {
+                append(data.text)
+                data.attachments.map {
+                    globalModel.document(it.originalName, it.downloadLink)
+                }.forEach {
+                    append(HtmlUtils.tagNewLine)
+                    append(HtmlUtils.tagNewLine)
+                    append(it)
+                }
+            }
+        }
+
+        findNavController().navigate(
+            R.id.action_mailFragment_to_letterFragment,
+            LetterFragment.config(data, isInBox, text)
+        )
     }
 }

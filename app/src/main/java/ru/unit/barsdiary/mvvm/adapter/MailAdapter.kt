@@ -1,12 +1,13 @@
 package ru.unit.barsdiary.mvvm.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.unit.barsdiary.mvvm.fragment.MailInBoxFragment
 import ru.unit.barsdiary.mvvm.fragment.MailOutBoxFragment
 import ru.unit.barsdiary.mvvm.fragment.PlugFragment
 
-class MailAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class MailAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     private val story = arrayOf<Fragment?>(null, null)
 
     override fun getItemCount(): Int = story.size

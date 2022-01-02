@@ -108,7 +108,7 @@ class DiaryFragment : BaseFragment(R.layout.fragment_diary) {
         with(binding.viewPagerLessons) {
             unregisterOnPageChangeCallback(onPageChangeListener)
 
-            adapter = DiaryAdapter(this@DiaryFragment, date)
+            adapter = this@DiaryFragment.activity?.let { DiaryAdapter(it, date) }
             setCurrentItem(500, false)
 
             onPageChangeListener = OnPageChangeListener()

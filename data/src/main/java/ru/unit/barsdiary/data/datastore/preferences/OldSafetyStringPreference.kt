@@ -8,14 +8,16 @@ import androidx.datastore.preferences.core.emptyPreferences
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import ru.unit.barsdiary.data.utils.Safety
 import java.io.IOException
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class SafetyStringPreference(
+class OldSafetyStringPreference(
     private val dataStore: DataStore<Preferences>,
     private val key: Preferences.Key<String>,
-    private val defaultValue: String?
+    private val defaultValue: String?,
+    private val safety: Safety,
 ) : ReadWriteProperty<Any, String?> {
 
     @WorkerThread
@@ -32,7 +34,7 @@ class SafetyStringPreference(
             return@runBlocking if (result.isNullOrEmpty()) {
                 null
             } else {
-                result
+                safety.decrypt(result)
             }
         } ?: defaultValue
     }
@@ -40,7 +42,7 @@ class SafetyStringPreference(
     override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) {
         runBlocking {
             dataStore.edit {
-                it[key] = value ?: ""
+                it[key] = if (value == null) "" else safety.encrypt(value)
             }
         }
     }

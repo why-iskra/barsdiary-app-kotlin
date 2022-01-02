@@ -1,10 +1,12 @@
 package ru.unit.barsdiary.mvvm.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ru.unit.barsdiary.mvvm.fragment.*
 
-class NavigationAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class NavigationAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
     private val story = arrayOf<Fragment?>(null, null, null, null)
 
     override fun getItemCount(): Int = story.size
