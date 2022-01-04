@@ -106,14 +106,30 @@ interface ApiService {
         @Field("messages") messages: String,
     ): Boolean
 
-    // api/MailBoxService/getPupilUserProfiles
-    // api/MailBoxService/getEmployeeUserProfiles
-    // api/MailBoxService/getParentUserProfiles
-    // api/MailBoxService/getAdminUserProfiles
+    @GET("api/MailBoxService/get{type}UserProfiles")
+    suspend fun getUserProfiles(
+        @Path("type") type: String,
+        @Query("page") page: Int,
+        @Query("search_text") search: String,
+    ): GetUserProfilesResponseDTO
 
-//    fullname:
-//    study_level:
-//    letter:
+    @FormUrlEncoded
+    @POST("api/MailBoxService/newMailBoxMessage")
+    suspend fun newMailBoxMessage(
+        @Field("receivers_ids") receiversIds: String,
+        @Field("subject") subject: String,
+        @Field("message") message: String,
+    ): Boolean
 
+    @FormUrlEncoded
+    @POST("api/MailBoxService/newMailBoxMessage")
+    suspend fun newMailBoxMessage(
+        @Field("receivers_ids") receiversIds: String,
+        @Field("subject") subject: String,
+        @Field("message") message: String,
+        @Field("document_names") documentNames: String,
+        @Field("filenames") fileNames: String,
+        @Field("documents[]") documents: String,
+    ): Boolean
 
 }

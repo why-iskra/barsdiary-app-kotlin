@@ -1,21 +1,20 @@
 package ru.unit.barsdiary.mvvm.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
+import ru.unit.barsdiary.domain.global.pojo.FoundUserPojo
 import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.livedata.EmptyLiveData
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -23,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GlobalViewModel @Inject constructor(
-    private val barsDiaryEngine: BarsDiaryEngine,
+    private val engine: Engine,
     private val globalUseCase: GlobalUseCase,
     @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter
 ) : ViewModel() {
@@ -43,6 +42,39 @@ class GlobalViewModel @Inject constructor(
     val resetBoxAdapterLiveData = EmptyLiveData()
 
     val eventLiveData = EventLiveData()
+
+    private val recipients = mutableListOf<FoundUserPojo>()
+    val recipientsLiveData = MutableLiveData<List<FoundUserPojo>>(recipients)
+
+    val attachmentLiveData = MutableLiveData<Pair<String, Uri>?>(null)
+
+    fun file(name: String?, path: Uri?) {
+        if (name != null && path != null) {
+            attachmentLiveData.postValue(name to path)
+        } else {
+            attachmentLiveData.postValue(null)
+        }
+    }
+
+    fun prepareNewLetter() {
+        recipients.clear()
+        recipientsLiveData.postValue(recipients)
+        attachmentLiveData.postValue(null)
+    }
+
+    fun addRecipient(user: FoundUserPojo) {
+        if (!recipients.contains(user)) {
+            recipients.add(0, user)
+        }
+        recipientsLiveData.postValue(recipients)
+    }
+
+    fun removeRecipient(user: FoundUserPojo) {
+        recipients.remove(user)
+        recipientsLiveData.postValue(recipients)
+    }
+
+    fun getRecipients() = recipients.map { it.profileId.toString() }
 
     private suspend fun getBirthdays() {
         exceptionLiveData.safety {
@@ -169,5 +201,5 @@ class GlobalViewModel @Inject constructor(
         } != null
     }
 
-    fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), barsDiaryEngine.getServerUrl() + url)
+    fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), engine.getServerUrl() + url)
 }

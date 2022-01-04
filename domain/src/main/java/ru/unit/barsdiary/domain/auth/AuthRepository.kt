@@ -6,5 +6,6 @@ interface AuthRepository {
     fun setAuthData(authData: AuthDataPojo)
     fun getAuthData(): AuthDataPojo?
     fun clearAuthData()
+    fun getSessionId(): String?
     suspend fun cleanRamCache()
 }

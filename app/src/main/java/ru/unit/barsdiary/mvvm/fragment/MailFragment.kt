@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -35,6 +36,11 @@ class MailFragment : BaseFragment(R.layout.fragment_mail) {
         binding.refreshButton.setOnClickListener {
             model.resetBoxes()
             model.refreshBoxes()
+        }
+
+        binding.newLetterButtonView.setOnClickListener {
+            model.prepareNewLetter()
+            findNavController().navigate(R.id.action_mailFragment_to_newLetterFragment)
         }
 
         model.eventLiveData.observe(viewLifecycleOwner) {

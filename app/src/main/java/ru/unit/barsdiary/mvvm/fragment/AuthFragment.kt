@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
-import ru.unit.barsdiary.ApplicationStatus
+import ru.unit.barsdiary.ApplicationService
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAuthBinding
 import ru.unit.barsdiary.mvvm.activity.MainActivity
@@ -34,7 +34,7 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
     }
 
     @Inject
-    lateinit var applicationStatus: ApplicationStatus
+    lateinit var applicationService: ApplicationService
 
     private val infoDialog get() = (activity as? StartActivity)?.infoDialog
     private lateinit var serverListDialog: ServerListDialogFragment

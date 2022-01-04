@@ -15,17 +15,17 @@ import ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel
 import ru.unit.barsdiary.other.livedata.EventLiveData
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
+class InformationFragment : BaseFragment(R.layout.fragment_information) {
 
     private val model: AccountViewModel by activityViewModels()
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentProfileBinding.bind(view)
+        val binding = FragmentInformationBinding.bind(view)
         with(binding) {
-            lifecycleOwner = this@ProfileFragment
-            model = this@ProfileFragment.model
+            lifecycleOwner = this@InformationFragment
+            model = this@InformationFragment.model
         }
 
         binding.refreshButton.setOnClickListener {

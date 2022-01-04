@@ -17,7 +17,7 @@
     <string name="pick_date">Pick Date</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
-    <string name="profile">Profile</string>
+    <string name="information">Information</string>
     <string name="child_s_choice">Child\'s choice</string>
     <string name="final_marks">Final marks</string>
     <string name="developer">Developer</string>
@@ -66,6 +66,7 @@
     <string name="clear_all" translatable="false">Clear all</string>
     <string name="fake_auth" translatable="false">Fake auth</string>
     <string name="error">Error</string>
+    <string name="success">Success</string>
     <string name="developer_mode">Developer mode</string>
     <string name="request_timeout">Request timeout</string>
     <string name="seconds">seconds</string>
@@ -73,4 +74,18 @@
     <string name="application">Application</string>
     <string name="error_dialog">Pop-up windows with errors</string>
     <string name="enable_chucker" translatable="false">Enable Chucker</string>
+    <string name="enable_crashlytics" translatable="false">Enable Crashlytics</string>
+    <string name="subject">Subject</string>
+    <string name="button_to_text">Click to select recipient(s)</string>
+    <string name="button_attach_text">Click to attach file</string>
+    <string name="recipients">Recipients</string>
+    <string name="recipient_type_pupil">Pupils</string>
+    <string name="recipient_type_employee">Employees</string>
+    <string name="recipient_type_parent">Parents</string>
+    <string name="recipient_type_admin">Admins</string>
+    <string name="channel_sending_message_name">Sending message</string>
+    <string name="channel_sending_message_description">Show while sending a message</string>
+    <string name="channel_sending_message_result_name">Result of sending message</string>
+    <string name="channel_sending_message_result_description">Show result of sending message</string>
+    <string name="choose_file">Choose a file</string>
 </resources>

@@ -6,13 +6,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import ru.unit.barsdiary.ApplicationStatus
+import ru.unit.barsdiary.ApplicationService
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val applicationStatus: ApplicationStatus,
+    private val applicationService: ApplicationService,
     private val authUseCase: AuthUseCase,
 ) : ViewModel() {
 
@@ -28,5 +28,5 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun isOnline() = applicationStatus.isOnline()
+    fun isOnline() = applicationService.isOnline()
 }

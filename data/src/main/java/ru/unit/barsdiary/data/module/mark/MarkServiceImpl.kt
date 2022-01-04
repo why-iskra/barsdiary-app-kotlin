@@ -9,7 +9,7 @@ import ru.unit.barsdiary.domain.mark.MarkService
 import ru.unit.barsdiary.domain.mark.pojo.AttendanceChartPojo
 import ru.unit.barsdiary.domain.mark.pojo.MarksPojo
 import ru.unit.barsdiary.domain.mark.pojo.ProgressChartPojo
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import ru.unit.barsdiary.sdk.response.GetAttendanceChartResponseDTO
 import ru.unit.barsdiary.sdk.response.GetProgressChartResponseDTO
 import java.time.LocalDate
@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class MarkServiceImpl @Inject constructor(
-    private val engine: BarsDiaryEngine,
+    private val engine: Engine,
     @WebDateFormatter private val webDateFormatter: DateTimeFormatter,
 
     private val marksTransformer: MarksTransformer,

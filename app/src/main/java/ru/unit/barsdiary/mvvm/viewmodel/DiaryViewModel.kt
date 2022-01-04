@@ -15,7 +15,7 @@ import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
 import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DiaryViewModel @Inject constructor(
-    private val barsDiaryEngine: BarsDiaryEngine,
+    private val engine: Engine,
     private val diaryUseCase: DiaryUseCase,
     @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
 ) : ViewModel() {
@@ -90,7 +90,7 @@ class DiaryViewModel @Inject constructor(
         }
     }
 
-    private fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), barsDiaryEngine.getServerUrl() + url)
+    private fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), engine.getServerUrl() + url)
 
     fun materialsToString(list: List<MaterialPojo>) = buildString {
         val size = list.size

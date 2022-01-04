@@ -7,7 +7,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.BuildConfig
 import ru.unit.barsdiary.R
@@ -17,6 +19,7 @@ import ru.unit.barsdiary.mvvm.fragment.dialog.ActionDialogFragment
 import ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel
 import ru.unit.barsdiary.other.inflateFactory
 import ru.unit.barsdiary.other.livedata.EventLiveData
+
 
 @AndroidEntryPoint
 class AccountFragment : BaseFragment(R.layout.fragment_account) {
@@ -110,6 +113,16 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
                     binding.shimmerLayout.visibility = View.GONE
                     binding.nameLayout.visibility = View.VISIBLE
                 }
+            }
+        }
+
+        model.personAvatarLiveData.observe(viewLifecycleOwner) {
+            val context = context
+            if (it != null && context != null) {
+                Picasso.get()
+                    .load(it)
+                    .transform(CropCircleTransformation())
+                    .into(binding.avatarView)
             }
         }
 

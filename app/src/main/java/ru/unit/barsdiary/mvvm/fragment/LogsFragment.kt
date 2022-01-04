@@ -23,7 +23,7 @@ class LogsFragment : BaseFragment(R.layout.fragment_logs) {
         binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
         binding.horizontalScrollView.overScrollMode = View.OVER_SCROLL_NEVER
 
-        binding.debugView.text = HtmlUtils.convert(model.getLog().joinToString(HtmlUtils.tagNewLine))
+        binding.debugView.text = HtmlUtils.convert(model.getLog().joinToString(HtmlUtils.tagNewLine)) // fixme: concurrent list
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             model.updateLogFlow.collectLatest {

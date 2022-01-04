@@ -15,7 +15,7 @@
     <string name="pick_date">Выбрать дату</string>
     <string name="settings">Настройки</string>
     <string name="logout">Выйти</string>
-    <string name="profile">Профиль</string>
+    <string name="information">Информация</string>
     <string name="child_s_choice">Выбрать ребенка</string>
     <string name="final_marks">Финальные оценки</string>
     <string name="developer">Для разработчиков</string>
@@ -60,10 +60,24 @@
     <string name="fast_auth">Быстрая авторизация</string>
     <string name="fast_auth_description">Сохранение авторизационных файлов cookie между сеансами</string>
     <string name="error">Ошибка</string>
+    <string name="success">Успех</string>
     <string name="developer_mode">Режим разработчика</string>
     <string name="request_timeout">Таймаут запроса</string>
     <string name="seconds">секунды</string>
     <string name="request_timeout_description">Максимальное время выполнения запроса до сервера (изменения вступят в силу после перезагрузки приложения)</string>
     <string name="application">Приложение</string>
     <string name="error_dialog">Всплывающие окно с ошибками</string>
+    <string name="subject">Тема</string>
+    <string name="button_to_text">Нажмите, чтобы выбрать получателя(ей)</string>
+    <string name="button_attach_text">Нажмите, чтобы прикрепить файл</string>
+    <string name="recipients">Получатели</string>
+    <string name="recipient_type_pupil">Ученики</string>
+    <string name="recipient_type_employee">Сотрудники</string>
+    <string name="recipient_type_parent">Родители</string>
+    <string name="recipient_type_admin">Админы</string>
+    <string name="channel_sending_message_name">Отправка cообщения</string>
+    <string name="channel_sending_message_description">Отображается, пока отправляется сообщение</string>
+    <string name="channel_sending_message_result_name">Результат отправки сообщения</string>
+    <string name="channel_sending_message_result_description">Отображает результат отправки сообщения</string>
+    <string name="choose_file">Выберите файл</string>
 </resources>

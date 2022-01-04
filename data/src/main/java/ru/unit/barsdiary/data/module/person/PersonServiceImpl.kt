@@ -9,11 +9,11 @@ import ru.unit.barsdiary.domain.person.pojo.ClassInfoPojo
 import ru.unit.barsdiary.domain.person.pojo.PersonPojo
 import ru.unit.barsdiary.domain.person.pojo.SchoolInfoPojo
 import ru.unit.barsdiary.domain.person.pojo.TotalMarksPojo
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject
 
 class PersonServiceImpl @Inject constructor(
-    private val engine: BarsDiaryEngine,
+    private val engine: Engine,
     private val personTransformer: PersonTransformer,
     private val schoolInfoTransformer: SchoolInfoTransformer,
     private val classInfoTransformer: ClassInfoTransformer,

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.unit.barsdiary.ApplicationService
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.domain.auth.AuthRepository
 import ru.unit.barsdiary.domain.auth.AuthUseCase
@@ -27,6 +28,7 @@ class DeveloperViewModel @Inject constructor(
     private val globalUseCase: GlobalUseCase,
     private val authRepository: AuthRepository,
     private val inAppLog: InAppLog,
+    private val applicationService: ApplicationService,
     val settingsDataStore: SettingsDataStore
 ) : ViewModel() {
 
@@ -75,6 +77,15 @@ class DeveloperViewModel @Inject constructor(
 
     fun crash() {
         throw RuntimeException()
+    }
+
+    fun getSessionId(): String? = authRepository.getSessionId()
+
+    fun sessionIdToClipboard() {
+        applicationService.plainTextClipboard(
+            "SessionId",
+            getSessionId().toString()
+        )
     }
 
     private fun randomString(len: Int): String {

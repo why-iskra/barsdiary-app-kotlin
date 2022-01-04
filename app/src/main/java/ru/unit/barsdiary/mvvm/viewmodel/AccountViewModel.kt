@@ -16,10 +16,12 @@ import ru.unit.barsdiary.domain.person.pojo.TotalMarksDisciplinePojo
 import ru.unit.barsdiary.domain.person.pojo.TotalMarksPojo
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
+    private val engine: Engine,
     private val personUseCase: PersonUseCase,
     private val authUseCase: AuthUseCase,
     val settingsDataStore: SettingsDataStore,
@@ -27,6 +29,7 @@ class AccountViewModel @Inject constructor(
     val exceptionLiveData = ExceptionLiveData()
 
     val personNameLiveData = MutableLiveData<String?>()
+    val personAvatarLiveData = MutableLiveData<String?>()
     val personParentNameLiveData = MutableLiveData<String?>()
     val isParentLiveData = MutableLiveData(false)
 
@@ -43,6 +46,12 @@ class AccountViewModel @Inject constructor(
 
     val eventLiveData = EventLiveData()
 
+    private suspend fun getPersonAvatar() {
+        exceptionLiveData.safety {
+            val result = personUseCase.getPerson()
+            personAvatarLiveData.postValue(engine.getServerUrl() + result.userAvaUrl)
+        }
+    }
     private suspend fun getPersonName() {
         exceptionLiveData.safety {
             val result = personUseCase.getPerson()
@@ -76,10 +85,12 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
 
+            val asyncPersonAvatar = async { getPersonAvatar() }
             val asyncPersonName = async { getPersonName() }
             val asyncPersonParentName = async { getPersonParentName() }
 
 
+            asyncPersonAvatar.await()
             asyncPersonName.await()
             asyncPersonParentName.await()
 

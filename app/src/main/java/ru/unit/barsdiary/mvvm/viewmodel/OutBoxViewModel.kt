@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.mvvm.paging.source.BoxPagingSource
+import ru.unit.barsdiary.sdk.Constants
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +18,7 @@ class OutBoxViewModel @Inject constructor(
 
     @ExperimentalPagingApi
     val outBoxFlow: Flow<PagingData<MessagePojo>> = Pager(
-        config = PagingConfig(pageSize = 10, prefetchDistance = 5),
+        config = PagingConfig(pageSize = Constants.MAIL_BOX_PAGE_SIZE, prefetchDistance = 5),
         pagingSourceFactory = { BoxPagingSource(isInBox = false, globalUseCase = globalUseCase) }
     ).flow.cachedIn(viewModelScope)
 

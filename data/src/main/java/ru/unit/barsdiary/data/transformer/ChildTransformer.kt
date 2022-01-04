@@ -1,11 +1,11 @@
 package ru.unit.barsdiary.data.transformer
 
 import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject
 
-class ChildTransformer @Inject constructor() : BaseTransformer<BarsDiaryEngine.Child, ChildPojo> {
-    override fun transform(value: BarsDiaryEngine.Child): ChildPojo {
+class ChildTransformer @Inject constructor() : BaseTransformer<Engine.Child, ChildPojo> {
+    override fun transform(value: Engine.Child): ChildPojo {
         return ChildPojo(
             value.id,
             value.name,

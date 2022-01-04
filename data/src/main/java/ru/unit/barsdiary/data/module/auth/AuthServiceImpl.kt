@@ -7,13 +7,13 @@ import ru.unit.barsdiary.domain.auth.AuthService
 import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
 import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
-import ru.unit.barsdiary.sdk.BarsDiaryCommon
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Common
+import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject
 
 class AuthServiceImpl @Inject constructor(
-    private val engine: BarsDiaryEngine,
-    private val common: BarsDiaryCommon,
+    private val engine: Engine,
+    private val common: Common,
     private val serverTransformer: ServerTransformer,
     private val authDataTransformer: AuthDataTransformer,
     private val childTransformer: ChildTransformer,

@@ -1,7 +1,6 @@
 package ru.unit.barsdiary.domain.global
 
-import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
-import ru.unit.barsdiary.domain.global.pojo.BoxPojo
+import ru.unit.barsdiary.domain.global.pojo.*
 import javax.inject.Inject
 
 interface GlobalUseCase {
@@ -19,6 +18,10 @@ interface GlobalUseCase {
     suspend fun markRead(id: Int)
     suspend fun removeInBoxMessages(list: List<Int>): Boolean
     suspend fun removeOutBoxMessages(list: List<Int>): Boolean
+
+    suspend fun searchUser(type: Int, searchText: String, page: Int): SearchResultPojo
+
+    suspend fun sendMessage(users: List<String>, subject: String, message: String, attachment: MessageAttachmentPojo?): Boolean
 }
 
 class GlobalUseCaseImpl @Inject constructor(
@@ -79,4 +82,14 @@ class GlobalUseCaseImpl @Inject constructor(
         return result
     }
 
+    override suspend fun searchUser(type: Int, searchText: String, page: Int) = globalService.searchUser(type, searchText, page)
+
+    override suspend fun sendMessage(users: List<String>, subject: String, message: String, attachment: MessageAttachmentPojo?): Boolean {
+        val ids = users.joinToString(separator = ",")
+        return if(attachment == null) {
+            globalService.sendMessage(ids, subject, message)
+        } else {
+            globalService.sendMessage(ids, subject, message, attachment.name, "[\"${attachment.name}\"]", attachment.data)
+        }
+    }
 }

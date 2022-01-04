@@ -88,7 +88,7 @@
         android:label="ChildChoiceFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.ProfileFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.InformationFragment"
         android:label="ProfileFragment" />
     <fragment
         android:id="@+id/finalMarksFragment"
@@ -109,6 +109,13 @@
             app:exitAnim="@anim/fade_out_short"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_mailFragment_to_newLetterFragment"
+            app:destination="@id/newLetterFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
     </fragment>
     <fragment
         android:id="@+id/letterFragment"
@@ -122,4 +129,20 @@
         android:id="@+id/settingsFragment"
         android:name="ru.unit.barsdiary.mvvm.fragment.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/newLetterFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.NewLetterFragment"
+        android:label="NewLetterFragment" >
+        <action
+            android:id="@+id/action_newLetterFragment_to_recipientsFragment"
+            app:destination="@id/recipientsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipientsFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.RecipientsFragment"
+        android:label="RecipientsFragment" />
 </navigation>

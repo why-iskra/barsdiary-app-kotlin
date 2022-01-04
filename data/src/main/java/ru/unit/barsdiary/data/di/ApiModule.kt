@@ -19,8 +19,8 @@ import ru.unit.barsdiary.data.datastore.AuthDataStore
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.data.di.annotation.*
 import ru.unit.barsdiary.data.utils.LoggingInterceptor
-import ru.unit.barsdiary.sdk.BarsDiaryCommon
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Common
+import ru.unit.barsdiary.sdk.Engine
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -127,7 +127,6 @@ object ApiModule {
         @DataStoreCookieSaver dataStoreCookieSaver: CookieJar,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
-        .callTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .readTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .writeTimeout(settingsDataStore.clientTimeout.toLong(), TimeUnit.SECONDS)
         .cookieJar(if (settingsDataStore.fastAuth) dataStoreCookieSaver else sessionCookieSaver)
@@ -162,23 +161,23 @@ object ApiModule {
     @Singleton
     fun provideSdkEngine(
         @EngineHttpClient client: OkHttpClient,
-    ): BarsDiaryEngine = BarsDiaryEngine(client)
+    ): Engine = Engine(client)
 
     @Provides
     fun provideSdkCommon(
         @CommonHttpClient client: OkHttpClient,
-    ): BarsDiaryCommon = BarsDiaryCommon(client)
+    ): Common = Common(client)
 
     @Provides
     @WebDateFormatter
-    fun provideWebDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(BarsDiaryEngine.webDateFormatPattern)
+    fun provideWebDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(Engine.webDateFormatPattern)
 
     @Provides
     @ChartDateFormatter
-    fun provideChartDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(BarsDiaryEngine.chartDateFormatPattern)
+    fun provideChartDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(Engine.chartDateFormatPattern)
 
     @Provides
     @MailDateFormatter
-    fun provideMailDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(BarsDiaryEngine.mailDateFormatPattern)
+    fun provideMailDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(Engine.mailDateFormatPattern)
 
 }

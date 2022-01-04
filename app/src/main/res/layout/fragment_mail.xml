@@ -24,6 +24,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
+    <ru.unit.barsdiary.components.ImageButtonView
+        android:id="@+id/newLetterButtonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintEnd_toStartOf="@+id/refreshButton"
+        app:layout_constraintTop_toTopOf="@+id/textViewTitle"
+        app:srcCompat="@drawable/ic_round_history_edu_24" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"

@@ -6,13 +6,13 @@ import ru.unit.barsdiary.data.transformer.HomeworkTransformer
 import ru.unit.barsdiary.domain.diary.DiaryService
 import ru.unit.barsdiary.domain.diary.pojo.DiaryPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkPojo
-import ru.unit.barsdiary.sdk.BarsDiaryEngine
+import ru.unit.barsdiary.sdk.Engine
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class DiaryServiceImpl @Inject constructor(
-    private val engine: BarsDiaryEngine,
+    private val engine: Engine,
     @WebDateFormatter private val webDateFormatter: DateTimeFormatter,
 
     private val diaryTransformer: DiaryTransformer,

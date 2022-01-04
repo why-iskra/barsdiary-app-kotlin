@@ -10,7 +10,7 @@ import ru.unit.barsdiary.sdk.exception.AuthDataNotInitException
 import ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException
 import ru.unit.barsdiary.sdk.exception.UnauthorizedException
 
-class BarsDiaryEngine(
+class Engine(
     private val client: OkHttpClient,
 ) {
 

@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.mvvm.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -15,6 +16,7 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
 
     private val model: DeveloperViewModel by viewModels()
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentPanelBinding.bind(view)
@@ -28,6 +30,17 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
             model.settingsDataStore.enableChucker = isChecked
         }
 
+        binding.crashlyticsSwitch.isChecked = model.settingsDataStore.enableCrashlytics
+        binding.crashlyticsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            model.settingsDataStore.enableCrashlytics = isChecked
+        }
+
+        binding.webSessionIdButton.text = "Web Session Id: ${model.getSessionId()}"
+        binding.webSessionIdButton.setOnClickListener {
+            model.sessionIdToClipboard()
+        }
+
         binding.crashButton.isVisible = BuildConfig.DEBUG
+        binding.crashlyticsSwitch.isVisible = BuildConfig.DEBUG
     }
 }

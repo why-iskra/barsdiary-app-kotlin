@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -50,6 +51,16 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
         adapter.setMailOnClick {
 //            (parentFragment as? MailFragment)?.openLetterFragment(it, inBox)
             openLetterFragment(it, inBox)
+        }
+
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
+                binding.recyclerView.isVisible = false
+                binding.infoTextView.isVisible = true
+            } else {
+                binding.recyclerView.isVisible = true
+                binding.infoTextView.isVisible = false
+            }
         }
 
         binding.imageButtonViewDelete.setOnClickListener {
