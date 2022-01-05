@@ -4,16 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="model"
-            type="ru.unit.barsdiary.mvvm.viewmodel.DiaryViewModel" />
+            type="ru.unit.barsdiary.ui.viewmodel.DiaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mvvm.fragment.DiaryFragment">
+        tools:context=".ui.fragment.DiaryFragment">
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -26,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ru.unit.barsdiary.components.RefreshButtonView
+        <ru.unit.barsdiary.ui.components.RefreshButtonView
             android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
-        <ru.unit.barsdiary.components.NestedScrollableHost
+        <ru.unit.barsdiary.ui.components.NestedScrollableHost
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
@@ -64,9 +63,9 @@
                 android:id="@+id/viewPagerLessons"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </ru.unit.barsdiary.components.NestedScrollableHost>
+        </ru.unit.barsdiary.ui.components.NestedScrollableHost>
 
-        <ru.unit.barsdiary.components.ImageButtonView
+        <ru.unit.barsdiary.ui.components.ImageButtonView
             android:id="@+id/calendarButtonView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

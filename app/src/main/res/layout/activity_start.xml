@@ -6,7 +6,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="ru.unit.barsdiary.mvvm.fragment.AuthFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.AuthFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_auth" />

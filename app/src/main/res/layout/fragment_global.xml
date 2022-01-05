@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvvm.fragment.GlobalFragment">
+    tools:context=".ui.fragment.GlobalFragment">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ru.unit.barsdiary.components.RefreshButtonView
+    <ru.unit.barsdiary.ui.components.RefreshButtonView
         android:id="@+id/refreshButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

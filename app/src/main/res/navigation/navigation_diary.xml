@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.DiaryFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.DiaryFragment"
         android:label="DiaryFragment" />
 </navigation>

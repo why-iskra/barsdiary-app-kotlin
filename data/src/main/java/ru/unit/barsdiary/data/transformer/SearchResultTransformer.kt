@@ -2,10 +2,6 @@ package ru.unit.barsdiary.data.transformer
 
 import ru.unit.barsdiary.domain.global.pojo.FoundUserPojo
 import ru.unit.barsdiary.domain.global.pojo.SearchResultPojo
-import ru.unit.barsdiary.domain.person.pojo.ClassInfoPojo
-import ru.unit.barsdiary.domain.person.pojo.ClassmatePojo
-import ru.unit.barsdiary.sdk.response.GetClassYearInfoClassmateDTO
-import ru.unit.barsdiary.sdk.response.GetClassYearInfoResponseDTO
 import ru.unit.barsdiary.sdk.response.GetUserProfileDTO
 import ru.unit.barsdiary.sdk.response.GetUserProfilesResponseDTO
 import javax.inject.Inject

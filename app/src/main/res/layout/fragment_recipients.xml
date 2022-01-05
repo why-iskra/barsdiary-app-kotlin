@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvvm.fragment.GlobalFragment">
+    tools:context=".ui.fragment.GlobalFragment">
 
-    <ru.unit.barsdiary.components.ImageButtonView
+    <ru.unit.barsdiary.ui.components.ImageButtonView
         android:id="@+id/doneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewRecipients" />
 
-    <ru.unit.barsdiary.components.ImageButtonView
+    <ru.unit.barsdiary.ui.components.ImageButtonView
         android:id="@+id/searchButtonView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

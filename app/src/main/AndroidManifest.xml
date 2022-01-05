@@ -20,13 +20,13 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".mvvm.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".mvvm.activity.StartActivity"
+            android:name=".ui.activity.StartActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

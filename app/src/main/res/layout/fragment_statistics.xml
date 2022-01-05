@@ -6,13 +6,13 @@
     <data>
         <variable
             name="model"
-            type="ru.unit.barsdiary.mvvm.viewmodel.StatisticsViewModel" />
+            type="ru.unit.barsdiary.ui.viewmodel.StatisticsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mvvm.fragment.StatisticsFragment">
+        tools:context=".ui.fragment.StatisticsFragment">
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ru.unit.barsdiary.components.RefreshButtonView
+        <ru.unit.barsdiary.ui.components.RefreshButtonView
             android:id="@+id/refreshButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
-                <ru.unit.barsdiary.components.ChartView
+                <ru.unit.barsdiary.ui.components.ChartView
                     android:id="@+id/chart"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.StatisticsFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.StatisticsFragment"
         android:label="StatisticsFragment" >
         <action
             android:id="@+id/action_statisticsFragment_to_marksFragment"
@@ -18,6 +18,6 @@
     </fragment>
     <fragment
         android:id="@+id/marksFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.MarksFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.MarksFragment"
         android:label="MarksFragment" />
 </navigation>

@@ -7,13 +7,13 @@
 
         <variable
             name="model"
-            type="ru.unit.barsdiary.mvvm.viewmodel.AccountViewModel" />
+            type="ru.unit.barsdiary.ui.viewmodel.AccountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".mvvm.fragment.MarksFragment">
+        tools:context=".ui.fragment.MarksFragment">
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -76,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline6"
-            tools:text="2.4-beta (8)" />
+            tools:text="X.X-xxx (X)" />
 
         <ScrollView
             android:id="@+id/scrollView"

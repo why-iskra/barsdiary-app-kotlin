@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.AccountFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.AccountFragment"
         android:label="AccountFragment" >
         <action
             android:id="@+id/action_accountFragment_to_developerFragment"
@@ -54,26 +54,26 @@
 
     <fragment
         android:id="@+id/developerFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.DeveloperFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.DeveloperFragment"
         android:label="DeveloperFragment" />
     <fragment
         android:id="@+id/childChoiceFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.ChildChoiceFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.ChildChoiceFragment"
         android:label="ChildChoiceFragment" />
     <fragment
         android:id="@+id/informationFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.InformationFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.InformationFragment"
         android:label="InformationFragment" />
     <fragment
         android:id="@+id/finalMarksFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.FinalMarksFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.FinalMarksFragment"
         android:label="FinalMarksFragment" />
     <fragment
         android:id="@+id/aboutApplicationFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.AboutApplicationFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.AboutApplicationFragment"
         android:label="AboutApplicationFragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.SettingsFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>

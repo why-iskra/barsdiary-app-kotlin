@@ -2,7 +2,6 @@ package ru.unit.barsdiary.other
 
 import android.text.Html
 import android.text.Spanned
-import javax.inject.Inject
 
 object HtmlUtils {
 

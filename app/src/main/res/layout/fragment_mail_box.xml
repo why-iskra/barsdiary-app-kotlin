@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
-    <ru.unit.barsdiary.components.ImageButtonView
+    <ru.unit.barsdiary.ui.components.ImageButtonView
         android:id="@+id/imageButtonViewDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/textViewTitle"
         app:srcCompat="@drawable/ic_round_delete_24" />
 
-    <ru.unit.barsdiary.components.ImageButtonView
+    <ru.unit.barsdiary.ui.components.ImageButtonView
         android:id="@+id/imageButtonViewClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         app:layout_constraintTop_toTopOf="@+id/textViewTitle"
         app:srcCompat="@drawable/ic_round_clear_24" />
 
-    <ru.unit.barsdiary.components.ImageButtonView
+    <ru.unit.barsdiary.ui.components.ImageButtonView
         android:id="@+id/imageButtonViewSelectAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

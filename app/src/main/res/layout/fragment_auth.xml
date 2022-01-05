@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="ru.unit.barsdiary.mvvm.viewmodel.AuthViewModel" />
+            type="ru.unit.barsdiary.ui.viewmodel.AuthViewModel" />
     </data>
 
 
@@ -61,7 +61,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ru.unit.barsdiary.components.RefreshButtonView
+            <ru.unit.barsdiary.ui.components.RefreshButtonView
                 android:id="@+id/refreshButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                         app:layout_constraintStart_toStartOf="@+id/guideline7"
                         app:layout_constraintTop_toBottomOf="@+id/editTextLogin" />
 
-                    <ru.unit.barsdiary.components.ImageButtonView
+                    <ru.unit.barsdiary.ui.components.ImageButtonView
                         android:id="@+id/visibilityButtonView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/globalFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.GlobalFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.GlobalFragment"
         android:label="GlobalFragment" >
         <action
             android:id="@+id/action_globalFragment_to_birthdaysFragment"
@@ -25,11 +25,11 @@
     </fragment>
     <fragment
         android:id="@+id/birthdaysFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.BirthdaysFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.BirthdaysFragment"
         android:label="BirthdaysFragment" />
     <fragment
         android:id="@+id/mailFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.MailFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.MailFragment"
         android:label="MailFragment" >
         <action
             android:id="@+id/action_mailFragment_to_letterFragment"
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/newLetterFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.NewLetterFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.NewLetterFragment"
         android:label="NewLetterFragment" >
         <action
             android:id="@+id/action_newLetterFragment_to_recipientsFragment"
@@ -60,10 +60,10 @@
     </fragment>
     <fragment
         android:id="@+id/letterFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.LetterFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.LetterFragment"
         android:label="LetterFragment" />
     <fragment
         android:id="@+id/recipientsFragment"
-        android:name="ru.unit.barsdiary.mvvm.fragment.RecipientsFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.RecipientsFragment"
         android:label="RecipientsFragment" />
 </navigation>

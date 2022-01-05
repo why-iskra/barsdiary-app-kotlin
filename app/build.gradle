@@ -104,6 +104,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$androidx_legacy_version"
     implementation "androidx.paging:paging-runtime-ktx:$androidx_paging_version"
     implementation "androidx.datastore:datastore-preferences:$androidx_datastore_version"
+    implementation "androidx.viewpager2:viewpager2:$androidx_viewpager2_version"
 
     implementation "com.google.android.material:material:$material_version"
 }

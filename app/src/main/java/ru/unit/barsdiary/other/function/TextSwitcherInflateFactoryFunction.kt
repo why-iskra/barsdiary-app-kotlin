@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.other
+package ru.unit.barsdiary.other.function
 
 import android.view.LayoutInflater
 import android.widget.TextSwitcher
