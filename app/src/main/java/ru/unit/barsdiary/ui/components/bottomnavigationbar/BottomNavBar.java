@@ -73,6 +73,7 @@ public class BottomNavBar extends View {
     private OnItemSelectedListener onItemSelectedListener;
     private OnItemReselectedListener onItemReselectedListener;
 
+    public boolean userInteractionEnabled = true;
 
     private List<BottomBarItem> bottomBarItems;
 
@@ -309,6 +310,8 @@ public class BottomNavBar extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!userInteractionEnabled) return false;
+
         int pos = -1;
         if (event.getAction() == MotionEvent.ACTION_UP && Math.abs(event.getDownTime() - event.getEventTime()) < 500) {
             int size = bottomBarItems.size();

@@ -20,6 +20,8 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
 
     private lateinit var binding: FragmentNavigationBinding
 
+//    private var navBottomBarCurrentAnimator: ValueAnimator? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentNavigationBinding.bind(view)
@@ -73,6 +75,47 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
         globalModel.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
             if (it != null) {
                 mainModel.handleException(it)
+            }
+        }
+
+        mainModel.navigationBarShowLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.bottomNavBar.userInteractionEnabled = it
+//                if (it) {
+//                    binding.bottomNavBar.userInteractionEnabled = true
+//
+//                    navBottomBarCurrentAnimator?.cancel()
+//                    navBottomBarCurrentAnimator = ValueAnimator.ofInt(
+//                        binding.bottomNavBar.layoutParams.height,
+//                        64.dp(requireContext())
+//                    ).apply {
+//                        duration = 1000
+//                        addUpdateListener { ar ->
+//                            binding.bottomNavBar.updateLayoutParams {
+//                                height = ar.animatedValue as Int
+//                            }
+//                        }
+//                        start()
+//                    }
+//                } else {
+//                    binding.bottomNavBar.userInteractionEnabled = false
+//
+//                    navBottomBarCurrentAnimator?.cancel()
+//                    navBottomBarCurrentAnimator = ValueAnimator.ofInt(
+//                        binding.bottomNavBar.layoutParams.height,
+//                        0.dp(requireContext())
+//                    ).apply {
+//                        duration = 1000
+//                        addUpdateListener { ar ->
+//                            binding.bottomNavBar.updateLayoutParams {
+//                                height = ar.animatedValue as Int
+//                            }
+//                        }
+//                        start()
+//                    }
+//                }
+            } else {
+                binding.bottomNavBar.userInteractionEnabled = true
             }
         }
     }

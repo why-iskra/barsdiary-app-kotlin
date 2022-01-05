@@ -46,7 +46,10 @@ class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
             it ?: return@observe
 
             when (it) {
-                EventLiveData.Event.LOADING -> uiHideButton()
+                EventLiveData.Event.LOADING -> {
+                    mainModel.hideNavigationBar()
+                    uiHideButton()
+                }
                 EventLiveData.Event.LOADED -> {
                     uiShowButton()
                     activity?.switchActivity(context, MainActivity::class.java)
@@ -57,6 +60,7 @@ class ChildChoiceFragment : BaseFragment(R.layout.fragment_child_choice) {
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {
             if (it != null) {
                 mainModel.handleException(it)
+                mainModel.showNavigationBar()
             }
         }
     }

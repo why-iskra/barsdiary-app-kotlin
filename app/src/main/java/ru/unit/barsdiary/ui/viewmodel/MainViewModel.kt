@@ -16,6 +16,8 @@ class MainViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
 ) : ViewModel() {
 
+    val navigationBarShowLiveData = MutableLiveData<Boolean?>(null)
+
     val throwableLiveData = MutableLiveData<Throwable>()
 
     fun handleException(e: Throwable) {
@@ -29,4 +31,12 @@ class MainViewModel @Inject constructor(
     }
 
     fun isOnline() = systemServices.isOnline()
+
+    fun hideNavigationBar() {
+        navigationBarShowLiveData.postValue(false)
+    }
+
+    fun showNavigationBar() {
+        navigationBarShowLiveData.postValue(true)
+    }
 }
