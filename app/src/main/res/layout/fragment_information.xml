@@ -44,7 +44,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +73,8 @@
                         android:fontFamily="@font/nunito_bold"
                         android:text="@{model.schoolNameLiveData}"
                         android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                        android:textSize="16sp"
                         android:textIsSelectable="true"
+                        android:textSize="16sp"
                         tools:text="Text test" />
 
                     <TextView
@@ -89,8 +88,8 @@
                         android:fontFamily="@font/nunito"
                         android:text="@{model.schoolAddressLiveData}"
                         android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                        android:textSize="16sp"
                         android:textIsSelectable="true"
+                        android:textSize="16sp"
                         tools:text="Text test" />
 
                     <TextView
@@ -104,8 +103,8 @@
                         android:fontFamily="@font/nunito"
                         android:text="@{model.schoolPhoneLiveData}"
                         android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                        android:textSize="16sp"
                         android:textIsSelectable="true"
+                        android:textSize="16sp"
                         tools:text="Text test" />
 
                     <TextView
@@ -119,8 +118,8 @@
                         android:fontFamily="@font/nunito"
                         android:text="@{model.schoolEmailLiveData}"
                         android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                        android:textSize="16sp"
                         android:textIsSelectable="true"
+                        android:textSize="16sp"
                         tools:text="Text test" />
 
                     <TextView
@@ -134,8 +133,8 @@
                         android:fontFamily="@font/nunito"
                         android:text="@{model.schoolSiteLiveData}"
                         android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                        android:textSize="16sp"
                         android:textIsSelectable="true"
+                        android:textSize="16sp"
                         tools:text="Text test" />
 
                 </LinearLayout>

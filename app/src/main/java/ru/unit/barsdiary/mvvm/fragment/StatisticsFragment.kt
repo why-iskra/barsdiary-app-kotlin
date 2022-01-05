@@ -44,7 +44,7 @@ class StatisticsFragment : BaseFragment(R.layout.fragment_statistics) {
         }
 
         binding.buttonMarks.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_marksFragment)
+            findNavController().navigate(R.id.action_statisticsFragment_to_marksFragment)
         }
 
         model.progressChartLiveData.observe(viewLifecycleOwner) {

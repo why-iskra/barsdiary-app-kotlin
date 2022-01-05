@@ -3,28 +3,24 @@ package ru.unit.barsdiary.mvvm.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import ru.unit.barsdiary.mvvm.fragment.*
+import ru.unit.barsdiary.mvvm.fragment.NavigationAccountFragment
+import ru.unit.barsdiary.mvvm.fragment.NavigationDiaryFragment
+import ru.unit.barsdiary.mvvm.fragment.NavigationGlobalFragment
+import ru.unit.barsdiary.mvvm.fragment.NavigationStatisticsFragment
+
 
 class NavigationAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
-    private val story = arrayOf<Fragment?>(null, null, null, null)
 
-    override fun getItemCount(): Int = story.size
+    override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment {
-        var fragment = story[position]
-        if (fragment == null) {
-            fragment = when (position) {
-                FragmentId.Diary.id -> DiaryFragment()
-                FragmentId.Statistics.id -> StatisticsFragment()
-                FragmentId.Global.id -> GlobalFragment()
-                FragmentId.Account.id -> AccountFragment()
-                else -> PlugFragment()
-            }
-
-            story[position] = fragment
+        return when (position) {
+            FragmentId.Diary.id -> NavigationDiaryFragment()
+            FragmentId.Statistics.id -> NavigationStatisticsFragment()
+            FragmentId.Global.id -> NavigationGlobalFragment()
+            else -> NavigationAccountFragment()
         }
-        return fragment
     }
 
     enum class FragmentId(val id: Int) {

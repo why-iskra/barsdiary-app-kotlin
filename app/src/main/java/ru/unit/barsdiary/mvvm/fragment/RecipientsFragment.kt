@@ -2,7 +2,10 @@ package ru.unit.barsdiary.mvvm.fragment
 
 import android.os.Bundle
 import android.text.Editable
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
@@ -51,6 +54,15 @@ class RecipientsFragment : BaseFragment(R.layout.fragment_recipients) {
                 recipientsTypeAdapter?.setSearchText(s.toString())
             }
         })
+
+        binding.editTextSearch.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                recipientsTypeAdapter?.search()
+                true
+            } else {
+                false
+            }
+        }
 
         binding.doneButton.setOnClickListener {
             findNavController().navigateUp()

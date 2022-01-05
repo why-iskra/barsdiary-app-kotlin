@@ -26,11 +26,11 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
         val attentionColor = ContextCompat.getColor(requireContext(), R.color.amaranth)
 
         binding.textViewBirthdays.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_birthdaysFragment)
+            findNavController().navigate(R.id.action_globalFragment_to_birthdaysFragment)
         }
 
         binding.textViewMail.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_mailFragment)
+            findNavController().navigate(R.id.action_globalFragment_to_mailFragment)
         }
 
         binding.refreshButton.setOnClickListener {

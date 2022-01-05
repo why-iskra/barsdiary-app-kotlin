@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_account"
+    app:startDestination="@id/accountFragment">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.AccountFragment"
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_developerFragment"
+            app:destination="@id/developerFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_accountFragment_to_finalMarksFragment"
+            app:destination="@id/finalMarksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_accountFragment_to_childChoiceFragment"
+            app:destination="@id/childChoiceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_accountFragment_to_aboutApplicationFragment"
+            app:destination="@id/aboutApplicationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_accountFragment_to_informationFragment"
+            app:destination="@id/informationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_accountFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/developerFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.DeveloperFragment"
+        android:label="DeveloperFragment" />
+    <fragment
+        android:id="@+id/childChoiceFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.ChildChoiceFragment"
+        android:label="ChildChoiceFragment" />
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.InformationFragment"
+        android:label="InformationFragment" />
+    <fragment
+        android:id="@+id/finalMarksFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.FinalMarksFragment"
+        android:label="FinalMarksFragment" />
+    <fragment
+        android:id="@+id/aboutApplicationFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.AboutApplicationFragment"
+        android:label="AboutApplicationFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>

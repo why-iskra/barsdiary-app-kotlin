@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_statistics"
+    app:startDestination="@id/statisticsFragment">
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.StatisticsFragment"
+        android:label="StatisticsFragment" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_marksFragment"
+            app:destination="@id/marksFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+    </fragment>
+    <fragment
+        android:id="@+id/marksFragment"
+        android:name="ru.unit.barsdiary.mvvm.fragment.MarksFragment"
+        android:label="MarksFragment" />
+</navigation>

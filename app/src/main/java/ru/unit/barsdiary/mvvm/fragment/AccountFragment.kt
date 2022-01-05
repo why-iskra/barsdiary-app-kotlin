@@ -69,27 +69,27 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
         binding.textViewAboutApp.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
 
         binding.textViewDeveloper.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_developerFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_developerFragment)
         }
 
         binding.textViewChildChoice.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_childChoiceFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_childChoiceFragment)
         }
 
-        binding.textViewProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_profileFragment)
+        binding.textViewInformation.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_informationFragment)
         }
 
         binding.textViewFinalMarks.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_finalMarksFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_finalMarksFragment)
         }
 
         binding.textViewAboutApp.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_aboutApplicationFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_aboutApplicationFragment)
         }
 
         binding.textViewSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_navigationFragment_to_settingsFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_settingsFragment)
         }
 
         actionDialog.setActionListener {
