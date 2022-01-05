@@ -3,6 +3,7 @@ package ru.unit.barsdiary.ui.fragment
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -45,8 +46,16 @@ class BirthdaysFragment : BaseFragment(R.layout.fragment_birthdays) {
         }
 
         model.birthdaysLiveData.observe(viewLifecycleOwner) {
-            binding.recyclerView.adapter = BirthdaysAdapter(it.birthdays) { date ->
-                model.birthdayDateFormat(date)
+            if(it.birthdays.isEmpty()) {
+                binding.infoTextView.isVisible = true
+                binding.recyclerView.isVisible = false
+            } else {
+                binding.infoTextView.isVisible = false
+                binding.recyclerView.isVisible = true
+
+                binding.recyclerView.adapter = BirthdaysAdapter(it.birthdays) { date ->
+                    model.birthdayDateFormat(date)
+                }
             }
         }
 

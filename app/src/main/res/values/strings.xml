@@ -88,4 +88,8 @@
     <string name="channel_sending_message_result_name">Result of sending message</string>
     <string name="channel_sending_message_result_description">Show result of sending message</string>
     <string name="choose_file">Choose a file</string>
+    <string name="meetings">Meetings</string>
+    <string name="class_hours">Class hours</string>
+    <string name="events">Events</string>
+    <string name="advert_board">Advert board</string>
 </resources>

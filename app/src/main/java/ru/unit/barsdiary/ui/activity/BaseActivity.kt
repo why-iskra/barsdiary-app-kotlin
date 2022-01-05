@@ -21,6 +21,7 @@ import ru.unit.barsdiary.other.function.switchActivity
 import ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException
 import ru.unit.barsdiary.sdk.exception.UnauthorizedException
 import timber.log.Timber
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -58,6 +59,7 @@ open class BaseActivity(@LayoutRes val res: Int) : AppCompatActivity(res) {
                 it is FinishRegistrationAccountException -> {
                     showInfoDialog(getString(R.string.finish_registration_error), getString(R.string.finish_registration_error_text).format(it.site))
                 }
+                it is SocketTimeoutException -> { /* ignore */ }
                 model.isOnline() -> {
                     showInfoDialog(getString(R.string.internal_error), it?.message ?: getString(R.string.internal_error_text))
                 }
