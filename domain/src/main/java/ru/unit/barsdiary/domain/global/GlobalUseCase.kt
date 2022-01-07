@@ -39,7 +39,8 @@ class GlobalUseCaseImpl @Inject constructor(
         globalRepository.getOutBox(page) ?: globalService.getOutBox(page).apply { globalRepository.setOutBox(this, page) }
 
     override suspend fun getInBoxCount(): Int =
-        globalRepository.getInBoxCount() ?: globalService.getInBoxCount().apply { globalRepository.setInBoxCount(this) }
+        globalService.getInBoxCount()
+//        globalRepository.getInBoxCount() ?: globalService.getInBoxCount().apply { globalRepository.setInBoxCount(this) }
 
     override suspend fun clearBirthdays() {
         globalRepository.clearBirthdays()

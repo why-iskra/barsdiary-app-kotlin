@@ -68,6 +68,13 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
             ) {
                 binding.bottomNavBar.setNotification(NavigationAdapter.FragmentId.Global.id, true)
             }
+
+            if(
+                globalModel.birthsTodayLiveData.value == false
+                && globalModel.hasInBoxLiveData.value == false
+            ) {
+                binding.bottomNavBar.setNotification(NavigationAdapter.FragmentId.Global.id, false)
+            }
         }
 
         globalModel.refreshNotifications()

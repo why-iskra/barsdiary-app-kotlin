@@ -3,7 +3,7 @@ package ru.unit.barsdiary.ui.fragment
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -11,7 +11,7 @@ import ru.unit.barsdiary.databinding.FragmentLetterBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
 import ru.unit.barsdiary.other.HtmlUtils
 import ru.unit.barsdiary.other.function.argumentDelegate
-import ru.unit.barsdiary.ui.viewmodel.LetterViewModel
+import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
 
 @AndroidEntryPoint
 class LetterFragment : BaseFragment(R.layout.fragment_letter) {
@@ -39,7 +39,7 @@ class LetterFragment : BaseFragment(R.layout.fragment_letter) {
         }
     }
 
-    private val model: LetterViewModel by viewModels()
+    private val model: GlobalViewModel by activityViewModels()
 
     private val title: String? by argumentDelegate()
     private val from: String? by argumentDelegate()

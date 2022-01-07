@@ -1,41 +1,52 @@
 package ru.unit.barsdiary.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBoxBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
+import ru.unit.barsdiary.other.HtmlUtils
+import ru.unit.barsdiary.other.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.BoxAdapter
 import ru.unit.barsdiary.ui.adapter.LoadStateAdapter
+import ru.unit.barsdiary.ui.viewmodel.BoxViewModel
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
-import ru.unit.barsdiary.other.HtmlUtils
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
+class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
+
+    private val inBox: Boolean by argumentDelegate()
+
+    @Inject
+    lateinit var assistedFactory: BoxViewModel.AssistedFactory
+
+    private val model: BoxViewModel by viewModels {
+        BoxViewModel.provideFactory(assistedFactory, inBox)
+    }
 
     private val globalModel: GlobalViewModel by activityViewModels()
     private lateinit var binding: FragmentMailBoxBinding
-
-    private var inBox: Boolean = true
 
     @Inject
     lateinit var adapter: BoxAdapter
 
     var selected: List<Int> = emptyList()
 
-    @SuppressLint("NotifyDataSetChanged")
+    @OptIn(ExperimentalPagingApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMailBoxBinding.bind(view)
@@ -45,11 +56,12 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+        setTitle(if (inBox) R.string.in_box else R.string.out_box)
+
         adapter.isInBox = inBox
         adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         adapter.setMailOnClick {
-//            (parentFragment as? MailFragment)?.openLetterFragment(it, inBox)
             openLetterFragment(it, inBox)
         }
 
@@ -94,7 +106,7 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
             selected = it
         }
 
-        if(binding.recyclerView.adapter == null) {
+        if (binding.recyclerView.adapter == null) {
             binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 LoadStateAdapter {
                     adapter.retry()
@@ -111,16 +123,27 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            adapter.loadStateFlow.collectLatest {
-                val error = when {
-                    it.append is LoadState.Error -> it.append
-                    it.prepend is LoadState.Error -> it.prepend
-                    it.refresh is LoadState.Error -> it.refresh
-                    else -> return@collectLatest
-                }
+            launch {
+                adapter.loadStateFlow.collectLatest {
+                    if (it.append is LoadState.NotLoading || it.prepend is LoadState.NotLoading || it.refresh is LoadState.NotLoading) {
+                        globalModel.silentRefreshInBoxCount()
+                    }
 
-                if (error is LoadState.Error) {
-                    mainModel.handleException(error.error)
+                    val error = when {
+                        it.append is LoadState.Error -> it.append
+                        it.prepend is LoadState.Error -> it.prepend
+                        it.refresh is LoadState.Error -> it.refresh
+                        else -> return@collectLatest
+                    }
+
+                    if (error is LoadState.Error) {
+                        mainModel.handleException(error.error)
+                    }
+                }
+            }
+            launch {
+                model.boxFlow.collectLatest {
+                    adapter.submitData(it)
                 }
             }
         }
@@ -134,15 +157,11 @@ open class MailBoxFragment : BaseFragment(R.layout.fragment_mail_box) {
         }
     }
 
-    fun isInBox(value: Boolean) {
-        inBox = value
-    }
-
-    fun setTitle(@StringRes res: Int) {
+    private fun setTitle(@StringRes res: Int) {
         binding.textViewTitle.setText(res)
     }
 
-    fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {
+    private fun openLetterFragment(data: MessagePojo, isInBox: Boolean) {
         var text: String? = data.text
         runCatching {
             text = buildString {

@@ -89,6 +89,7 @@ class GlobalViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
 
+            resetBoxes()
             val asyncInBoxCount = async { getInBoxCount() }
             val asyncBirthdays = async { getBirthdays() }
 
@@ -112,6 +113,13 @@ class GlobalViewModel @Inject constructor(
 
             notificationLiveData.post()
             eventLiveData.postEventLoaded()
+        }
+    }
+
+    fun silentRefreshInBoxCount() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getInBoxCount()
+            notificationLiveData.post()
         }
     }
 
@@ -155,6 +163,17 @@ class GlobalViewModel @Inject constructor(
             exceptionLiveData.safety {
                 globalUseCase.removeOutBoxMessages(list)
                 refreshBoxes()
+            }
+        }
+    }
+
+    fun markRead(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.markRead(id)
+                globalUseCase.clearInBoxCount()
+                getInBoxCount()
+                notificationLiveData.post()
             }
         }
     }
