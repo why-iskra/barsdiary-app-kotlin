@@ -15,11 +15,12 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
-import ru.unit.barsdiary.ui.fragment.dialog.InfoDialogFragment
-import ru.unit.barsdiary.ui.viewmodel.MainViewModel
 import ru.unit.barsdiary.other.function.switchActivity
+import ru.unit.barsdiary.productflavor.ProductFlavorDevelopingInterface
 import ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException
 import ru.unit.barsdiary.sdk.exception.UnauthorizedException
+import ru.unit.barsdiary.ui.fragment.dialog.InfoDialogFragment
+import ru.unit.barsdiary.ui.viewmodel.MainViewModel
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import javax.inject.Inject
@@ -39,10 +40,19 @@ open class BaseActivity(@LayoutRes val res: Int) : AppCompatActivity(res) {
     private val infoDialogTag = INFO_DIALOG_TAG + this::class.java.simpleName
 
     @Inject
+    lateinit var productFlavorDevelopingInterface: ProductFlavorDevelopingInterface
+
+    @Inject
     lateinit var settingsDataStore: SettingsDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runCatching {
+            window.decorView.rootView.let {
+                productFlavorDevelopingInterface.removeStatusBar(this, it)
+            }
+        }
 
         val model = ViewModelProvider(this)[MainViewModel::class.java]
 

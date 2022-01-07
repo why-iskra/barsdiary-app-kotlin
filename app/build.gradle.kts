@@ -48,6 +48,19 @@ android {
         }
         getByName("debug") { }
     }
+
+    flavorDimensions.add("version")
+    productFlavors {
+        create("publish") {
+            dimension = "version"
+            resValue("string", "app_name", "@string/app_name_publish")
+        }
+        create("developing") {
+            dimension = "version"
+            resValue("string", "app_name", "@string/app_name_developing")
+        }
+    }
+
     buildFeatures {
         dataBinding = true
         viewBinding = true

@@ -84,69 +84,69 @@
                 android:textSize="18sp"
                 app:drawableStartCompat="@drawable/ic_round_mail_24" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textViewMeetings"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="?selectableItemBackground"-->
-<!--                android:clickable="true"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/nunito_bold"-->
-<!--                android:paddingStart="16dp"-->
-<!--                android:paddingTop="14dp"-->
-<!--                android:paddingBottom="14dp"-->
-<!--                android:text="@string/meetings"-->
-<!--                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"-->
-<!--                android:textSize="18sp"-->
-<!--                app:drawableStartCompat="@drawable/ic_round_groups_24" />-->
+            <TextView
+                android:id="@+id/textViewMeetings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingStart="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/meetings"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_round_groups_24" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textViewClassHours"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="?selectableItemBackground"-->
-<!--                android:clickable="true"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/nunito_bold"-->
-<!--                android:paddingStart="16dp"-->
-<!--                android:paddingTop="14dp"-->
-<!--                android:paddingBottom="14dp"-->
-<!--                android:text="@string/class_hours"-->
-<!--                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"-->
-<!--                android:textSize="18sp"-->
-<!--                app:drawableStartCompat="@drawable/ic_round_access_time_filled_24" />-->
+            <TextView
+                android:id="@+id/textViewClassHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingStart="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/class_hours"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_round_access_time_filled_24" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textViewEvents"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="?selectableItemBackground"-->
-<!--                android:clickable="true"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/nunito_bold"-->
-<!--                android:paddingStart="16dp"-->
-<!--                android:paddingTop="14dp"-->
-<!--                android:paddingBottom="14dp"-->
-<!--                android:text="@string/events"-->
-<!--                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"-->
-<!--                android:textSize="18sp"-->
-<!--                app:drawableStartCompat="@drawable/ic_round_event_24" />-->
+            <TextView
+                android:id="@+id/textViewEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingStart="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/events"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_round_event_24" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/textViewAdvertBoard"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="?selectableItemBackground"-->
-<!--                android:clickable="true"-->
-<!--                android:drawablePadding="16dp"-->
-<!--                android:fontFamily="@font/nunito_bold"-->
-<!--                android:paddingStart="16dp"-->
-<!--                android:paddingTop="14dp"-->
-<!--                android:paddingBottom="14dp"-->
-<!--                android:text="@string/advert_board"-->
-<!--                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"-->
-<!--                android:textSize="18sp"-->
-<!--                app:drawableStartCompat="@drawable/ic_round_assignment_24" />-->
+            <TextView
+                android:id="@+id/textViewAdvertBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:paddingStart="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/advert_board"
+                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/ic_round_assignment_24" />
 
             <TextView
                 android:id="@+id/textViewBirthdays"
@@ -176,6 +176,7 @@
         android:text="@string/experimental"
         android:textAppearance="@style/TextAppearance.Barsdiary.Small"
         android:textColor="?attr/colorPrimary"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

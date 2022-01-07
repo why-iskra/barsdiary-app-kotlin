@@ -2,6 +2,7 @@ package ru.unit.barsdiary.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
@@ -31,6 +32,22 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
 
         binding.textViewMail.setOnClickListener {
             findNavController().navigate(R.id.action_globalFragment_to_mailFragment)
+        }
+
+        binding.textViewAdvertBoard.setOnClickListener {
+            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+        }
+
+        binding.textViewClassHours.setOnClickListener {
+            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+        }
+
+        binding.textViewMeetings.setOnClickListener {
+            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+        }
+
+        binding.textViewEvents.setOnClickListener {
+            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
         binding.refreshButton.setOnClickListener {

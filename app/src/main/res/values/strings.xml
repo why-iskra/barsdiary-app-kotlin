@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Bars Diary</string>
+    <string name="app_name_publish">Bars Diary</string>
+    <string name="app_name_developing">Bars Diary (dev)</string>
     <string name="written_by_unit" translatable="false">written by ũŋit</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -10,7 +11,7 @@
     <string name="global">Global</string>
     <string name="marks">Marks</string>
     <string name="sign_in">Sign in</string>
-    <string name="server_url">Server URL</string>
+    <string name="server_url">Region (Server)</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="server_list">Server List</string>
@@ -92,4 +93,5 @@
     <string name="class_hours">Class hours</string>
     <string name="events">Events</string>
     <string name="advert_board">Advert board</string>
+    <string name="in_development">In development</string>
 </resources>

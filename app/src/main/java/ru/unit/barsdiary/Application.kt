@@ -7,6 +7,7 @@ import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.notification.SendingMessageNotification
 import ru.unit.barsdiary.notification.SendingMessageResultNotification
 import ru.unit.barsdiary.other.InAppTree
+import ru.unit.barsdiary.productflavor.ProductFlavorDevelopingInterface
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -25,6 +26,9 @@ class Application : Application() {
     @Inject
     lateinit var sendingMessageResultNotification: SendingMessageResultNotification
 
+    @Inject
+    lateinit var productFlavorDevelopingInterface: ProductFlavorDevelopingInterface
+
     override fun onCreate() {
         super.onCreate()
 
@@ -38,5 +42,9 @@ class Application : Application() {
         }
 
         Timber.plant(inAppTree)
+
+        runCatching {
+            productFlavorDevelopingInterface.init(applicationContext)
+        }
     }
 }

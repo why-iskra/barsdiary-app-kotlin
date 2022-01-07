@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Барс Дневник</string>
+    <string name="app_name_publish">Барс Дневник</string>
+    <string name="app_name_developing">Барс Дневник (dev)</string>
     <string name="ok">ОК</string>
     <string name="cancel">Отменить</string>
     <string name="custom_url">Свой URL</string>
@@ -8,7 +9,7 @@
     <string name="global">Сервисы</string>
     <string name="marks">Оценки</string>
     <string name="sign_in">Войти</string>
-    <string name="server_url">URL сервера</string>
+    <string name="server_url">Регион (Адрес сервера)</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="server_list">Список серверов</string>
@@ -84,4 +85,5 @@
     <string name="class_hours">Классные часы</string>
     <string name="events">События</string>
     <string name="advert_board">Доска объявлений</string>
+    <string name="in_development">В разработке</string>
 </resources>
