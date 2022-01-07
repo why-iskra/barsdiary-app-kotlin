@@ -18,7 +18,6 @@ import ru.unit.barsdiary.databinding.FragmentAuthBinding
 import ru.unit.barsdiary.other.function.switchActivity
 import ru.unit.barsdiary.other.livedata.EventLiveData
 import ru.unit.barsdiary.ui.activity.MainActivity
-import ru.unit.barsdiary.ui.activity.StartActivity
 import ru.unit.barsdiary.ui.fragment.dialog.ServerListDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.AuthViewModel
 import javax.inject.Inject
@@ -36,7 +35,6 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
     @Inject
     lateinit var systemServices: SystemServices
 
-    private val infoDialog get() = (activity as? StartActivity)?.infoDialog
     private lateinit var serverListDialog: ServerListDialogFragment
 
     private val model: AuthViewModel by activityViewModels()

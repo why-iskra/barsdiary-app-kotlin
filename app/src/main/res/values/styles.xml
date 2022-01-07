@@ -6,6 +6,8 @@
 
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarSize">4dp</item>
 
         <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
@@ -29,6 +31,8 @@
 
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarSize">4dp</item>
 
         <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>
@@ -49,6 +53,8 @@
 
         <item name="android:scrollbarThumbHorizontal">@drawable/scrollbar_thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/scrollbar_thumb</item>
+        <item name="android:scrollbarSize">4dp</item>
 
         <item name="android:switchStyle">@style/Widget.Barsdiary.Switch</item>
         <item name="android:textViewStyle">@style/Widget.Barsdiary.TextView</item>

@@ -43,6 +43,7 @@ dependencies {
 
     debugImplementation(Dependency.chuckerDebug)
     releaseImplementation(Dependency.chuckerRelease)
+    add("betaImplementation", Dependency.chuckerRelease)
 
     implementation(Dependency.androidXDatastoreCore)
     implementation(Dependency.androidXDatastore)

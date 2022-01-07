@@ -61,6 +61,7 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
             binding.viewPager.currentItem = it
         }
 
+        // fixme: review notification logic
         globalModel.notificationLiveData.observe(viewLifecycleOwner) {
             if (
                 globalModel.birthsTodayLiveData.value == true

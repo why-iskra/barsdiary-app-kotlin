@@ -66,8 +66,6 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
             }
         }
 
-        binding.textViewAboutApp.visibility = if (BuildConfig.DEBUG) View.VISIBLE else View.GONE
-
         binding.textViewDeveloper.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_developerFragment)
         }
