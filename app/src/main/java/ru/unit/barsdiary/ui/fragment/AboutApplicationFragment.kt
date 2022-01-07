@@ -26,7 +26,7 @@ class AboutApplicationFragment : BaseFragment(R.layout.fragment_about_applicatio
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentAboutApplicationBinding.bind(view)
 
-        binding.textViewVersion.text = "${BuildConfig.VERSION_NAME} ${BuildConfig.BUILD_TYPE}"
+        binding.textViewVersion.text = BuildConfig.VERSION_NAME
 
         binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
 
