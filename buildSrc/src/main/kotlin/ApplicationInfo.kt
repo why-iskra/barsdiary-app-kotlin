@@ -2,8 +2,8 @@ object ApplicationInfo {
 
     object Version {
         const val MAJOR = 2
-        const val MINOR = 7
-        const val PATCH = 0
+        const val MINOR = 8
+        const val PATCH = 1
         const val CODE = 9
     }
 
