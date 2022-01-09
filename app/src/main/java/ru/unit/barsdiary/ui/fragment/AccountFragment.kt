@@ -1,6 +1,5 @@
 package ru.unit.barsdiary.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -14,10 +13,11 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAccountBinding
 import ru.unit.barsdiary.lib.function.inflateFactory
-import ru.unit.barsdiary.ui.activity.StartActivity
+import ru.unit.barsdiary.lib.function.switchActivity
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.ui.activity.MainActivity
 import ru.unit.barsdiary.ui.fragment.dialog.ActionDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.AccountViewModel
-import ru.unit.barsdiary.lib.livedata.EventLiveData
 
 
 @AndroidEntryPoint
@@ -91,8 +91,9 @@ class AccountFragment : BaseFragment(R.layout.fragment_account) {
 
         actionDialog.setActionListener {
             model.logout()
-            activity?.finishAffinity()
-            startActivity(Intent(context, StartActivity::class.java))
+            context?.let {
+                activity?.switchActivity(context, MainActivity::class.java)
+            }
         }
 
         model.isParentLiveData.observe(viewLifecycleOwner) {

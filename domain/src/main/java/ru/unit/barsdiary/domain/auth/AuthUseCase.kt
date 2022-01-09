@@ -22,7 +22,7 @@ interface AuthUseCase {
 
 class AuthUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
-    private val authService: AuthService,
+    private val authService: AuthService
 ) : AuthUseCase {
     override suspend fun auth(serverUrl: String?, login: String?, password: String?) {
         val repositoryAuthData = authRepository.getAuthData()
@@ -48,16 +48,13 @@ class AuthUseCaseImpl @Inject constructor(
 
     override suspend fun logout() {
         authRepository.clearAuthData()
-//        authService.logout()
+        authService.logout()
     }
 
     override suspend fun getServerList(): List<ServerInfoPojo> = authService.getServerList()
 
     override fun prepareFastAuth(): Boolean {
-
-
         val authData = authRepository.getAuthData() ?: return false
-
         authService.prepare(authData)
         return true
     }

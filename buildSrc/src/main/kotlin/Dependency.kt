@@ -7,6 +7,8 @@ object Dependency {
 
     val kotlinCoroutines by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${DependencyVersion.KOTLIN_COROUTINES}" }
 
+    val googlePlayCore by lazy { "com.google.android.play:core-ktx:${DependencyVersion.GOOGLE_PLAY_CORE}" }
+
     val dagger by lazy { "com.google.dagger:dagger:${DependencyVersion.HILT}" }
     val daggerCompiler by lazy { "com.google.dagger:dagger-compiler:${DependencyVersion.HILT}" }
 

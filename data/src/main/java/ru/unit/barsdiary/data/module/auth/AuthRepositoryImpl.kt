@@ -37,6 +37,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun getSessionId(): String? = authDataStore.sessionId
 
+    override fun setSessionId(id: String) {
+        authDataStore.sessionId = id
+    }
+
     override suspend fun cleanRamCache() {
         ramCacheCleaner.clean()
     }

@@ -104,7 +104,11 @@ class Engine(
             updateParentData()
         }.onFailure {
             authMutex.unlock()
-            throw it
+            if(it is HttpException && it.code() == 403) {
+                throw UnauthorizedException()
+            } else {
+                throw it
+            }
         }
 
         authMutex.unlock()
@@ -148,7 +152,12 @@ class Engine(
             service.setChild(childrenList[selectedChild].id)
         }.onFailure {
             selectedChild = saved
-            throw it
+
+            if(it is HttpException && it.code() == 403) {
+                throw UnauthorizedException()
+            } else {
+                throw it
+            }
         }
     }
 
@@ -157,28 +166,41 @@ class Engine(
         service.logout()
     }
 
-    suspend fun <T> api(authProtect: Boolean = true, block: suspend ApiService.() -> T): T {
+    suspend fun <T> api(authProtect: Int = 1, block: suspend ApiService.() -> T): T {
         waitAuth()
 
         runCatching {
             if (!inited) {
                 auth(true)
             }
+        }.onFailure {
+            if(it is HttpException && it.code() == 403) {
+                throw UnauthorizedException()
+            } else {
+                throw it
+            }
         }
 
-        return if (authProtect) {
+        if (authProtect > 0) {
             return try {
                 block.invoke(service)
             } catch (e: HttpException) {
                 if (e.code() == 403) {
-                    auth(false)
-                    block.invoke(service)
+                    api(authProtect - 1, block)
                 } else {
                     throw e
                 }
             }
         } else {
-            block.invoke(service)
+            return try {
+                block.invoke(service)
+            } catch (e: HttpException) {
+                if (e.code() == 403) {
+                    throw UnauthorizedException()
+                } else {
+                    throw e
+                }
+            }
         }
     }
 

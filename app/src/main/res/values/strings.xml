@@ -96,4 +96,6 @@
     <string name="in_development">In development</string>
     <string name="message">Message</string>
     <string name="download_file">Download file</string>
+    <string name="update_downloaded">An update has just been downloaded from Google Play</string>
+    <string name="reload">RELOAD</string>
 </resources>

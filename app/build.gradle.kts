@@ -24,9 +24,9 @@ android {
 
     val assembleVersionName = if(typeVersion == null) {
         project.logger.warn("Unknown build type")
-        "${ApplicationInfo.Version.MAJOR}.${ApplicationInfo.Version.MINOR}.${ApplicationInfo.Version.PATCH} (${ApplicationInfo.Version.CODE})"
+        "${ApplicationInfo.Version.MAJOR}.${ApplicationInfo.Version.MINOR}.${ApplicationInfo.Version.PATCH}"
     } else {
-        "${ApplicationInfo.Version.MAJOR}.${ApplicationInfo.Version.MINOR}.${ApplicationInfo.Version.PATCH}-$typeVersion (${ApplicationInfo.Version.CODE})"
+        "${ApplicationInfo.Version.MAJOR}.${ApplicationInfo.Version.MINOR}.${ApplicationInfo.Version.PATCH}-$typeVersion"
     }
 
     println("${27.toChar()}[30;46mApp Version: $assembleVersionName${27.toChar()}[0m")
@@ -86,6 +86,8 @@ dependencies {
     implementation(Dependency.firebaseCore)
     implementation(Dependency.firebaseCrashlytics)
     implementation(Dependency.firebaseAnalytics)
+
+    implementation(Dependency.googlePlayCore)
 
     implementation(Dependency.hilt)
     kapt(Dependency.hiltCompiler)

@@ -88,4 +88,6 @@
     <string name="in_development">В разработке</string>
     <string name="message">Сообщение</string>
     <string name="download_file">Скачать файл</string>
+    <string name="update_downloaded">Только что было загружено обновление из Google Play</string>
+    <string name="reload">ПЕРЕЗАГРУЗИТЬ</string>
 </resources>

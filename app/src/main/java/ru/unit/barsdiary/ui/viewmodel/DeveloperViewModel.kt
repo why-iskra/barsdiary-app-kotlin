@@ -71,6 +71,8 @@ class DeveloperViewModel @Inject constructor(
                         password
                     )
                 )
+
+                authRepository.setSessionId(randomString(32))
             }
         }
     }

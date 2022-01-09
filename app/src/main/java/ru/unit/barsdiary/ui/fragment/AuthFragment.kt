@@ -10,17 +10,15 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.commitNow
 import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
-import ru.unit.barsdiary.SystemServices
 import ru.unit.barsdiary.databinding.FragmentAuthBinding
-import ru.unit.barsdiary.lib.function.switchActivity
 import ru.unit.barsdiary.lib.livedata.EventLiveData
-import ru.unit.barsdiary.ui.activity.MainActivity
 import ru.unit.barsdiary.ui.fragment.dialog.ServerListDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.AuthViewModel
-import javax.inject.Inject
 
 
 // todo: review logic
@@ -31,9 +29,6 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
         private const val SERVER_LIST_DIALOG_TAG = "serverListDialog"
     }
 
-    @Inject
-    lateinit var systemServices: SystemServices
-
     private lateinit var serverListDialog: ServerListDialogFragment
 
     private val model: AuthViewModel by activityViewModels()
@@ -41,7 +36,10 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (model.fastAuth()) {
-            activity?.switchActivity(context, MainActivity::class.java)
+            activity?.supportFragmentManager?.commit {
+                setCustomAnimations(R.anim.fade_in_short, R.anim.fade_out_short, R.anim.fade_in_short, R.anim.fade_out_short)
+                replace(R.id.fragmentContainerView, NavigationFragment())
+            }
         }
 
         serverListDialog = parentFragmentManager
@@ -152,7 +150,10 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
                 interpolator = AccelerateDecelerateInterpolator()
                 addUpdateListener { valueAnimator ->
                     if (valueAnimator.animatedValue == 100) {
-                        activity?.switchActivity(context, MainActivity::class.java)
+                        activity?.supportFragmentManager?.commit {
+                            setCustomAnimations(R.anim.fade_in_short, R.anim.fade_out_short, R.anim.fade_in_short, R.anim.fade_out_short)
+                            replace(R.id.fragmentContainerView, NavigationFragment())
+                        }
                     }
                 }
                 start()

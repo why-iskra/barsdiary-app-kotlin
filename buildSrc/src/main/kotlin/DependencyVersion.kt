@@ -5,6 +5,7 @@ object DependencyVersion {
     const val KOTLIN_COROUTINES = "1.6.0-native-mt"
 
     const val GOOGLE_SERVICES = "4.3.10"
+    const val GOOGLE_PLAY_CORE = "1.8.1"
 
     const val FIREBASE_CRASHLYTICS = "2.8.1"
     const val FIREBASE_BOM = "29.0.3"
