@@ -86,4 +86,5 @@
     <string name="events">События</string>
     <string name="advert_board">Доска объявлений</string>
     <string name="in_development">В разработке</string>
+    <string name="message">Сообщение</string>
 </resources>

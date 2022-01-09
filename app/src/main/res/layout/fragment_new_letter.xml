@@ -89,11 +89,14 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="bottom"
             android:fontFamily="@font/nunito"
+            android:hint="@string/message"
             android:inputType="textMultiLine"
             android:padding="16dp"
             android:scrollbars="vertical"
-            android:textAppearance="@style/TextAppearance.Barsdiary.Medium" />
+            android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+            android:importantForAutofill="no" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

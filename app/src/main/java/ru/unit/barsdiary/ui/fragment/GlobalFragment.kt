@@ -41,7 +41,7 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
-        binding.tabBirthdaysLayout.setOnClickListener {
+        binding.tabAdvertBoardLayout.setOnClickListener {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
