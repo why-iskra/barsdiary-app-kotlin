@@ -5,7 +5,8 @@
 /build
 local.properties
 
-app/beta
+app/publish
+app/developing
 
 buildSrc/.gradle
 buildSrc/build

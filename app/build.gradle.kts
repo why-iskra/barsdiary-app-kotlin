@@ -14,11 +14,13 @@ android {
         isCheckReleaseBuilds = false
     }
 
-    val findTaskTag = "assemble"
-    val typeVersion = gradle.startParameter.taskRequests.first()
-        .args.find { it.contains(findTaskTag) }?.let {
-            it.substring(it.indexOf(findTaskTag) + findTaskTag.length).toLowerCase()
-        }
+    val findTaskTag = listOf("assemble", "bundle")
+    val typeVersion = findTaskTag.map { tag ->
+        gradle.startParameter.taskRequests.first()
+            .args.find { it.contains(tag) }?.let {
+                it.substring(it.indexOf(tag) + tag.length).toLowerCase()
+            }
+    }.find { it != null }
 
     val assembleVersionName = if(typeVersion == null) {
         project.logger.warn("Unknown build type")

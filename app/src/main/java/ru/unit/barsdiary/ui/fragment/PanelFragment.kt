@@ -21,6 +21,8 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentPanelBinding.bind(view)
 
+        binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
+
         binding.fakeAuthButton.setOnClickListener { model.fakeAuth() }
         binding.clearAllButton.setOnClickListener { model.clearAll() }
         binding.crashButton.setOnClickListener { model.crash() }
@@ -30,17 +32,11 @@ class PanelFragment : BaseFragment(R.layout.fragment_panel) {
             model.settingsDataStore.enableChucker = isChecked
         }
 
-        binding.crashlyticsSwitch.isChecked = model.settingsDataStore.enableCrashlytics
-        binding.crashlyticsSwitch.setOnCheckedChangeListener { _, isChecked ->
-            model.settingsDataStore.enableCrashlytics = isChecked
-        }
-
         binding.webSessionIdButton.text = "Web Session Id: ${model.getSessionId()}"
         binding.webSessionIdButton.setOnClickListener {
             model.sessionIdToClipboard()
         }
 
         binding.crashButton.isVisible = BuildConfig.DEBUG
-        binding.crashlyticsSwitch.isVisible = BuildConfig.DEBUG
     }
 }

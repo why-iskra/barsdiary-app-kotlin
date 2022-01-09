@@ -1,6 +1,7 @@
 package ru.unit.barsdiary
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
@@ -32,7 +33,8 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled((!BuildConfig.DEBUG) || settingsDataStore.enableCrashlytics)
+        FirebaseApp.initializeApp(applicationContext)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
         sendingMessageNotification.channel()
         sendingMessageResultNotification.channel()

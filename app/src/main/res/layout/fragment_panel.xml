@@ -7,75 +7,81 @@
     android:paddingHorizontal="16dp"
     tools:context=".ui.fragment.LogsFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/webSessionIdButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:clickable="true"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="10dp" />
+            android:layout_marginHorizontal="4dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/chuckerSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="12dp"
-            android:switchPadding="10dp"
-            android:text="@string/enable_chucker"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <TextView
+                android:id="@+id/webSessionIdButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp" />
 
-        <Switch
-            android:id="@+id/crashlyticsSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="12dp"
-            android:switchPadding="10dp"
-            android:text="@string/enable_crashlytics"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <Switch
+                android:id="@+id/chuckerSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:switchPadding="10dp"
+                android:text="@string/enable_chucker"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <TextView
-            android:id="@+id/clearAllButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="12dp"
-            android:clickable="true"
-            android:background="?selectableItemBackground"
-            android:text="@string/clear_all" />
+            <Switch
+                android:id="@+id/crashlyticsSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:switchPadding="10dp"
+                android:text="@string/enable_crashlytics"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <TextView
-            android:id="@+id/fakeAuthButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="12dp"
-            android:clickable="true"
-            android:background="?selectableItemBackground"
-            android:text="@string/fake_auth" />
+            <TextView
+                android:id="@+id/clearAllButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:text="@string/clear_all" />
 
-        <TextView
-            android:id="@+id/crashButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="12dp"
-            android:clickable="true"
-            android:background="?selectableItemBackground"
-            android:text="@string/crash" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/fakeAuthButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:text="@string/fake_auth" />
+
+            <TextView
+                android:id="@+id/crashButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="10dp"
+                android:text="@string/crash" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
