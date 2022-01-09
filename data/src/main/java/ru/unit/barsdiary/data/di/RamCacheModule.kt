@@ -8,6 +8,7 @@ import ru.unit.barsdiary.data.di.annotation.*
 import ru.unit.barsdiary.data.utils.RamCache
 import ru.unit.barsdiary.domain.diary.pojo.DiaryPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkPojo
+import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
 import ru.unit.barsdiary.domain.global.pojo.BoxPojo
 import ru.unit.barsdiary.domain.mark.pojo.AttendanceChartPojo
@@ -90,4 +91,9 @@ object RamCacheModule {
     @Singleton
     @HomeworkRamCache
     fun provideHomeworkCache(): RamCache<HomeworkPojo> = RamCache()
+
+    @Provides
+    @Singleton
+    @AdvertBoardRamCache
+    fun provideAdvertBoardCache(): RamCache<AdvertBoardPojo> = RamCache()
 }

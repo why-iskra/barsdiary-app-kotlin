@@ -132,4 +132,6 @@ interface ApiService {
         @Field("documents[]") documents: String,
     ): Boolean
 
+    @GET("api/AdvertBoardService/getAdvertBoard")
+    suspend fun getAdvertBoard(): GetAdvertBoardDTO
 }

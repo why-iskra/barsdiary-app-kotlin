@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import ru.unit.barsdiary.data.di.annotation.AdvertBoardDateFormatter
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.global.GlobalUseCase
+import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
 import ru.unit.barsdiary.lib.HtmlUtils
 import ru.unit.barsdiary.lib.livedata.EmptyLiveData
@@ -23,12 +25,14 @@ import javax.inject.Inject
 class GlobalViewModel @Inject constructor(
     private val engine: Engine,
     private val globalUseCase: GlobalUseCase,
+    private val inAppNotifications: InAppNotifications,
     @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
-    private val inAppNotifications: InAppNotifications
+    @AdvertBoardDateFormatter private val advertBoardDateTimeFormatter: DateTimeFormatter
 ) : ViewModel() {
 
     companion object {
         private val birthdayDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val advertBoardDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM, yyyy")
     }
 
     val exceptionLiveData = ExceptionLiveData()
@@ -36,6 +40,7 @@ class GlobalViewModel @Inject constructor(
     val birthdaysLiveData = MutableLiveData<BirthdaysPojo>()
     val birthsTodayLiveData = MutableLiveData<Boolean>()
     val inBoxLiveData = MutableLiveData<Int>()
+    val advertBoardLiveData = MutableLiveData<AdvertBoardPojo>()
 
     val resetBoxAdapterLiveData = EmptyLiveData()
 
@@ -60,6 +65,22 @@ class GlobalViewModel @Inject constructor(
         }
     }
 
+    private suspend fun getAdvertBoard() {
+        exceptionLiveData.safety {
+            advertBoardLiveData.postValue(globalUseCase.getAdvertBoard())
+        }
+    }
+
+    fun refreshAdvertBoard() {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventLiveData.postEventLoading()
+
+            getAdvertBoard()
+
+            eventLiveData.postEventLoaded()
+        }
+    }
+
     fun refreshBirthdays() {
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
@@ -81,14 +102,6 @@ class GlobalViewModel @Inject constructor(
         }
     }
 
-    fun resetBirthdays() {
-        viewModelScope.launch(Dispatchers.IO) {
-            exceptionLiveData.safety {
-                globalUseCase.clearBirthdays()
-            }
-        }
-    }
-
     fun refresh() {
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
@@ -96,9 +109,11 @@ class GlobalViewModel @Inject constructor(
             resetBoxes()
             val asyncInBoxCount = async { getInBoxCount() }
             val asyncBirthdays = async { getBirthdays() }
+            val asyncAdvertBoard = async { getAdvertBoard() }
 
             asyncInBoxCount.await()
             asyncBirthdays.await()
+            asyncAdvertBoard.await()
 
             eventLiveData.postEventLoaded()
         }
@@ -141,13 +156,20 @@ class GlobalViewModel @Inject constructor(
         }
     }
 
-    fun birthdayDateFormat(date: String): String {
-        exceptionLiveData.safety {
-            val parsed = LocalDate.parse(date, webDateTimeFormatter)
-            return birthdayDateFormatter.format(parsed)
+    fun resetBirthdays() {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.clearBirthdays()
+            }
         }
+    }
 
-        return ""
+    fun resetAdvertBoard() {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.clearAdvertBoard()
+            }
+        }
     }
 
     fun deleteInBox(list: List<Int>) {
@@ -176,6 +198,26 @@ class GlobalViewModel @Inject constructor(
                 getInBoxCount()
             }
         }
+    }
+
+    fun birthdayDateFormat(date: String): String {
+        exceptionLiveData.safety {
+            val parsed = LocalDate.parse(date, webDateTimeFormatter)
+            return birthdayDateFormatter.format(parsed)
+        }
+
+        return ""
+    }
+
+    fun advertBoardDateFormat(date: String?): String? {
+        date ?: return null
+
+        exceptionLiveData.safety {
+            val parsed = LocalDate.parse(date, advertBoardDateTimeFormatter)
+            return advertBoardDateFormatter.format(parsed)
+        }
+
+        return null
     }
 
     private fun hasBirthsToday(value: BirthdaysPojo): Boolean {

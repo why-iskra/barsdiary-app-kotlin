@@ -22,6 +22,13 @@
             app:exitAnim="@anim/fade_out_short"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_globalFragment_to_advertBoardFragment"
+            app:destination="@id/advertBoardFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
     </fragment>
     <fragment
         android:id="@+id/birthdaysFragment"
@@ -66,4 +73,8 @@
         android:id="@+id/recipientsFragment"
         android:name="ru.unit.barsdiary.ui.fragment.RecipientsFragment"
         android:label="RecipientsFragment" />
+    <fragment
+        android:id="@+id/advertBoardFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.AdvertBoardFragment"
+        android:label="AdvertBoardFragment" />
 </navigation>

@@ -180,4 +180,8 @@ object ApiModule {
     @MailDateFormatter
     fun provideMailDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(Engine.mailDateFormatPattern)
 
+    @Provides
+    @AdvertBoardDateFormatter
+    fun provideAdvertBoardDateFormatter(): DateTimeFormatter = DateTimeFormatter.ofPattern(Engine.advertBoardDateFormatPattern)
+
 }

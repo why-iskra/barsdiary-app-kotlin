@@ -21,6 +21,8 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentGlobalBinding.bind(view)
 
+        binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
+
         binding.tabMailLayout.setOnClickListener {
             findNavController().navigate(R.id.action_globalFragment_to_mailFragment)
         }
@@ -42,7 +44,7 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
         }
 
         binding.tabAdvertBoardLayout.setOnClickListener {
-            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+            findNavController().navigate(R.id.action_globalFragment_to_advertBoardFragment)
         }
 
         binding.refreshButton.setOnClickListener {
@@ -52,6 +54,10 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
 
         model.inBoxLiveData.observe(viewLifecycleOwner) {
             binding.tabMailCountView.count = it
+        }
+
+        model.advertBoardLiveData.observe(viewLifecycleOwner) {
+            binding.tabAdvertBoardCountView.count = it.items.size
         }
 
         model.birthdaysLiveData.observe(viewLifecycleOwner) {

@@ -1,11 +1,9 @@
 package ru.unit.barsdiary.data.module.global
 
-import ru.unit.barsdiary.data.di.annotation.BirthdaysRamCache
-import ru.unit.barsdiary.data.di.annotation.InBoxCountRamCache
-import ru.unit.barsdiary.data.di.annotation.InBoxRamCache
-import ru.unit.barsdiary.data.di.annotation.OutBoxRamCache
+import ru.unit.barsdiary.data.di.annotation.*
 import ru.unit.barsdiary.data.utils.RamCache
 import ru.unit.barsdiary.domain.global.GlobalRepository
+import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
 import ru.unit.barsdiary.domain.global.pojo.BoxPojo
 import javax.inject.Inject
@@ -15,6 +13,7 @@ class GlobalRepositoryImpl @Inject constructor(
     @InBoxRamCache private val inBoxCache: RamCache<BoxPojo>,
     @OutBoxRamCache private val outBoxCache: RamCache<BoxPojo>,
     @InBoxCountRamCache private val inBoxCountCache: RamCache<Int>,
+    @AdvertBoardRamCache private val advertBoardCache: RamCache<AdvertBoardPojo>,
 ) : GlobalRepository {
 
     override suspend fun getBirthdays(): BirthdaysPojo? = birthdaysCache.get()
@@ -55,5 +54,15 @@ class GlobalRepositoryImpl @Inject constructor(
 
     override suspend fun clearInBoxCount() {
         inBoxCountCache.clear()
+    }
+
+    override suspend fun getAdvertBoard(): AdvertBoardPojo? = advertBoardCache.get()
+
+    override suspend fun setAdvertBoard(value: AdvertBoardPojo) {
+        advertBoardCache.put(value)
+    }
+
+    override suspend fun clearAdvertBoard() {
+        advertBoardCache.clear()
     }
 }

@@ -95,4 +95,5 @@
     <string name="advert_board">Advert board</string>
     <string name="in_development">In development</string>
     <string name="message">Message</string>
+    <string name="download_file">Download file</string>
 </resources>

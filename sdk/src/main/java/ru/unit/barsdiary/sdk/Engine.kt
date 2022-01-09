@@ -203,5 +203,6 @@ class Engine(
         const val webDateFormatPattern = "yyyy-MM-dd"
         const val chartDateFormatPattern = "dd.MM.yyyy"
         const val mailDateFormatPattern = "dd.MM.yyyy HH:mm"
+        const val advertBoardDateFormatPattern = "HH:mm:ss dd.MM.yyyy"
     }
 }

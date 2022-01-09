@@ -8,11 +8,13 @@ interface GlobalUseCase {
     suspend fun getInBox(page: Int): BoxPojo
     suspend fun getOutBox(page: Int): BoxPojo
     suspend fun getInBoxCount(): Int
+    suspend fun getAdvertBoard(): AdvertBoardPojo
 
     suspend fun clearBirthdays()
     suspend fun clearInBox()
     suspend fun clearOutBox()
     suspend fun clearInBoxCount()
+    suspend fun clearAdvertBoard()
     suspend fun clear()
 
     suspend fun markRead(id: Int)
@@ -40,7 +42,9 @@ class GlobalUseCaseImpl @Inject constructor(
 
     override suspend fun getInBoxCount(): Int =
         globalService.getInBoxCount()
-//        globalRepository.getInBoxCount() ?: globalService.getInBoxCount().apply { globalRepository.setInBoxCount(this) }
+
+    override suspend fun getAdvertBoard(): AdvertBoardPojo =
+        globalRepository.getAdvertBoard() ?: globalService.getAdvertBoard().apply { globalRepository.setAdvertBoard(this) }
 
     override suspend fun clearBirthdays() {
         globalRepository.clearBirthdays()
@@ -58,11 +62,16 @@ class GlobalUseCaseImpl @Inject constructor(
         globalRepository.clearInBoxCount()
     }
 
+    override suspend fun clearAdvertBoard() {
+        globalRepository.clearAdvertBoard()
+    }
+
     override suspend fun clear() {
         clearBirthdays()
         clearInBox()
         clearOutBox()
         clearInBoxCount()
+        clearAdvertBoard()
     }
 
     override suspend fun markRead(id: Int) {
