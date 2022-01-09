@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
 import ru.unit.barsdiary.domain.auth.AuthUseCase
 import ru.unit.barsdiary.domain.auth.pojo.ServerInfoPojo
-import ru.unit.barsdiary.other.livedata.EventLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import javax.inject.Inject
 
 @HiltViewModel

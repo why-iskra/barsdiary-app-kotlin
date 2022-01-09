@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBoxBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
-import ru.unit.barsdiary.other.HtmlUtils
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.HtmlUtils
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.BoxAdapter
 import ru.unit.barsdiary.ui.adapter.LoadStateAdapter
 import ru.unit.barsdiary.ui.viewmodel.BoxViewModel

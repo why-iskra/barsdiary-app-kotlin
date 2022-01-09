@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatImageView
 import ru.unit.barsdiary.R
-import ru.unit.barsdiary.other.dp
-import ru.unit.barsdiary.other.function.questionAttribute
+import ru.unit.barsdiary.lib.dp
+import ru.unit.barsdiary.lib.function.questionAttribute
 
 class ImageButtonView : AppCompatImageView {
 

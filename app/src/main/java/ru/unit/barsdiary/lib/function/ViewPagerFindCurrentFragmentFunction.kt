@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.other.function
+package ru.unit.barsdiary.lib.function
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

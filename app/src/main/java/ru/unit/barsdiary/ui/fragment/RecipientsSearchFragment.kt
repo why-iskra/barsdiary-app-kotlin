@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentRecipientsSearchBinding
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.LoadStateAdapter
 import ru.unit.barsdiary.ui.adapter.RecipientsSearchAdapter
 import ru.unit.barsdiary.ui.viewmodel.NewLetterViewModel

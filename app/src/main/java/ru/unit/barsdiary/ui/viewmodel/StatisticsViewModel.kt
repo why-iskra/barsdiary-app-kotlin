@@ -16,8 +16,8 @@ import ru.unit.barsdiary.data.di.annotation.ChartDateFormatter
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.mark.pojo.DisciplineMarksPojo
-import ru.unit.barsdiary.other.livedata.EventLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(

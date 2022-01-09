@@ -11,14 +11,13 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.coroutines.flow.collectLatest
-import ru.unit.barsdiary.BuildConfig
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentAccountBinding
-import ru.unit.barsdiary.other.function.inflateFactory
+import ru.unit.barsdiary.lib.function.inflateFactory
 import ru.unit.barsdiary.ui.activity.StartActivity
 import ru.unit.barsdiary.ui.fragment.dialog.ActionDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.AccountViewModel
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 
 
 @AndroidEntryPoint

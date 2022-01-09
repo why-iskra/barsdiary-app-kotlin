@@ -9,8 +9,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMailBinding
-import ru.unit.barsdiary.other.function.configure
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.function.configure
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.adapter.MailAdapter
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
 

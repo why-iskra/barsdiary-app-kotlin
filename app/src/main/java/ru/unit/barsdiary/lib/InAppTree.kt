@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.other
+package ru.unit.barsdiary.lib
 
 import android.util.Log
 import timber.log.Timber

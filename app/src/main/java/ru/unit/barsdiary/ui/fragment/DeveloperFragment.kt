@@ -8,7 +8,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentDeveloperBinding
-import ru.unit.barsdiary.other.function.configure
+import ru.unit.barsdiary.lib.function.configure
 import ru.unit.barsdiary.ui.adapter.DeveloperAdapter
 import ru.unit.barsdiary.ui.viewmodel.DeveloperViewModel
 

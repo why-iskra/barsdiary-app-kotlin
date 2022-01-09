@@ -3,15 +3,13 @@ package ru.unit.barsdiary.ui.fragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentGlobalBinding
-import ru.unit.barsdiary.other.function.questionAttribute
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
 
 @AndroidEntryPoint
@@ -23,36 +21,45 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentGlobalBinding.bind(view)
 
-        val normalColor = ContextCompat.getColor(requireContext(), requireContext().questionAttribute(android.R.attr.textColorSecondary).resourceId)
-        val attentionColor = ContextCompat.getColor(requireContext(), R.color.amaranth)
-
-        binding.textViewBirthdays.setOnClickListener {
-            findNavController().navigate(R.id.action_globalFragment_to_birthdaysFragment)
-        }
-
-        binding.textViewMail.setOnClickListener {
+        binding.tabMailLayout.setOnClickListener {
             findNavController().navigate(R.id.action_globalFragment_to_mailFragment)
         }
 
-        binding.textViewAdvertBoard.setOnClickListener {
+        binding.tabBirthdaysLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_globalFragment_to_birthdaysFragment)
+        }
+
+        binding.tabMeetingsLayout.setOnClickListener {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
-        binding.textViewClassHours.setOnClickListener {
+        binding.tabClassHoursLayout.setOnClickListener {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
-        binding.textViewMeetings.setOnClickListener {
+        binding.tabEventsLayout.setOnClickListener {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
-        binding.textViewEvents.setOnClickListener {
+        binding.tabBirthdaysLayout.setOnClickListener {
             context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
         }
 
         binding.refreshButton.setOnClickListener {
             model.reset()
             model.refresh()
+        }
+
+        model.inBoxLiveData.observe(viewLifecycleOwner) {
+            binding.tabMailCountView.count = it
+        }
+
+        model.birthdaysLiveData.observe(viewLifecycleOwner) {
+            binding.tabBirthdaysCountView.count = it.birthdays.size
+        }
+
+        model.birthsTodayLiveData.observe(viewLifecycleOwner) {
+            binding.tabBirthdaysCountView.accent = it
         }
 
         model.eventLiveData.observe(viewLifecycleOwner) {
@@ -62,14 +69,6 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
                 EventLiveData.Event.LOADING -> binding.refreshButton.refreshStart()
                 EventLiveData.Event.LOADED -> binding.refreshButton.refreshStop()
             }
-        }
-
-        model.birthsTodayLiveData.observe(viewLifecycleOwner) {
-            binding.textViewBirthdays.setTextColor(if (it) attentionColor else normalColor)
-        }
-
-        model.hasInBoxLiveData.observe(viewLifecycleOwner) {
-            binding.textViewMail.setTextColor(if (it) attentionColor else normalColor)
         }
 
         model.exceptionLiveData.observeFreshly(viewLifecycleOwner) {

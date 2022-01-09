@@ -12,9 +12,9 @@ import ru.unit.barsdiary.domain.diary.pojo.DiaryDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.HomeworkIndividualPojo
 import ru.unit.barsdiary.domain.diary.pojo.MaterialPojo
-import ru.unit.barsdiary.other.HtmlUtils
-import ru.unit.barsdiary.other.livedata.EventLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.HtmlUtils
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import ru.unit.barsdiary.sdk.Engine
 import java.time.DayOfWeek
 import java.time.LocalDate

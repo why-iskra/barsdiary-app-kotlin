@@ -14,8 +14,8 @@ import ru.unit.barsdiary.domain.person.pojo.ClassmatePojo
 import ru.unit.barsdiary.domain.person.pojo.EmployeePojo
 import ru.unit.barsdiary.domain.person.pojo.TotalMarksDisciplinePojo
 import ru.unit.barsdiary.domain.person.pojo.TotalMarksPojo
-import ru.unit.barsdiary.other.livedata.EventLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject
 

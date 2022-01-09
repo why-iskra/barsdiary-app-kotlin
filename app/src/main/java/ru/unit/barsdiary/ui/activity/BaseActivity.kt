@@ -15,10 +15,11 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
-import ru.unit.barsdiary.other.function.switchActivity
+import ru.unit.barsdiary.lib.function.switchActivity
 import ru.unit.barsdiary.productflavor.ProductFlavorDevelopingInterface
 import ru.unit.barsdiary.sdk.exception.FinishRegistrationAccountException
 import ru.unit.barsdiary.sdk.exception.UnauthorizedException
+import ru.unit.barsdiary.ui.InAppNotifications
 import ru.unit.barsdiary.ui.fragment.dialog.InfoDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.MainViewModel
 import timber.log.Timber
@@ -45,6 +46,9 @@ open class BaseActivity(@LayoutRes val res: Int) : AppCompatActivity(res) {
     @Inject
     lateinit var settingsDataStore: SettingsDataStore
 
+    @Inject
+    lateinit var inAppNotifications: InAppNotifications
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -55,6 +59,8 @@ open class BaseActivity(@LayoutRes val res: Int) : AppCompatActivity(res) {
         }
 
         val model = ViewModelProvider(this)[MainViewModel::class.java]
+
+        inAppNotifications.init()
 
         model.throwableLiveData.observe(this) {
             when {

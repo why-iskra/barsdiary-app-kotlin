@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentMarksBinding
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.adapter.MarksAdapter
 import ru.unit.barsdiary.ui.fragment.bottomsheet.DisciplineMarksBottomSheetDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.StatisticsViewModel

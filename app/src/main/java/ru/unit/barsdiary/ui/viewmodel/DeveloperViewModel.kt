@@ -14,8 +14,8 @@ import ru.unit.barsdiary.domain.diary.DiaryUseCase
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.mark.MarkUseCase
 import ru.unit.barsdiary.domain.person.PersonUseCase
-import ru.unit.barsdiary.other.InAppLog
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.InAppLog
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import javax.inject.Inject
 import kotlin.random.Random
 

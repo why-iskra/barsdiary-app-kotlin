@@ -68,101 +68,179 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewMail"
+            <LinearLayout
+                android:id="@+id/tabMailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/mail"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_mail_24" />
+                android:clickable="true">
 
-            <TextView
-                android:id="@+id/textViewMeetings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/meetings"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_groups_24" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:text="@string/mail"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    app:drawableStartCompat="@drawable/ic_round_mail_24" />
 
-            <TextView
-                android:id="@+id/textViewClassHours"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/class_hours"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_access_time_filled_24" />
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabMailCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
 
-            <TextView
-                android:id="@+id/textViewEvents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/events"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_event_24" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textViewAdvertBoard"
+            <LinearLayout
+                android:id="@+id/tabMeetingsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/advert_board"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_assignment_24" />
+                android:clickable="true">
 
-            <TextView
-                android:id="@+id/textViewBirthdays"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    android:text="@string/meetings"
+                    app:drawableStartCompat="@drawable/ic_round_groups_24" />
+
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabMeetingsCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tabClassHoursLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/nunito_bold"
-                android:paddingStart="16dp"
-                android:paddingTop="14dp"
-                android:paddingBottom="14dp"
-                android:text="@string/birthdays"
-                android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
-                android:textSize="18sp"
-                app:drawableStartCompat="@drawable/ic_round_cake_24" />
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    android:text="@string/class_hours"
+                    app:drawableStartCompat="@drawable/ic_round_access_time_filled_24" />
+
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabClassHoursCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tabEventsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="?selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    android:text="@string/events"
+                    app:drawableStartCompat="@drawable/ic_round_event_24" />
+
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabEventsCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tabAdvertBoardLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="?selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    android:text="@string/advert_board"
+                    app:drawableStartCompat="@drawable/ic_round_assignment_24" />
+
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabAdvertBoardCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tabBirthdaysLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="?selectableItemBackground"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+                    android:textSize="18sp"
+                    android:text="@string/birthdays"
+                    app:drawableStartCompat="@drawable/ic_round_cake_24" />
+
+                <ru.unit.barsdiary.ui.components.CountView
+                    android:id="@+id/tabBirthdaysCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

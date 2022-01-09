@@ -13,7 +13,7 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.data.di.annotation.MailDateFormatter
 import ru.unit.barsdiary.databinding.RecyclerItemMailBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
-import ru.unit.barsdiary.other.HtmlUtils
+import ru.unit.barsdiary.lib.HtmlUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject

@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.databinding.BottomSheetDisciplineMarksBinding
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.DisciplineMarksAdapter
 import ru.unit.barsdiary.ui.viewmodel.StatisticsViewModel
 

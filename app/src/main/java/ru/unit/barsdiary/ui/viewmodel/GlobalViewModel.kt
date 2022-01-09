@@ -8,11 +8,12 @@ import kotlinx.coroutines.*
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.global.GlobalUseCase
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
-import ru.unit.barsdiary.other.HtmlUtils
-import ru.unit.barsdiary.other.livedata.EmptyLiveData
-import ru.unit.barsdiary.other.livedata.EventLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.HtmlUtils
+import ru.unit.barsdiary.lib.livedata.EmptyLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import ru.unit.barsdiary.sdk.Engine
+import ru.unit.barsdiary.ui.InAppNotifications
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class GlobalViewModel @Inject constructor(
     private val engine: Engine,
     private val globalUseCase: GlobalUseCase,
-    @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter
+    @WebDateFormatter private val webDateTimeFormatter: DateTimeFormatter,
+    private val inAppNotifications: InAppNotifications
 ) : ViewModel() {
 
     companion object {
@@ -32,11 +34,9 @@ class GlobalViewModel @Inject constructor(
     val exceptionLiveData = ExceptionLiveData()
 
     val birthdaysLiveData = MutableLiveData<BirthdaysPojo>()
-
     val birthsTodayLiveData = MutableLiveData<Boolean>()
-    val hasInBoxLiveData = MutableLiveData<Boolean>()
+    val inBoxLiveData = MutableLiveData<Int>()
 
-    val notificationLiveData = EmptyLiveData()
     val resetBoxAdapterLiveData = EmptyLiveData()
 
     val eventLiveData = EventLiveData()
@@ -45,14 +45,18 @@ class GlobalViewModel @Inject constructor(
         exceptionLiveData.safety {
             val result = globalUseCase.getBirthdays()
             birthdaysLiveData.postValue(result)
-            birthsTodayLiveData.postValue(hasBirthsToday(result))
+
+            val has = hasBirthsToday(result)
+            birthsTodayLiveData.postValue(has)
+            inAppNotifications.hasBirthsTodayLiveData.postValue(has)
         }
     }
 
     private suspend fun getInBoxCount() {
         exceptionLiveData.safety {
             val result = globalUseCase.getInBoxCount()
-            hasInBoxLiveData.postValue(result > 0)
+            inBoxLiveData.postValue(result)
+            inAppNotifications.hasInBoxLiveData.postValue(result > 0)
         }
     }
 
@@ -96,7 +100,6 @@ class GlobalViewModel @Inject constructor(
             asyncInBoxCount.await()
             asyncBirthdays.await()
 
-            notificationLiveData.post()
             eventLiveData.postEventLoaded()
         }
     }
@@ -111,7 +114,6 @@ class GlobalViewModel @Inject constructor(
             asyncInBoxCount.await()
             asyncBirthdays.await()
 
-            notificationLiveData.post()
             eventLiveData.postEventLoaded()
         }
     }
@@ -119,7 +121,6 @@ class GlobalViewModel @Inject constructor(
     fun silentRefreshInBoxCount() {
         viewModelScope.launch(Dispatchers.IO) {
             getInBoxCount()
-            notificationLiveData.post()
         }
     }
 
@@ -173,7 +174,6 @@ class GlobalViewModel @Inject constructor(
                 globalUseCase.markRead(id)
                 globalUseCase.clearInBoxCount()
                 getInBoxCount()
-                notificationLiveData.post()
             }
         }
     }

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentChildBinding
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.function.argumentDelegate
 
 class ChildFragment : BaseFragment(R.layout.fragment_child) {
 

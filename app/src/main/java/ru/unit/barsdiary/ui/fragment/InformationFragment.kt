@@ -11,7 +11,7 @@ import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.*
 import ru.unit.barsdiary.domain.person.pojo.ClassmatePojo
 import ru.unit.barsdiary.domain.person.pojo.EmployeePojo
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.viewmodel.AccountViewModel
 
 @AndroidEntryPoint

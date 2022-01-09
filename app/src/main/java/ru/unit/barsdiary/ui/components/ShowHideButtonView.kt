@@ -13,7 +13,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import ru.unit.barsdiary.R
-import ru.unit.barsdiary.other.dp
+import ru.unit.barsdiary.lib.dp
 
 @SuppressLint("ResourceAsColor")
 class ShowHideButtonView : LinearLayoutCompat {

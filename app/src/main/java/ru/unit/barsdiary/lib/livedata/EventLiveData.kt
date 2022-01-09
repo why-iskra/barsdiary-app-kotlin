@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.other.livedata
+package ru.unit.barsdiary.lib.livedata
 
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.sync.Mutex

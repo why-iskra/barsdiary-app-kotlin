@@ -10,8 +10,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.BottomSheetLessonBinding
-import ru.unit.barsdiary.other.HtmlUtils
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.HtmlUtils
+import ru.unit.barsdiary.lib.function.argumentDelegate
 
 
 class LessonBottomSheetDialogFragment : BottomSheetDialogFragment() {

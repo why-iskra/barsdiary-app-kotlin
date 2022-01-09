@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentRecipientsBinding
-import ru.unit.barsdiary.other.function.configure
+import ru.unit.barsdiary.lib.function.configure
 import ru.unit.barsdiary.ui.adapter.RecipientsAdapter
 import ru.unit.barsdiary.ui.adapter.RecipientsTypeAdapter
 import ru.unit.barsdiary.ui.viewmodel.NewLetterViewModel

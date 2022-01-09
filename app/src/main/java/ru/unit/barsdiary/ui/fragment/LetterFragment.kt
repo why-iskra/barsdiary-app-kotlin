@@ -9,8 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentLetterBinding
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo
-import ru.unit.barsdiary.other.HtmlUtils
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.HtmlUtils
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
 
 @AndroidEntryPoint

@@ -10,10 +10,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentChildChoiceBinding
-import ru.unit.barsdiary.other.function.configure
-import ru.unit.barsdiary.other.function.endAnimatorListener
-import ru.unit.barsdiary.other.function.switchActivity
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.function.configure
+import ru.unit.barsdiary.lib.function.endAnimatorListener
+import ru.unit.barsdiary.lib.function.switchActivity
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.activity.MainActivity
 import ru.unit.barsdiary.ui.adapter.ChildChoiceAdapter
 import ru.unit.barsdiary.ui.viewmodel.ChangePupilViewModel

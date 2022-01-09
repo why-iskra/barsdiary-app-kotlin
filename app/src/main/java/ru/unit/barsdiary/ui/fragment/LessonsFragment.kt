@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.LessonsAdapter
 import ru.unit.barsdiary.ui.fragment.bottomsheet.LessonBottomSheetDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.DiaryViewModel

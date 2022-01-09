@@ -1,4 +1,4 @@
-package ru.unit.barsdiary.other.function
+package ru.unit.barsdiary.lib.function
 
 import android.content.Context
 import android.util.TypedValue

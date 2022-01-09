@@ -8,9 +8,9 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentDiaryBinding
-import ru.unit.barsdiary.other.function.configure
-import ru.unit.barsdiary.other.function.inflateFactory
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.function.configure
+import ru.unit.barsdiary.lib.function.inflateFactory
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.adapter.DiaryAdapter
 import ru.unit.barsdiary.ui.fragment.dialog.PickDateDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.DiaryViewModel

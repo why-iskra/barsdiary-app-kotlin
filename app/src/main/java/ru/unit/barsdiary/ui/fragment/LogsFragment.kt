@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentLogsBinding
 import ru.unit.barsdiary.ui.viewmodel.DeveloperViewModel
-import ru.unit.barsdiary.other.HtmlUtils
+import ru.unit.barsdiary.lib.HtmlUtils
 
 @AndroidEntryPoint
 class LogsFragment : BaseFragment(R.layout.fragment_logs) {

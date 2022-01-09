@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.unit.barsdiary.domain.global.pojo.FoundUserPojo
-import ru.unit.barsdiary.other.livedata.EmptyLiveData
-import ru.unit.barsdiary.other.livedata.ExceptionLiveData
+import ru.unit.barsdiary.lib.livedata.EmptyLiveData
+import ru.unit.barsdiary.lib.livedata.ExceptionLiveData
 import javax.inject.Inject
 
 @HiltViewModel

@@ -9,9 +9,11 @@ import androidx.viewpager2.widget.ViewPager2
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentNavigationBinding
-import ru.unit.barsdiary.other.function.configure
+import ru.unit.barsdiary.lib.function.configure
 import ru.unit.barsdiary.ui.adapter.NavigationAdapter
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
+import ru.unit.barsdiary.ui.InAppNotifications
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
@@ -20,7 +22,8 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
 
     private lateinit var binding: FragmentNavigationBinding
 
-//    private var navBottomBarCurrentAnimator: ValueAnimator? = null
+    @Inject
+    lateinit var inAppNotifications: InAppNotifications
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,21 +64,8 @@ class NavigationFragment : BaseFragment(R.layout.fragment_navigation) {
             binding.viewPager.currentItem = it
         }
 
-        // fixme: review notification logic
-        globalModel.notificationLiveData.observe(viewLifecycleOwner) {
-            if (
-                globalModel.birthsTodayLiveData.value == true
-                || globalModel.hasInBoxLiveData.value == true
-            ) {
-                binding.bottomNavBar.setNotification(NavigationAdapter.FragmentId.Global.id, true)
-            }
-
-            if(
-                globalModel.birthsTodayLiveData.value == false
-                && globalModel.hasInBoxLiveData.value == false
-            ) {
-                binding.bottomNavBar.setNotification(NavigationAdapter.FragmentId.Global.id, false)
-            }
+        inAppNotifications.observe(viewLifecycleOwner) {
+            binding.bottomNavBar.setNotification(NavigationAdapter.FragmentId.Global.id, it)
         }
 
         globalModel.refreshNotifications()

@@ -8,8 +8,8 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentStatisticsBinding
-import ru.unit.barsdiary.other.function.inflateFactory
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.function.inflateFactory
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.viewmodel.StatisticsViewModel
 
 @AndroidEntryPoint

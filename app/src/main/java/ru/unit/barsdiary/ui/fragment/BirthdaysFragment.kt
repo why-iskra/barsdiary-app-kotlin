@@ -12,7 +12,7 @@ import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.FragmentBirthdaysBinding
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.adapter.BirthdaysAdapter
 import ru.unit.barsdiary.ui.viewmodel.GlobalViewModel
 

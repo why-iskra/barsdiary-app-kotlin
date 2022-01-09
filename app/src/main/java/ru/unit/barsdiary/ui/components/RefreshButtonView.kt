@@ -15,8 +15,8 @@ import androidx.annotation.AttrRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import ru.unit.barsdiary.R
-import ru.unit.barsdiary.other.function.endAnimatorListener
-import ru.unit.barsdiary.other.function.questionAttribute
+import ru.unit.barsdiary.lib.function.endAnimatorListener
+import ru.unit.barsdiary.lib.function.questionAttribute
 
 class RefreshButtonView : FrameLayout {
 

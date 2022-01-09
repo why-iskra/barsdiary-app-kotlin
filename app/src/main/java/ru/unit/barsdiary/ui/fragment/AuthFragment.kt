@@ -15,8 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.SystemServices
 import ru.unit.barsdiary.databinding.FragmentAuthBinding
-import ru.unit.barsdiary.other.function.switchActivity
-import ru.unit.barsdiary.other.livedata.EventLiveData
+import ru.unit.barsdiary.lib.function.switchActivity
+import ru.unit.barsdiary.lib.livedata.EventLiveData
 import ru.unit.barsdiary.ui.activity.MainActivity
 import ru.unit.barsdiary.ui.fragment.dialog.ServerListDialogFragment
 import ru.unit.barsdiary.ui.viewmodel.AuthViewModel
@@ -28,7 +28,6 @@ import javax.inject.Inject
 class AuthFragment : BaseFragment(R.layout.fragment_auth) {
 
     companion object {
-        private const val INFO_DIALOG_TAG = "infoDialog"
         private const val SERVER_LIST_DIALOG_TAG = "serverListDialog"
     }
 

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import ru.unit.barsdiary.R
 import ru.unit.barsdiary.databinding.DialogFragmentPickDateBinding
-import ru.unit.barsdiary.other.function.argumentDelegate
+import ru.unit.barsdiary.lib.function.argumentDelegate
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
