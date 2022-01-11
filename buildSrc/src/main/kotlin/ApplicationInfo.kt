@@ -2,9 +2,9 @@ object ApplicationInfo {
 
     object Version {
         const val MAJOR = 2
-        const val MINOR = 8
-        const val PATCH = 1
-        const val CODE = 10
+        const val MINOR = 9
+        const val PATCH = 0
+        const val CODE = 11
     }
 
 }
