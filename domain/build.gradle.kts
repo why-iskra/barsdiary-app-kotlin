@@ -1,6 +1,6 @@
 plugins {
-    id("java-library")
-    id("kotlin")
+    Sugar.include(this, Plugin.javaLibrary)
+    Sugar.include(this, Plugin.kotlin)
 }
 
 java {

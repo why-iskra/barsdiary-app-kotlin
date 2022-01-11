@@ -1,8 +1,8 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    Sugar.include(this, Plugin.androidLibrary)
+    Sugar.include(this, Plugin.kotlinAndroid)
+    Sugar.include(this, Plugin.kotlinKapt)
+    Sugar.include(this, Plugin.hilt)
 }
 
 android {

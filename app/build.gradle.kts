@@ -1,10 +1,10 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    Sugar.include(this, Plugin.androidApplication)
+    Sugar.include(this, Plugin.kotlinAndroid)
+    Sugar.include(this, Plugin.kotlinKapt)
+    Sugar.include(this, Plugin.hilt)
+    Sugar.include(this, Plugin.googleServices)
+    Sugar.include(this, Plugin.firebaseCrashlytics)
 }
 
 android {
