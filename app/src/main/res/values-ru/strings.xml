@@ -81,7 +81,7 @@
     <string name="channel_sending_message_result_name">Результат отправки сообщения</string>
     <string name="channel_sending_message_result_description">Отображает результат отправки сообщения</string>
     <string name="choose_file">Выберите файл</string>
-    <string name="meetings">Собрания</string>
+    <string name="meetings">Родительские собрания</string>
     <string name="class_hours">Классные часы</string>
     <string name="events">События</string>
     <string name="advert_board">Доска объявлений</string>
