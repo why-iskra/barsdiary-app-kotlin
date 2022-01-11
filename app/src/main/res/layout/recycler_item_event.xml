@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/themeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_bold"
+        android:textAppearance="@style/TextAppearance.Barsdiary.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/dateTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="тема события может быть длинной" />
+
+    <TextView
+        android:id="@+id/dateFullTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito"
+        android:textAppearance="@style/TextAppearance.Barsdiary.Small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="дата с дата по" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/transparent"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito"
+        android:textAppearance="@style/TextAppearance.Barsdiary.Small"
+        app:layout_constraintBottom_toTopOf="@+id/dateFullTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="дата" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,4 +90,7 @@
     <string name="download_file">Скачать файл</string>
     <string name="update_downloaded">Только что было загружено обновление из Google Play</string>
     <string name="reload">ПЕРЕЗАГРУЗИТЬ</string>
+    <string name="download_protocol">Скачать протокол</string>
+    <string name="ssl_handshake">SSL Handshake</string>
+    <string name="set_correct_date">Установите текущую дату на устройстве</string>
 </resources>

@@ -3,9 +3,7 @@ package ru.unit.barsdiary.data.module.global
 import ru.unit.barsdiary.data.di.annotation.*
 import ru.unit.barsdiary.data.utils.RamCache
 import ru.unit.barsdiary.domain.global.GlobalRepository
-import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
-import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
-import ru.unit.barsdiary.domain.global.pojo.BoxPojo
+import ru.unit.barsdiary.domain.global.pojo.*
 import javax.inject.Inject
 
 class GlobalRepositoryImpl @Inject constructor(
@@ -14,6 +12,9 @@ class GlobalRepositoryImpl @Inject constructor(
     @OutBoxRamCache private val outBoxCache: RamCache<BoxPojo>,
     @InBoxCountRamCache private val inBoxCountCache: RamCache<Int>,
     @AdvertBoardRamCache private val advertBoardCache: RamCache<AdvertBoardPojo>,
+    @MeetingRamCache private val meetingCache: RamCache<MeetingPojo>,
+    @ClassHourRamCache private val classHourCache: RamCache<ClassHourPojo>,
+    @EventsRamCache private val eventsCache: RamCache<EventsPojo>,
 ) : GlobalRepository {
 
     override suspend fun getBirthdays(): BirthdaysPojo? = birthdaysCache.get()
@@ -64,5 +65,35 @@ class GlobalRepositoryImpl @Inject constructor(
 
     override suspend fun clearAdvertBoard() {
         advertBoardCache.clear()
+    }
+
+    override suspend fun getMeeting(): MeetingPojo? = meetingCache.get()
+
+    override suspend fun setMeeting(value: MeetingPojo) {
+        meetingCache.put(value)
+    }
+
+    override suspend fun clearMeeting() {
+        meetingCache.clear()
+    }
+
+    override suspend fun getClassHour(): ClassHourPojo? = classHourCache.get()
+
+    override suspend fun setClassHour(value: ClassHourPojo) {
+        classHourCache.put(value)
+    }
+
+    override suspend fun clearClassHour() {
+        classHourCache.clear()
+    }
+
+    override suspend fun getEvents(): EventsPojo? = eventsCache.get()
+
+    override suspend fun setEvents(value: EventsPojo) {
+        eventsCache.put(value)
+    }
+
+    override suspend fun clearEvents() {
+        eventsCache.clear()
     }
 }

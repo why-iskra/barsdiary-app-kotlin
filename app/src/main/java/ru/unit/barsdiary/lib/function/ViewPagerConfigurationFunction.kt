@@ -13,4 +13,5 @@ fun ViewPager2.configure() {
 
     overScrollMode = View.OVER_SCROLL_NEVER
     isHorizontalFadingEdgeEnabled = true
+    isSaveEnabled = false
 }

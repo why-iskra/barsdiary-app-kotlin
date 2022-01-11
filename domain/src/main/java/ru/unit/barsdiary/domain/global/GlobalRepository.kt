@@ -1,8 +1,6 @@
 package ru.unit.barsdiary.domain.global
 
-import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
-import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
-import ru.unit.barsdiary.domain.global.pojo.BoxPojo
+import ru.unit.barsdiary.domain.global.pojo.*
 
 interface GlobalRepository {
     suspend fun getBirthdays(): BirthdaysPojo?
@@ -24,4 +22,16 @@ interface GlobalRepository {
     suspend fun getAdvertBoard(): AdvertBoardPojo?
     suspend fun setAdvertBoard(value: AdvertBoardPojo)
     suspend fun clearAdvertBoard()
+
+    suspend fun getMeeting(): MeetingPojo?
+    suspend fun setMeeting(value: MeetingPojo)
+    suspend fun clearMeeting()
+
+    suspend fun getClassHour(): ClassHourPojo?
+    suspend fun setClassHour(value: ClassHourPojo)
+    suspend fun clearClassHour()
+
+    suspend fun getEvents(): EventsPojo?
+    suspend fun setEvents(value: EventsPojo)
+    suspend fun clearEvents()
 }

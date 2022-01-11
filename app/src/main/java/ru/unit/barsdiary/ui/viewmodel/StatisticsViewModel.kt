@@ -121,12 +121,18 @@ class StatisticsViewModel @Inject constructor(
                 }
             }
 
-            averageGradeLiveData.postValue(
+            val result = sum / count
+
+            val text = if(result.isNaN()) {
+                "${averageGradeText}: 0"
+            } else {
                 averageGradeText + ": %.2f".format(
                     Locale.US,
-                    sum / count
+                    result
                 )
-            )
+            }
+
+            averageGradeLiveData.postValue(text)
         }
     }
 

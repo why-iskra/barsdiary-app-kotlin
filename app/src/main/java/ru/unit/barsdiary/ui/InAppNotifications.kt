@@ -11,15 +11,24 @@ class InAppNotifications @Inject constructor() {
 
     val hasInBoxLiveData = MutableLiveData<Boolean>()
     val hasBirthsTodayLiveData = MutableLiveData<Boolean>()
+    val hasMeetingTodayLiveData = MutableLiveData<Boolean>()
+    val hasClassHourTodayLiveData = MutableLiveData<Boolean>()
+    val hasEventsTodayLiveData = MutableLiveData<Boolean>()
 
     private val observerLiveData = ObserverLiveData(
         hasInBoxLiveData,
-        hasBirthsTodayLiveData
+        hasBirthsTodayLiveData,
+        hasMeetingTodayLiveData,
+        hasClassHourTodayLiveData,
+        hasEventsTodayLiveData,
     )
 
     fun init() {
         hasInBoxLiveData.postValue(false)
         hasBirthsTodayLiveData.postValue(false)
+        hasMeetingTodayLiveData.postValue(false)
+        hasClassHourTodayLiveData.postValue(false)
+        hasEventsTodayLiveData.postValue(false)
     }
 
     fun observe(lifecycleOwner: LifecycleOwner, func: (value: Boolean) -> Unit) {

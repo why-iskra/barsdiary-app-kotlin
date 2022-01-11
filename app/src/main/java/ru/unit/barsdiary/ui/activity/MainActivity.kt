@@ -32,6 +32,7 @@ import ru.unit.barsdiary.ui.viewmodel.MainViewModel
 import timber.log.Timber
 import java.net.SocketTimeoutException
 import javax.inject.Inject
+import javax.net.ssl.SSLHandshakeException
 
 
 @AndroidEntryPoint
@@ -119,6 +120,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     )
                 }
                 it is SocketTimeoutException -> { /* ignore */
+                }
+                it is SSLHandshakeException -> {
+                    showInfoDialog(getString(R.string.ssl_handshake), getString(R.string.set_correct_date), isAuthFragment)
                 }
                 model.isOnline() -> {
                     showInfoDialog(getString(R.string.internal_error), it?.message ?: getString(R.string.internal_error_text), isAuthFragment)

@@ -98,4 +98,7 @@
     <string name="download_file">Download file</string>
     <string name="update_downloaded">An update has just been downloaded from Google Play</string>
     <string name="reload">RELOAD</string>
+    <string name="download_protocol">Download protocol</string>
+    <string name="ssl_handshake">SSL Handshake</string>
+    <string name="set_correct_date">Set the current date on the device</string>
 </resources>

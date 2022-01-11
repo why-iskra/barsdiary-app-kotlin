@@ -134,4 +134,13 @@ interface ApiService {
 
     @GET("api/AdvertBoardService/getAdvertBoard")
     suspend fun getAdvertBoard(): GetAdvertBoardDTO
+
+    @GET("api/WidgetService/getMeeting")
+    suspend fun getMeeting(): GetMeetingDTO
+
+    @GET("api/WidgetService/getClassHours")
+    suspend fun getClassHours(): GetClassHoursDTO
+
+    @GET("api/WidgetService/getEvents")
+    suspend fun getEvents(): GetEventsDTO
 }

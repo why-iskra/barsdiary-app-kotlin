@@ -2,7 +2,6 @@ package ru.unit.barsdiary.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observeFreshly
 import androidx.navigation.fragment.findNavController
@@ -32,15 +31,15 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
         }
 
         binding.tabMeetingsLayout.setOnClickListener {
-            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+            findNavController().navigate(R.id.action_globalFragment_to_meetingFragment)
         }
 
         binding.tabClassHoursLayout.setOnClickListener {
-            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+            findNavController().navigate(R.id.action_globalFragment_to_classHourFragment)
         }
 
         binding.tabEventsLayout.setOnClickListener {
-            context?.let { Toast.makeText(it, getString(R.string.in_development), Toast.LENGTH_SHORT).show() }
+            findNavController().navigate(R.id.action_globalFragment_to_eventsFragment)
         }
 
         binding.tabAdvertBoardLayout.setOnClickListener {
@@ -66,6 +65,42 @@ class GlobalFragment : BaseFragment(R.layout.fragment_global) {
 
         model.birthsTodayLiveData.observe(viewLifecycleOwner) {
             binding.tabBirthdaysCountView.accent = it
+        }
+
+        model.meetingLiveData.observe(viewLifecycleOwner) {
+            val date = it.date
+            if (date.isNullOrBlank()) {
+                binding.tabMeetingsCountView.count = 0
+            } else {
+                binding.tabMeetingsCountView.count = 1
+                binding.tabMeetingsCountView.accent = model.webIsToday(date)
+            }
+        }
+
+        model.classHourLiveData.observe(viewLifecycleOwner) {
+            val date = it.date
+            if (date.isNullOrBlank()) {
+                binding.tabClassHoursCountView.count = 0
+            } else {
+                binding.tabClassHoursCountView.count = 1
+                binding.tabClassHoursCountView.accent = model.webIsToday(date)
+            }
+        }
+
+        model.eventsLiveData.observe(viewLifecycleOwner) { raw ->
+            val events = raw.items.filter {
+                !it.theme.isNullOrBlank() || !it.date.isNullOrBlank() || !it.dateStr.isNullOrBlank()
+            }
+
+            binding.tabEventsCountView.count = events.size
+            binding.tabEventsCountView.accent = events.find {
+                val date = it.date
+                return@find if (date.isNullOrBlank()) {
+                    false
+                } else {
+                    model.webIsToday(date)
+                }
+            } != null
         }
 
         model.eventLiveData.observe(viewLifecycleOwner) {

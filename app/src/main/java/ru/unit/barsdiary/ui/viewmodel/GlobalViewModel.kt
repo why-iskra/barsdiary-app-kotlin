@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ru.unit.barsdiary.data.di.annotation.AdvertBoardDateFormatter
 import ru.unit.barsdiary.data.di.annotation.WebDateFormatter
 import ru.unit.barsdiary.domain.global.GlobalUseCase
-import ru.unit.barsdiary.domain.global.pojo.AdvertBoardPojo
-import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
+import ru.unit.barsdiary.domain.global.pojo.*
 import ru.unit.barsdiary.lib.HtmlUtils
 import ru.unit.barsdiary.lib.livedata.EmptyLiveData
 import ru.unit.barsdiary.lib.livedata.EventLiveData
@@ -18,7 +20,6 @@ import ru.unit.barsdiary.sdk.Engine
 import ru.unit.barsdiary.ui.InAppNotifications
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,8 +32,16 @@ class GlobalViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        private val birthdayDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM, yyyy")
-        private val advertBoardDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val birthdayDateFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val advertBoardDateFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val meetingDateFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val classHourDateFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("d MMM, yyyy")
+        private val eventDateFormatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("d MMM, yyyy")
     }
 
     val exceptionLiveData = ExceptionLiveData()
@@ -41,6 +50,9 @@ class GlobalViewModel @Inject constructor(
     val birthsTodayLiveData = MutableLiveData<Boolean>()
     val inBoxLiveData = MutableLiveData<Int>()
     val advertBoardLiveData = MutableLiveData<AdvertBoardPojo>()
+    val meetingLiveData = MutableLiveData<MeetingPojo>()
+    val classHourLiveData = MutableLiveData<ClassHourPojo>()
+    val eventsLiveData = MutableLiveData<EventsPojo>()
 
     val resetBoxAdapterLiveData = EmptyLiveData()
 
@@ -51,7 +63,10 @@ class GlobalViewModel @Inject constructor(
             val result = globalUseCase.getBirthdays()
             birthdaysLiveData.postValue(result)
 
-            val has = hasBirthsToday(result)
+            val has = result.birthdays.find {
+                webIsToday(it.date)
+            } != null
+
             birthsTodayLiveData.postValue(has)
             inAppNotifications.hasBirthsTodayLiveData.postValue(has)
         }
@@ -71,11 +86,70 @@ class GlobalViewModel @Inject constructor(
         }
     }
 
+    private suspend fun getMeeting() {
+        exceptionLiveData.safety {
+            val meeting = globalUseCase.getMeeting()
+            meetingLiveData.postValue(meeting)
+            inAppNotifications.hasMeetingTodayLiveData.postValue(!meeting.date.isNullOrBlank())
+        }
+    }
+
+    private suspend fun getClassHour() {
+        exceptionLiveData.safety {
+            val classHour = globalUseCase.getClassHour()
+            classHourLiveData.postValue(classHour)
+            inAppNotifications.hasClassHourTodayLiveData.postValue(!classHour.date.isNullOrBlank())
+        }
+    }
+
+    private suspend fun getEvents() {
+        exceptionLiveData.safety {
+            val events = globalUseCase.getEvents()
+            eventsLiveData.postValue(events)
+
+            val countEvents = events.items.filter {
+                !it.theme.isNullOrBlank() || !it.date.isNullOrBlank() || !it.dateStr.isNullOrBlank()
+            }.count()
+
+            inAppNotifications.hasEventsTodayLiveData.postValue(countEvents > 0)
+        }
+    }
+
     fun refreshAdvertBoard() {
         viewModelScope.launch(Dispatchers.IO) {
             eventLiveData.postEventLoading()
 
             getAdvertBoard()
+
+            eventLiveData.postEventLoaded()
+        }
+    }
+
+    fun refreshMeeting() {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventLiveData.postEventLoading()
+
+            getMeeting()
+
+            eventLiveData.postEventLoaded()
+        }
+    }
+
+    fun refreshClassHour() {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventLiveData.postEventLoading()
+
+            getClassHour()
+
+            eventLiveData.postEventLoaded()
+        }
+    }
+
+    fun refreshEvents() {
+        viewModelScope.launch(Dispatchers.IO) {
+            eventLiveData.postEventLoading()
+
+            getEvents()
 
             eventLiveData.postEventLoaded()
         }
@@ -110,10 +184,16 @@ class GlobalViewModel @Inject constructor(
             val asyncInBoxCount = async { getInBoxCount() }
             val asyncBirthdays = async { getBirthdays() }
             val asyncAdvertBoard = async { getAdvertBoard() }
+            val asyncMeeting = async { getMeeting() }
+            val asyncClassHour = async { getClassHour() }
+            val asyncEvents = async { getEvents() }
 
             asyncInBoxCount.await()
             asyncBirthdays.await()
             asyncAdvertBoard.await()
+            asyncMeeting.await()
+            asyncClassHour.await()
+            asyncEvents.await()
 
             eventLiveData.postEventLoaded()
         }
@@ -125,9 +205,15 @@ class GlobalViewModel @Inject constructor(
 
             val asyncInBoxCount = async { getInBoxCount() }
             val asyncBirthdays = async { getBirthdays() }
+            val asyncMeeting = async { getMeeting() }
+            val asyncClassHour = async { getClassHour() }
+            val asyncEvents = async { getEvents() }
 
             asyncInBoxCount.await()
             asyncBirthdays.await()
+            asyncMeeting.await()
+            asyncClassHour.await()
+            asyncEvents.await()
 
             eventLiveData.postEventLoaded()
         }
@@ -168,6 +254,30 @@ class GlobalViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             exceptionLiveData.safety {
                 globalUseCase.clearAdvertBoard()
+            }
+        }
+    }
+
+    fun resetMeeting() {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.clearMeeting()
+            }
+        }
+    }
+
+    fun resetClassHour() {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.clearClassHour()
+            }
+        }
+    }
+
+    fun resetEvents() {
+        viewModelScope.launch(Dispatchers.IO) {
+            exceptionLiveData.safety {
+                globalUseCase.clearEvents()
             }
         }
     }
@@ -220,12 +330,42 @@ class GlobalViewModel @Inject constructor(
         return null
     }
 
-    private fun hasBirthsToday(value: BirthdaysPojo): Boolean {
-        val date = LocalDate.now()
-        return value.birthdays.find {
-            return@find it.date == webDateTimeFormatter.format(date)
-        } != null
+    fun meetingDateFormat(date: String?): String? {
+        date ?: return null
+
+        exceptionLiveData.safety {
+            val parsed = LocalDate.parse(date, webDateTimeFormatter)
+            return meetingDateFormatter.format(parsed)
+        }
+
+        return null
     }
 
-    fun document(name: String, url: String) = HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), engine.getServerUrl() + url)
+    fun classHourDateFormat(date: String?): String? {
+        date ?: return null
+
+        exceptionLiveData.safety {
+            val parsed = LocalDate.parse(date, webDateTimeFormatter)
+            return classHourDateFormatter.format(parsed)
+        }
+
+        return null
+    }
+
+    fun eventDateFormat(date: String?): String? {
+        date ?: return null
+
+        exceptionLiveData.safety {
+            val parsed = LocalDate.parse(date, webDateTimeFormatter)
+            return eventDateFormatter.format(parsed)
+        }
+
+        return null
+    }
+
+    fun webIsToday(value: String): Boolean =
+        (value == webDateTimeFormatter.format(LocalDate.now()))
+
+    fun document(name: String, url: String) =
+        HtmlUtils.hrefDocument(HtmlUtils.prepareText(name), engine.getServerUrl() + url)
 }

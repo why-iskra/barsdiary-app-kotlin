@@ -29,6 +29,27 @@
             app:exitAnim="@anim/fade_out_short"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_globalFragment_to_meetingFragment"
+            app:destination="@id/meetingFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_globalFragment_to_classHourFragment"
+            app:destination="@id/classHourFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
+        <action
+            android:id="@+id/action_globalFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/fade_out_short"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/fade_out_short" />
     </fragment>
     <fragment
         android:id="@+id/birthdaysFragment"
@@ -77,4 +98,16 @@
         android:id="@+id/advertBoardFragment"
         android:name="ru.unit.barsdiary.ui.fragment.AdvertBoardFragment"
         android:label="AdvertBoardFragment" />
+    <fragment
+        android:id="@+id/meetingFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.MeetingFragment"
+        android:label="MeetingFragment" />
+    <fragment
+        android:id="@+id/classHourFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.ClassHourFragment"
+        android:label="ClassHourFragment" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="ru.unit.barsdiary.ui.fragment.EventsFragment"
+        android:label="EventsFragment" />
 </navigation>

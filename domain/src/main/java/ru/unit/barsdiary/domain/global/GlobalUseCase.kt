@@ -9,12 +9,18 @@ interface GlobalUseCase {
     suspend fun getOutBox(page: Int): BoxPojo
     suspend fun getInBoxCount(): Int
     suspend fun getAdvertBoard(): AdvertBoardPojo
+    suspend fun getMeeting(): MeetingPojo
+    suspend fun getClassHour(): ClassHourPojo
+    suspend fun getEvents(): EventsPojo
 
     suspend fun clearBirthdays()
     suspend fun clearInBox()
     suspend fun clearOutBox()
     suspend fun clearInBoxCount()
     suspend fun clearAdvertBoard()
+    suspend fun clearMeeting()
+    suspend fun clearClassHour()
+    suspend fun clearEvents()
     suspend fun clear()
 
     suspend fun markRead(id: Int)
@@ -46,6 +52,15 @@ class GlobalUseCaseImpl @Inject constructor(
     override suspend fun getAdvertBoard(): AdvertBoardPojo =
         globalRepository.getAdvertBoard() ?: globalService.getAdvertBoard().apply { globalRepository.setAdvertBoard(this) }
 
+    override suspend fun getMeeting(): MeetingPojo =
+        globalRepository.getMeeting() ?: globalService.getMeeting().apply { globalRepository.setMeeting(this) }
+
+    override suspend fun getClassHour(): ClassHourPojo =
+        globalRepository.getClassHour() ?: globalService.getClassHour().apply { globalRepository.setClassHour(this) }
+
+    override suspend fun getEvents(): EventsPojo =
+        globalRepository.getEvents() ?: globalService.getEvents().apply { globalRepository.setEvents(this) }
+
     override suspend fun clearBirthdays() {
         globalRepository.clearBirthdays()
     }
@@ -66,12 +81,27 @@ class GlobalUseCaseImpl @Inject constructor(
         globalRepository.clearAdvertBoard()
     }
 
+    override suspend fun clearMeeting() {
+        globalRepository.clearMeeting()
+    }
+
+    override suspend fun clearClassHour() {
+        globalRepository.clearClassHour()
+    }
+
+    override suspend fun clearEvents() {
+        globalRepository.clearEvents()
+    }
+
     override suspend fun clear() {
         clearBirthdays()
         clearInBox()
         clearOutBox()
         clearInBoxCount()
         clearAdvertBoard()
+        clearEvents()
+        clearMeeting()
+        clearClassHour()
     }
 
     override suspend fun markRead(id: Int) {
