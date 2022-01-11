@@ -73,12 +73,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                appUpdateManager.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    AppUpdateType.FLEXIBLE,
-                    this,
-                    11
-                )
+                runCatching {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        11
+                    )
+                }
             }
 
             if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
