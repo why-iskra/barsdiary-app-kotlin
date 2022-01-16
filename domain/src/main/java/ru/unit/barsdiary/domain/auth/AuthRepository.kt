@@ -5,6 +5,7 @@ import ru.unit.barsdiary.domain.auth.pojo.AuthDataPojo
 interface AuthRepository {
     fun setAuthData(authData: AuthDataPojo)
     fun getAuthData(): AuthDataPojo?
+    fun getRawAuthData(): AuthDataPojo
     fun clearAuthData()
     fun getSessionId(): String?
     fun setSessionId(id: String)

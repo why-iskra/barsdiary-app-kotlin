@@ -58,7 +58,6 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
         }
 
         // to login or auth
-
         if (model.fastAuth() && fastBootEnabled) {
             activity?.supportFragmentManager?.commit {
                 setCustomAnimations(R.anim.fade_in_short, R.anim.fade_out_short, R.anim.fade_in_short, R.anim.fade_out_short)
@@ -172,6 +171,7 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
             }
         }
 
+        model.getPreloadAuthData()
         model.refresh()
     }
 

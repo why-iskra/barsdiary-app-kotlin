@@ -62,6 +62,24 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun getPreloadAuthData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                val data = authUseCase.getAuthData()
+                val server = data.serverUrl
+                val login = data.login
+
+                if(login.isNotBlank()) {
+                    loginLiveData.postValue(login)
+                }
+
+                if(server.isNotBlank()) {
+                    serverUrlLiveData.postValue(server)
+                }
+            }
+        }
+    }
+
     fun isAuthorized() = authUseCase.isAuthorized()
 
     fun passwordVisibility() {

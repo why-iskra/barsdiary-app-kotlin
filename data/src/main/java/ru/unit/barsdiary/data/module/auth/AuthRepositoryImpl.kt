@@ -28,6 +28,12 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getRawAuthData() = AuthDataPojo(
+        authDataStore.serverUrl ?: "",
+        authDataStore.login ?: "",
+        authDataStore.password ?: ""
+    )
+
     override fun clearAuthData() {
 //        authDataStore.serverUrl = null
 //        authDataStore.login = null

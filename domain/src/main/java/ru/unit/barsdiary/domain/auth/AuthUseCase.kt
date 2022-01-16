@@ -12,6 +12,8 @@ interface AuthUseCase {
 
     fun prepareFastAuth(): Boolean
 
+    fun getAuthData(): AuthDataPojo
+
     fun isParent(): Boolean
     fun getPupils(): List<ChildPojo>
     fun getSelectedPupil(): Int
@@ -58,6 +60,8 @@ class AuthUseCaseImpl @Inject constructor(
         authService.prepare(authData)
         return true
     }
+
+    override fun getAuthData(): AuthDataPojo = authRepository.getRawAuthData()
 
     override fun isParent(): Boolean = authService.isParent()
 
