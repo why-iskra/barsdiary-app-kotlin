@@ -72,7 +72,7 @@ class AuthUseCaseImpl @Inject constructor(
     override fun isAuthorized(): Boolean {
         var success = false
         runCatching {
-            success = authRepository.getAuthData() != null
+            success = authRepository.getAuthData()?.password != null
         }
         return success
     }

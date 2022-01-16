@@ -34,7 +34,7 @@ class Engine(
         }
 
     private var authData: AuthData? = null
-    private var inited: Boolean = false
+    private var state = State.NON_AUTHED
     private var parent: Boolean = false
     private var childrenList: List<Child> = emptyList()
     private var selectedChild: Int = 0
@@ -46,11 +46,14 @@ class Engine(
         this.authData = data
         _service = null
 
+        state = State.NON_AUTHED
+
         runCatching { authMutex.unlock() }
         runCatching { logicMutex.unlock() }
     }
 
     private suspend fun waitAuth() {
+//        while(authMutex.isLocked) delay(100)
         authMutex.withLock { }
     }
 
@@ -78,7 +81,10 @@ class Engine(
                 try {
                     val result = service.login(data.login, data.password)
 
-                    if (!result.success) throw UnauthorizedException()
+                    if (!result.success) {
+                        throwUnauthorized()
+                    }
+
                     val redirect = result.redirect.orEmpty()
 
                     val parsedRedirect = if (redirect.isNotEmpty() && redirect.first() == '/') redirect.drop(1) else redirect
@@ -94,7 +100,7 @@ class Engine(
                     }
                 } catch (e: HttpException) {
                     if (e.code() == 401 || e.code() == 403) {
-                        throw UnauthorizedException()
+                        throwUnauthorized()
                     } else {
                         throw e
                     }
@@ -104,8 +110,8 @@ class Engine(
             updateParentData()
         }.onFailure {
             authMutex.unlock()
-            if(it is HttpException && it.code() == 403) {
-                throw UnauthorizedException()
+            if (it is HttpException && it.code() == 403) {
+                throwUnauthorized()
             } else {
                 throw it
             }
@@ -133,7 +139,7 @@ class Engine(
             selectedChild = 0
         }
 
-        inited = true
+        state = State.AUTHED
     }
 
     suspend fun changeChild(index: Int) {
@@ -153,8 +159,8 @@ class Engine(
         }.onFailure {
             selectedChild = saved
 
-            if(it is HttpException && it.code() == 403) {
-                throw UnauthorizedException()
+            if (it is HttpException && it.code() == 403) {
+                throwUnauthorized()
             } else {
                 throw it
             }
@@ -163,21 +169,18 @@ class Engine(
 
     suspend fun logout() {
         waitAuth()
+        state = State.NON_AUTHED
         service.logout()
     }
 
     suspend fun <T> api(authProtect: Int = 1, block: suspend ApiService.() -> T): T {
         waitAuth()
 
-        runCatching {
-            if (!inited) {
+        if (state == State.NON_AUTHED) {
+            runCatching {
                 auth(true)
-            }
-        }.onFailure {
-            if(it is HttpException && it.code() == 403) {
-                throw UnauthorizedException()
-            } else {
-                throw it
+            }.onFailure {
+                auth(false)
             }
         }
 
@@ -186,6 +189,7 @@ class Engine(
                 block.invoke(service)
             } catch (e: HttpException) {
                 if (e.code() == 403) {
+                    auth(false)
                     api(authProtect - 1, block)
                 } else {
                     throw e
@@ -196,6 +200,7 @@ class Engine(
                 block.invoke(service)
             } catch (e: HttpException) {
                 if (e.code() == 403) {
+                    state = State.NON_AUTHED
                     throw UnauthorizedException()
                 } else {
                     throw e
@@ -209,6 +214,11 @@ class Engine(
     fun children() = childrenList
     fun selectedChild() = selectedChild
 
+    private fun throwUnauthorized() {
+        state = State.NON_AUTHED
+        throw UnauthorizedException()
+    }
+
     data class Child(
         val id: Int,
         val name: String?,
@@ -220,6 +230,11 @@ class Engine(
         val login: String,
         val password: String,
     )
+
+    enum class State {
+        NON_AUTHED,
+        AUTHED
+    }
 
     companion object {
         const val webDateFormatPattern = "yyyy-MM-dd"

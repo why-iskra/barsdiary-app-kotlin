@@ -11,7 +11,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
-import androidx.fragment.app.commitNow
 import androidx.lifecycle.observeFreshly
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
@@ -35,13 +34,6 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
     private lateinit var binding: FragmentAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (model.fastAuth()) {
-            activity?.supportFragmentManager?.commit {
-                setCustomAnimations(R.anim.fade_in_short, R.anim.fade_out_short, R.anim.fade_in_short, R.anim.fade_out_short)
-                replace(R.id.fragmentContainerView, NavigationFragment())
-            }
-        }
-
         serverListDialog = parentFragmentManager
             .findFragmentByTag(SERVER_LIST_DIALOG_TAG) as? ServerListDialogFragment ?: ServerListDialogFragment()
 
@@ -50,6 +42,9 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val fastBootEnabled = activity?.intent?.getBooleanExtra("DISABLE_FAST_BOOT", false) == false
+
         binding = FragmentAuthBinding.bind(view)
         with(binding) {
             lifecycleOwner = this@AuthFragment
@@ -63,15 +58,23 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
         }
 
         // to login or auth
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (model.isAuthorized()) {
-                binding.motionLayout.setTransition(R.id.transitionStartToEnd)
-                model.auth()
-            } else {
-                binding.motionLayout.setTransition(R.id.transitionStartToMiddle)
+
+        if (model.fastAuth() && fastBootEnabled) {
+            activity?.supportFragmentManager?.commit {
+                setCustomAnimations(R.anim.fade_in_short, R.anim.fade_out_short, R.anim.fade_in_short, R.anim.fade_out_short)
+                replace(R.id.fragmentContainerView, NavigationFragment())
             }
-            binding.motionLayout.transitionToEnd()
-        }, 2000)
+        } else {
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (model.isAuthorized()) {
+                    binding.motionLayout.setTransition(R.id.transitionStartToEnd)
+                    model.auth()
+                } else {
+                    binding.motionLayout.setTransition(R.id.transitionStartToMiddle)
+                }
+                binding.motionLayout.transitionToEnd()
+            }, 2000)
+        }
 
         // onclick: send server, login, password
         binding.buttonSignIn.setOnClickListener {

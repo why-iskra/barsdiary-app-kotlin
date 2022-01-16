@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val model = ViewModelProvider(this)[MainViewModel::class.java]
+
         runCatching {
             window.decorView.rootView.let {
                 productFlavorDevelopingInterface.removeStatusBar(this, it)
             }
         }
-
-        val model = ViewModelProvider(this)[MainViewModel::class.java]
 
         inAppNotifications.init()
 
@@ -111,7 +111,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                         showInfoDialog(getString(R.string.unauthorized), getString(R.string.unauthorized_error_text), true)
                     } else {
                         model.throwableLiveData.removeObservers(this)
-                        switchActivity(baseContext, MainActivity::class.java, Intent.FLAG_ACTIVITY_NEW_TASK)
+                        switchActivity(baseContext, MainActivity::class.java, Intent.FLAG_ACTIVITY_NEW_TASK) { intent ->
+                            intent.putExtra("DISABLE_FAST_BOOT", true)
+                        }
                     }
                 }
                 it is FinishRegistrationAccountException -> {

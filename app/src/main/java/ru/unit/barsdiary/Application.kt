@@ -5,9 +5,9 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
 import ru.unit.barsdiary.data.datastore.SettingsDataStore
+import ru.unit.barsdiary.lib.InAppTree
 import ru.unit.barsdiary.notification.SendingMessageNotification
 import ru.unit.barsdiary.notification.SendingMessageResultNotification
-import ru.unit.barsdiary.lib.InAppTree
 import ru.unit.barsdiary.productflavor.ProductFlavorDevelopingInterface
 import timber.log.Timber
 import javax.inject.Inject

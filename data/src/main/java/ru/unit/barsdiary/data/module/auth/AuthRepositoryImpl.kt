@@ -29,8 +29,8 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun clearAuthData() {
-        authDataStore.serverUrl = null
-        authDataStore.login = null
+//        authDataStore.serverUrl = null
+//        authDataStore.login = null
         authDataStore.password = null
         authDataStore.sessionId = null
     }

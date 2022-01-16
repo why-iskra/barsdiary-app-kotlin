@@ -25,8 +25,10 @@ class MainViewModel @Inject constructor(
     }
 
     fun handleUnauthorizedException() {
-        viewModelScope.launch(Dispatchers.Main) {
-            authUseCase.logout()
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                authUseCase.logout()
+            }
         }
     }
 
