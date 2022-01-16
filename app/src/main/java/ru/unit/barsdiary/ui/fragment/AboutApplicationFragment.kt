@@ -42,6 +42,10 @@ class AboutApplicationFragment : BaseFragment(R.layout.fragment_about_applicatio
         binding.textViewPlayMarket.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=ru.unit.barsdiary")))
         }
+
+        binding.textViewPrivacyPolicy.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://why-iskra.github.io/bars-diary-privacy-policy")))
+        }
     }
 
 }
