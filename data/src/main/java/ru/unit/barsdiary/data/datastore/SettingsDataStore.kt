@@ -44,7 +44,7 @@ class SettingsDataStore @Inject constructor(
     var nightTheme by BooleanPreference(context.dataStore, NIGHT_THEME, false)
     var fastAuth by BooleanPreference(context.dataStore, FAST_AUTH, false)
     var developerMode by BooleanPreference(context.dataStore, DEVELOPER_MODE, false)
-    var clientTimeout by IntPreference(context.dataStore, CLIENT_TIMEOUT, 60)
+    var clientTimeout by IntPreference(context.dataStore, CLIENT_TIMEOUT, 180)
     var errorDialogs by BooleanPreference(context.dataStore, ERROR_DIALOGS, true)
     var enableChucker by BooleanPreference(context.dataStore, ENABLE_CHUCKER, false)
 
