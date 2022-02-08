@@ -1,12 +1,14 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.global.pojo.BirthdayPojo
 import ru.unit.barsdiary.domain.global.pojo.BirthdaysPojo
 import ru.unit.barsdiary.sdk.response.GetBirthdaysBirthdayDTO
 import ru.unit.barsdiary.sdk.response.GetBirthdaysResponseDTO
 import javax.inject.Inject
 
-class BirthdaysTransformer @Inject constructor() : BaseTransformer<GetBirthdaysResponseDTO, BirthdaysPojo> {
+class BirthdaysTransformer @Inject constructor() :
+    BaseTransformer<GetBirthdaysResponseDTO, BirthdaysPojo> {
     override fun transform(value: GetBirthdaysResponseDTO): BirthdaysPojo {
         return BirthdaysPojo(
             value.birthdays.mapNotNull { transform(it) }

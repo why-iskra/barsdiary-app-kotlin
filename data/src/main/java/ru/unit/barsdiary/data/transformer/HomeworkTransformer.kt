@@ -1,10 +1,12 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.diary.pojo.*
 import ru.unit.barsdiary.sdk.response.*
 import javax.inject.Inject
 
-class HomeworkTransformer @Inject constructor() : BaseTransformer<GetHomeworkFromRangeResponseDTO, HomeworkPojo> {
+class HomeworkTransformer @Inject constructor() :
+    BaseTransformer<GetHomeworkFromRangeResponseDTO, HomeworkPojo> {
     override fun transform(value: GetHomeworkFromRangeResponseDTO): HomeworkPojo {
         return HomeworkPojo(
             value.days.mapNotNull { transform(it) }
@@ -32,7 +34,10 @@ class HomeworkTransformer @Inject constructor() : BaseTransformer<GetHomeworkFro
             value.theme,
             value.scheduleLessonType,
             value.individualHomeworks.map { transform(it) },
-            value.discipline
+            value.discipline,
+            value.nextHomework,
+            value.nextMaterials.mapNotNull { transform(it) },
+            value.nextIndividualHomeworks.map { transform(it) }
         )
     }
 

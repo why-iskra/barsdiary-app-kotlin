@@ -18,7 +18,6 @@ data class GetHomeworkFromRangeDayDTO(
     @SerializedName("homeworks") val homeworks: List<GetHomeworkFromRangeHomeworkDTO> = emptyList(),
 )
 
-// todo: add individual homework
 data class GetHomeworkFromRangeHomeworkDTO(
     @SerializedName("homework") val homework: String?,
     @SerializedName("teacher") val teacher: String?,

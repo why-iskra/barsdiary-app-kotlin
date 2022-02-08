@@ -9,4 +9,7 @@ data class HomeworkLessonPojo(
     val scheduleLessonType: String?,
     val individualHomeworks: List<HomeworkIndividualPojo>,
     val discipline: String?,
+    val nextHomework: String?,
+    val nextMaterials: List<MaterialPojo>,
+    val nextIndividualHomeworks: List<HomeworkIndividualPojo>,
 )

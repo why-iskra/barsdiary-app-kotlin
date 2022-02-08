@@ -84,37 +84,37 @@ class LessonBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
         if (teacher.isNullOrBlank()) {
-            binding.textViewTeacher.visibility = View.GONE
+            binding.layoutTeacher.visibility = View.GONE
         } else {
-            binding.textViewTeacher.visibility = View.VISIBLE
+            binding.layoutTeacher.visibility = View.VISIBLE
             binding.textViewTeacher.text = teacher
         }
 
         if (office.isNullOrBlank()) {
-            binding.textViewOffice.visibility = View.GONE
+            binding.layoutOffice.visibility = View.GONE
         } else {
-            binding.textViewOffice.visibility = View.VISIBLE
+            binding.layoutOffice.visibility = View.VISIBLE
             binding.textViewOffice.text = office
         }
 
         if (theme.isNullOrBlank()) {
-            binding.textViewTheme.visibility = View.GONE
+            binding.layoutTheme.visibility = View.GONE
         } else {
-            binding.textViewTheme.visibility = View.VISIBLE
+            binding.layoutTheme.visibility = View.VISIBLE
             binding.textViewTheme.text = HtmlUtils.convert(theme)
         }
 
         if (comment.isNullOrBlank()) {
-            binding.textViewComment.visibility = View.GONE
+            binding.layoutComment.visibility = View.GONE
         } else {
-            binding.textViewComment.visibility = View.VISIBLE
+            binding.layoutComment.visibility = View.VISIBLE
             binding.textViewComment.text = HtmlUtils.convert(comment)
         }
 
         if (homework.isNullOrBlank()) {
-            binding.textViewHomework.visibility = View.GONE
+            binding.layoutHomework.visibility = View.GONE
         } else {
-            binding.textViewHomework.visibility = View.VISIBLE
+            binding.layoutHomework.visibility = View.VISIBLE
 
             binding.textViewHomework.setLinkTextColor(requireContext().getColor(R.color.amaranth))
             binding.textViewHomework.movementMethod = LinkMovementMethod.getInstance()
@@ -122,9 +122,9 @@ class LessonBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
         if (materials.isNullOrBlank()) {
-            binding.textViewMaterials.visibility = View.GONE
+            binding.layoutMaterials.visibility = View.GONE
         } else {
-            binding.textViewMaterials.visibility = View.VISIBLE
+            binding.layoutMaterials.visibility = View.VISIBLE
 
             binding.textViewMaterials.setLinkTextColor(requireContext().getColor(R.color.amaranth))
             binding.textViewMaterials.movementMethod = LinkMovementMethod.getInstance()
@@ -132,16 +132,16 @@ class LessonBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
         if (mark.isNullOrBlank()) {
-            binding.textViewMark.visibility = View.GONE
+            binding.layoutMark.visibility = View.GONE
         } else {
-            binding.textViewMark.visibility = View.VISIBLE
+            binding.layoutMark.visibility = View.VISIBLE
             binding.textViewMark.text = mark
         }
 
         if (attendance.isNullOrBlank()) {
-            binding.textViewAttendance.visibility = View.GONE
+            binding.layoutAttendance.visibility = View.GONE
         } else {
-            binding.textViewAttendance.visibility = View.VISIBLE
+            binding.layoutAttendance.visibility = View.VISIBLE
             binding.textViewAttendance.text = attendance
         }
 

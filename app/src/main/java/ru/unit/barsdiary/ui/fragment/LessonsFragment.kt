@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
 import ru.unit.barsdiary.R
+import ru.unit.barsdiary.lib.HtmlUtils
 import ru.unit.barsdiary.lib.function.argumentDelegate
 import ru.unit.barsdiary.ui.adapter.LessonsAdapter
 import ru.unit.barsdiary.ui.fragment.bottomsheet.LessonBottomSheetDialogFragment
@@ -78,14 +79,43 @@ class LessonsFragment : BaseFragment(R.layout.fragment_lessons) {
                             homeworkWithInd = model.homeworkToString(homework.homework ?: "", homework.individualHomeworks)
                         }
 
+                        var nextMaterials: String? = null
+                        var nextHomeworkWithInd: String? = null
+                        if (homework != null) {
+                            nextMaterials = model.materialsToString(homework.nextMaterials)
+                            nextHomeworkWithInd = model.homeworkToString(homework.nextHomework ?: "", homework.nextIndividualHomeworks)
+                        }
+
+                        val fullMaterials = buildString {
+                            append(materials)
+
+                            if(!nextMaterials.isNullOrBlank()) {
+                                append(HtmlUtils.tagNewLine)
+                                append(getString(R.string.for_next_lesson))
+                                append(": ")
+                                append(nextMaterials)
+                            }
+                        }
+
+                        val fullHomework = buildString {
+                            append(homeworkWithInd)
+
+                            if(!nextHomeworkWithInd.isNullOrBlank()) {
+                                append(HtmlUtils.tagNewLine)
+                                append(getString(R.string.for_next_lesson))
+                                append(": ")
+                                append(nextHomeworkWithInd)
+                            }
+                        }
+
                         lessonBottomSheetDialogFragment.arguments = LessonBottomSheetDialogFragment.config(
                             lesson.discipline,
                             lesson.teacher,
                             lesson.office,
                             lesson.theme,
                             lesson.comment,
-                            homeworkWithInd,
-                            materials,
+                            fullHomework,
+                            fullMaterials,
                             lesson.mark,
                             lesson.attendance
                         )

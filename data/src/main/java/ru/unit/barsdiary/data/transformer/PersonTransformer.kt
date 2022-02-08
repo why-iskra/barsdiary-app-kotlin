@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.person.pojo.PersonChildPojo
 import ru.unit.barsdiary.domain.person.pojo.PersonIndicatorPojo
 import ru.unit.barsdiary.domain.person.pojo.PersonPojo
@@ -8,7 +9,8 @@ import ru.unit.barsdiary.sdk.response.GetPersonDataIndicatorDTO
 import ru.unit.barsdiary.sdk.response.GetPersonDataResponseDTO
 import javax.inject.Inject
 
-class PersonTransformer @Inject constructor() : BaseTransformer<GetPersonDataResponseDTO, PersonPojo> {
+class PersonTransformer @Inject constructor() :
+    BaseTransformer<GetPersonDataResponseDTO, PersonPojo> {
     override fun transform(value: GetPersonDataResponseDTO): PersonPojo {
         return PersonPojo(
             value.authUserProfileId,

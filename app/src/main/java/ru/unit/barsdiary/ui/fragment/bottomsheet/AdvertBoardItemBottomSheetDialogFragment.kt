@@ -70,29 +70,21 @@ class AdvertBoardItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
 
-        with(binding.textViewAuthor) {
-            isVisible = !author.isNullOrBlank()
-            text = author
-        }
+        binding.layoutAuthor.isVisible = !author.isNullOrBlank()
+        binding.textViewAuthor.text = author
 
-        with(binding.textViewTheme) {
-            isVisible = !theme.isNullOrBlank()
-            text = theme
-        }
+        binding.layoutTheme.isVisible = !theme.isNullOrBlank()
+        binding.textViewTheme.text = theme
 
-        with(binding.textViewDate) {
-            val parsedDate = model.advertBoardDateFormat(date)
-            isVisible = !parsedDate.isNullOrBlank()
-            text = parsedDate
-        }
+        val parsedDate = model.advertBoardDateFormat(date)
+        binding.layoutDate.isVisible = !parsedDate.isNullOrBlank()
+        binding.textViewDate.text = parsedDate
 
-        with(binding.textViewSchool) {
-            isVisible = !school.isNullOrBlank()
-            text = school
-        }
+        binding.layoutSchool.isVisible = !school.isNullOrBlank()
+        binding.textViewSchool.text = school
 
+        binding.layoutFile.isVisible = !file.isNullOrBlank()
         with(binding.textViewFile) {
-            isVisible = !file.isNullOrBlank()
             setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.amaranth))
             movementMethod = LinkMovementMethod.getInstance()
 
@@ -101,8 +93,8 @@ class AdvertBoardItemBottomSheetDialogFragment : BottomSheetDialogFragment() {
             }
         }
 
+        binding.layoutMessage.isVisible = !message.isNullOrBlank()
         with(binding.textViewMessage) {
-            isVisible = !message.isNullOrBlank()
             setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.amaranth))
             movementMethod = LinkMovementMethod.getInstance()
             text = HtmlUtils.convert(message)

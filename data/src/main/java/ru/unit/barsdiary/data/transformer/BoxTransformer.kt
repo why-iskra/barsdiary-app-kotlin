@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.global.pojo.AttachmentPojo
 import ru.unit.barsdiary.domain.global.pojo.BoxPojo
 import ru.unit.barsdiary.domain.global.pojo.MessagePojo

@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.mark.pojo.DisciplineMarksPojo
 import ru.unit.barsdiary.domain.mark.pojo.MarkPojo
 import ru.unit.barsdiary.domain.mark.pojo.MarksPojo
@@ -10,7 +11,8 @@ import ru.unit.barsdiary.sdk.response.GetSummaryMarksResponseDTO
 import ru.unit.barsdiary.sdk.response.GetSummaryMarksSubPeriodDTO
 import javax.inject.Inject
 
-class MarksTransformer @Inject constructor() : BaseTransformer<GetSummaryMarksResponseDTO, MarksPojo> {
+class MarksTransformer @Inject constructor() :
+    BaseTransformer<GetSummaryMarksResponseDTO, MarksPojo> {
     override fun transform(value: GetSummaryMarksResponseDTO): MarksPojo {
         return MarksPojo(
             value.disciplineMarks.map { transform(it) },

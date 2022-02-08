@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.auth.pojo.ChildPojo
 import ru.unit.barsdiary.sdk.Engine
 import javax.inject.Inject

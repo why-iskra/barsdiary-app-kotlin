@@ -1,5 +1,6 @@
 package ru.unit.barsdiary.data.transformer
 
+import ru.unit.barsdiary.domain.BaseTransformer
 import ru.unit.barsdiary.domain.diary.pojo.DiaryDayPojo
 import ru.unit.barsdiary.domain.diary.pojo.DiaryLessonPojo
 import ru.unit.barsdiary.domain.diary.pojo.DiaryPojo

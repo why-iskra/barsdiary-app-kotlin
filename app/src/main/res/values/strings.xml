@@ -102,4 +102,5 @@
     <string name="ssl_handshake">SSL Handshake</string>
     <string name="set_correct_date">Set the current date on the device</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="for_next_lesson">For the next lesson</string>
 </resources>
