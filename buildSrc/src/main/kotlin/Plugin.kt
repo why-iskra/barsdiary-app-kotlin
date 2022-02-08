@@ -13,6 +13,7 @@ object Plugin {
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
 
-    val detekt by lazy { PluginWithVersion("io.gitlab.arturbosch.detekt", PluginVersion.DETEKT) }
-    val ktlint by lazy { PluginWithVersion("org.jlleitschuh.gradle.ktlint", PluginVersion.KTLINT) }
+    const val gradleVersionsPlugin = "com.github.ben-manes.versions"
+
+//    val example by lazy { PluginWithVersion("example", PluginVersion.EXAMPLE) }
 }

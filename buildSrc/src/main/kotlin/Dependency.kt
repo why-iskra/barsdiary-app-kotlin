@@ -1,9 +1,9 @@
 object Dependency {
-    val gradle by lazy { "com.android.tools.build:gradle:${DependencyVersion.GRADLE}" }
     val kotlinPlugin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:${DependencyVersion.KOTLIN}" }
     val hiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${DependencyVersion.HILT}" }
     val googleServices by lazy { "com.google.gms:google-services:${DependencyVersion.GOOGLE_SERVICES}" }
     val firebaseCrashlyticsGradle by lazy { "com.google.firebase:firebase-crashlytics-gradle:${DependencyVersion.FIREBASE_CRASHLYTICS}" }
+    val gradleVersionsPlugin by lazy { "com.github.ben-manes:gradle-versions-plugin:${DependencyVersion.GRADLE_VERSIONS_PLUGIN}" }
 
     val kotlinCoroutines by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${DependencyVersion.KOTLIN_COROUTINES}" }
 

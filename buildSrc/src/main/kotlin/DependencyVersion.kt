@@ -1,14 +1,14 @@
 object DependencyVersion {
-    const val GRADLE = "7.0.4"
+    const val GRADLE_VERSIONS_PLUGIN = "0.42.0"
 
     const val KOTLIN = "1.6.10"
-    const val KOTLIN_COROUTINES = "1.6.0-native-mt"
+    const val KOTLIN_COROUTINES = "1.6.0"
 
     const val GOOGLE_SERVICES = "4.3.10"
     const val GOOGLE_PLAY_CORE = "1.8.1"
 
+    const val FIREBASE_BOM = "29.0.4"
     const val FIREBASE_CRASHLYTICS = "2.8.1"
-    const val FIREBASE_BOM = "29.0.3"
 
     const val RETROFIT = "2.9.0"
 
@@ -25,8 +25,8 @@ object DependencyVersion {
     const val CHUCKER = "3.5.2"
 
     const val ANDROIDX_CORE = "1.7.0"
-    const val ANDROIDX_APPCOMPAT = "1.4.0"
-    const val ANDROIDX_CONSTRAINTLAYOUT = "2.1.2"
+    const val ANDROIDX_APPCOMPAT = "1.4.1"
+    const val ANDROIDX_CONSTRAINTLAYOUT = "2.1.3"
     const val ANDROIDX_LIFECYCLE = "2.4.0"
     const val ANDROIDX_FRAGMENT = "1.4.0"
     const val ANDROIDX_NAVIGATION = "2.3.5"

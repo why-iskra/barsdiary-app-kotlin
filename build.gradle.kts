@@ -1,22 +1,22 @@
 
+apply(plugin = Plugin.gradleVersionsPlugin)
+
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath(Dependency.gradle)
+        classpath("com.android.tools.build:gradle:7.1.1")
+
         classpath(Dependency.kotlinPlugin)
         classpath(Dependency.hiltPlugin)
         classpath(Dependency.googleServices)
         classpath(Dependency.firebaseCrashlyticsGradle)
+        classpath(Dependency.gradleVersionsPlugin)
     }
-}
-
-plugins {
-    Sugar.include(this, Plugin.ktlint)
-    Sugar.include(this, Plugin.detekt)
 }
 
 allprojects {
@@ -25,26 +25,6 @@ allprojects {
             google()
             mavenCentral()
         }
-    }
-}
-
-subprojects {
-    apply {
-        plugin(Plugin.detekt.id)
-        plugin(Plugin.ktlint.id)
-    }
-
-    ktlint {
-        verbose.set(true)
-        android.set(true)
-        outputToConsole.set(true)
-        ignoreFailures.set(false)
-        enableExperimentalRules.set(true)
-    }
-
-    detekt {
-        config = rootProject.files("detekt-config.yml")
-        parallel = true
     }
 }
 

@@ -10,10 +10,6 @@ plugins {
 android {
     compileSdk = 31
 
-    lint {
-        isCheckReleaseBuilds = false
-    }
-
     val findTaskTag = listOf("assemble", "bundle")
     val typeVersion = findTaskTag.map { tag ->
         gradle.startParameter.taskRequests.first()
