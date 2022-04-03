@@ -112,10 +112,16 @@ class StatisticsViewModel @Inject constructor(
             response.disciplineMarks.forEach { discipline ->
                 discipline.marks.forEach {
                     val mark = it.mark
-                    if (mark.endsWith('-')) {
-                        sum += it.mark.dropLast(1).toInt() - 0.5
-                    } else {
-                        sum += it.mark.toInt()
+                    when {
+                        mark.endsWith('-') -> {
+                            sum += it.mark.dropLast(1).toInt() - 0.5
+                        }
+                        mark.endsWith('+') -> {
+                            sum += it.mark.dropLast(1).toInt() + 0.5
+                        }
+                        else -> {
+                            sum += it.mark.toInt()
+                        }
                     }
                     count++
                 }
